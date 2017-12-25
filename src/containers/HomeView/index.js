@@ -26,8 +26,16 @@ class HomeView extends Component {
   }
 
   registerAsset=() => {    
-    const { history } = this.props
-    history.push('/register')
+    const { provider, history, actions } = this.props
+
+    if(provider.web3Provider !== null) {
+      history.push('/register')
+    } else {
+      actions.ui.showModal({
+        title: 'You need to install MetaMask'
+      })
+    }
+
   }
 
   render() {
@@ -53,6 +61,12 @@ class HomeView extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    provider: state.provider,
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
@@ -62,5 +76,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(
-  connect(null, mapDispatchToProps)(HomeView)
+  connect(mapStateToProps, mapDispatchToProps)(HomeView)
 )
