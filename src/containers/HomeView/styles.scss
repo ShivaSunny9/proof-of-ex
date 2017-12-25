@@ -20,9 +20,12 @@
 }
 
 :local(.modalStyles) {
+	border: 2px solid blue !important;
+
+	width: 1000px;
 
 	.metamask-logo {
-		max-width: 30%;
+		max-width: 200px;
 		float: left;
 		margin-right: 50px;
 	}

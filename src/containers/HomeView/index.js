@@ -56,6 +56,7 @@ class HomeView extends Component {
 
       actions.ui.showModal({
         className : modalStyles,
+        customStyles : { width: '1000' },
         title     : 'You need to install MetaMask',
         content   : modalContent
       })

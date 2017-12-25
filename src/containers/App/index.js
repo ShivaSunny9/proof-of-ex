@@ -73,7 +73,8 @@ export class App extends Component {
             actions={ui.modalActions}
             content={ui.modalContent}
             className={ui.modalClassName}
-            title={ui.modalTitle}/>
+            customStyles={ui.modalCustomStyles}
+            title={ui.modalTitle} />
         </div>
       </MuiThemeProvider>
     )

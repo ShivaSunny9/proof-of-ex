@@ -1,13 +1,14 @@
 import constants from 'core/types'
 
 const initialState = {
-  leftNavOpen  : false,
-  rightNavOpen : false,
-  showModal    : false,
-  modalActions : [],
-  modalTitle   : '',
-  modalContent : null,
-  modalClassName : ''
+  leftNavOpen       : false,
+  rightNavOpen      : false,
+  showModal         : false,
+  modalActions      : [],
+  modalTitle        : '',
+  modalContent      : null,
+  modalClassName    : '',
+  modalCustomStyles : {}
 }
 
 export function uiReducer(state = initialState, action) {
@@ -15,20 +16,22 @@ export function uiReducer(state = initialState, action) {
 
   case constants.SHOW_MODAL:
     return Object.assign({}, state, {
-      showModal      : true,
-      modalActions   : action.actions,
-      modalTitle     : action.title,
-      modalContent   : action.content,
-      modalClassName : action.className
+      showModal         : true,
+      modalActions      : action.actions,
+      modalTitle        : action.title,
+      modalContent      : action.content,
+      modalClassName    : action.className,
+      modalCustomStyles : action.customStyles
     })
 
   case constants.CLOSE_MODAL:
     return Object.assign({}, state, {
-      showModal    : false,
-      modalActions : [],
-      modalTitle   : '',
-      modalContent : '',
-      modalClassName : ''
+      showModal       : false,
+      modalActions    : [],
+      modalTitle      : '',
+      modalContent    : '',
+      modalClassName  : '',
+      modalCustomStyles : ''
     })
 
   case constants.OPEN_LEFT_NAV:
@@ -53,12 +56,7 @@ export function uiReducer(state = initialState, action) {
 
   case constants.CLEAR_UI:
     return Object.assign({}, state, {
-      leftNavOpen   : false,
-      rightNavOpen  : false,
-      showModal     : false,
-      modalActions  : [],
-      modalTitle    : '',
-      modalContent  : ''
+      initialState
     })
 
   default:

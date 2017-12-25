@@ -23,15 +23,16 @@ class Modal extends Component {
   }
 
   render() {
-    const { actions, title, content, className } = this.props
+    const { actions, title, content, className, customStyles } = this.props
     const mergedStyles = styles + ' ' + className
-        
+    
     return(
       <div>
         <Dialog
           title={title}
           actions={actions}
           className={mergedStyles}
+          contentStyle={customStyles}
           modal={false}
           open={this.state.open}
           children={<div className="modal-content">{content}</div>}
