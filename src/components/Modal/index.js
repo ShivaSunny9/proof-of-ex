@@ -26,8 +26,6 @@ class Modal extends Component {
     this.setState({
       open: false
     });
-
-    uiActions.closeModal();
   }
 
   render() {
