@@ -8,6 +8,7 @@ import { HashRouter,
          Route,
          Redirect,
          Switch }             from 'react-router-dom'
+import Web3                   from 'web3'
 
 /* 
  * Import global styles into entire app 

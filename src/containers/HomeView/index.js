@@ -88,7 +88,7 @@ class HomeView extends Component {
 
 function mapStateToProps(state) {
   return {
-    provider: state.provider,
+    provider: state.provider
   }
 }
 
