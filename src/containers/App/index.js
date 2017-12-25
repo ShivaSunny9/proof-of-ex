@@ -47,7 +47,7 @@ export class App extends Component {
   }
 
   render() {
-    const { ui, actions } = this.props
+    const { ui } = this.props
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
