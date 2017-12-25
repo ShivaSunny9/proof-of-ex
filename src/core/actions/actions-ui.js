@@ -8,7 +8,8 @@ export function showModal(obj) {
     type        : constants.SHOW_MODAL,
     title       : obj.title,
     modalActions: obj.actions,
-    content     : obj.content
+    content     : obj.content,
+    className   : obj.className
   };
 }
 

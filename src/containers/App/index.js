@@ -71,6 +71,7 @@ export class App extends Component {
             actions={ui.modalActions}
             uiActions={actions.ui}
             content={ui.modalContent}
+            className={ui.modalClassName}
             title={ui.modalTitle}/>
         </div>
       </MuiThemeProvider>

@@ -27,17 +27,18 @@ class Modal extends Component {
   }
 
   render() {
-    const { actions, title, content } = this.props
+    const { actions, title, content, className } = this.props
+    const mergedStyles = styles + ' ' + className
         
     return(
       <div>
         <Dialog
           title={title}
           actions={actions}
-          className={styles}
+          className={mergedStyles}
           modal={false}
           open={this.state.open}
-          children={content}
+          children={<div className="modal-content">{content}</div>}
           onRequestClose={this.handleClose}>
         </Dialog>
       </div>
@@ -51,7 +52,8 @@ Modal.propTypes = {
   actions   : PropTypes.array,
   title     : PropTypes.string,
   uiActions : PropTypes.object,
-  content   : PropTypes.element
+  content   : PropTypes.element,
+  className : PropTypes.string
 }
 
 Modal.defaultProps = {

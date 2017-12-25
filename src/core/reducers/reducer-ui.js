@@ -6,7 +6,8 @@ const initialState = {
 	showModal    : false,
 	modalActions : [],
 	modalTitle   : '',
-	modalContent : null
+	modalContent : null,
+	modalClassName : ''
 }
 
 export function uiReducer(state = initialState, action) {
@@ -17,7 +18,8 @@ export function uiReducer(state = initialState, action) {
 			showModal    : true,
 			modalActions : action.actions,
 			modalTitle   : action.title,
-			modalContent : action.content
+			modalContent : action.content,
+			modalClassName : action.className
 		})
 
 	case constants.CLOSE_MODAL:
@@ -25,7 +27,8 @@ export function uiReducer(state = initialState, action) {
 			showModal    : false,
 			modalActions : [],
 			modalTitle   : '',
-			modalContent : ''
+			modalContent : '',
+			modalClassName : ''
 		})
 
 	case constants.OPEN_LEFT_NAV:

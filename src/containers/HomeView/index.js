@@ -3,10 +3,11 @@ import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter }         from 'react-router-dom';
 import { UploadBox }          from 'components/UploadBox'
-import Button                  from 'components/Button'
+import Button                 from 'components/Button'
+import metaMaskImg            from 'assets/images/metamask.png'
 
 /* component styles */
-import { styles } from './styles.scss';
+import { styles, modalStyles } from './styles.scss';
 
 /* actions */
 import * as uiActionCreators from 'core/actions/actions-ui';
@@ -31,12 +32,30 @@ class HomeView extends Component {
     if(provider.web3Provider !== null) {
       history.push('/register')
     } else {
-      const modalContent = (<div>Go do it!</div>)
+      const modalContent = (
+        <div>
+          <img className="metamask-logo" src={metaMaskImg } alt="MetaMask logo" />
+          <p className="message">
+            <a hreg="https://metamask.io/" target="_blank">MetaMask</a> is a wallet and Chrome extension that allows you to make Ethereum transactions from regular websites.
+            In order to register your asset on the blockchain, you need to have it installed.
+            <br />
+            <br />
+            Get MetaMask &nbsp;
+            <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">here</a>.
+          </p>
+        </div>
+      )
+
+      const modalActions = [
+        <Button label="Close" raised={true} />,
+        <Button label="Install" raised={true} />
+      ]
 
       actions.ui.showModal({
-        title  : 'You need to install MetaMask',
-        content: modalContent,
-        actions: []
+        className : modalStyles,
+        title     : 'You need to install MetaMask',
+        content   : modalContent,
+        actions   : modalActions
       })
     }
 
