@@ -22,8 +22,6 @@ class Modal extends Component {
     const { uiActions } = this.props
 
     this.setState({ open: false })
-
-    uiActions.closeModal()
   }
 
   render() {

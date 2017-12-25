@@ -71,7 +71,6 @@ export class App extends Component {
           <Modal
             open={ui.showModal}
             actions={ui.modalActions}
-            uiActions={actions.ui}
             content={ui.modalContent}
             className={ui.modalClassName}
             title={ui.modalTitle}/>
