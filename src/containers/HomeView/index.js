@@ -41,7 +41,7 @@ class HomeView extends Component {
               <div id="register-actions">
                 <Button 
                   onTouchTap={this.registerAsset}
-                  label="Register Asset On Blockchain"
+                  label="Register Document On Blockchain"
                   raised={true}
                   className="tertiary" />
                 <a id="reset" href="#">Reset</a>

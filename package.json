@@ -80,7 +80,8 @@
     "redux-thunk": "^2.0.1",
     "sass-extract": "^2.0.0",
     "sass-extract-loader": "^1.1.0",
-    "web3": "^1.0.0-beta.18"
+    "solc": "^0.4.19",
+    "web3": "^1.0.0-beta.27"
   },
   "config": {
     "ghooks": {

@@ -33,6 +33,10 @@ export class App extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    
+  }
+
   render() {
     const { ui, actions } = this.props;
 
