@@ -39,9 +39,7 @@ export class App extends Component {
     /* Set the Provider */
     if (typeof window.web3 !== 'undefined') {
       const currentProvider = window.web3.currentProvider
-      let web3Provider
-
-      web3Provider = new Web3(currentProvider)
+      const web3Provider = new Web3(currentProvider)
       actions.provider.setProvider(web3Provider)
     }
   }
@@ -72,6 +70,7 @@ export class App extends Component {
             open={ui.showModal}
             actions={ui.modalActions}
             uiActions={actions.ui}
+            content={ui.modalContent}
             title={ui.modalTitle}/>
         </div>
       </MuiThemeProvider>

@@ -31,8 +31,12 @@ class HomeView extends Component {
     if(provider.web3Provider !== null) {
       history.push('/register')
     } else {
+      const modalContent = (<div>Go do it!</div>)
+
       actions.ui.showModal({
-        title: 'You need to install MetaMask'
+        title  : 'You need to install MetaMask',
+        content: modalContent,
+        actions: []
       })
     }
 
