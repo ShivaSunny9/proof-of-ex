@@ -19,8 +19,6 @@ class Modal extends Component {
   }
 
   handleClose=() => {
-    const { uiActions } = this.props
-
     this.setState({ open: false })
   }
 
