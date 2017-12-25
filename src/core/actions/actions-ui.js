@@ -5,11 +5,11 @@ import constants from 'core/types';
  */
 export function showModal(obj) {
   return {
-    type        : constants.SHOW_MODAL,
-    title       : obj.title,
-    modalActions: obj.actions,
-    content     : obj.content,
-    className   : obj.className
+    type       : constants.SHOW_MODAL,
+    title      : obj.title,
+    actions    : obj.actions,
+    content    : obj.content,
+    className  : obj.className
   };
 }
 

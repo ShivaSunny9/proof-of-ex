@@ -5,7 +5,7 @@ import constants from 'core/types';
  */
 export function setProvider(provider) {
   return {
-    type: constants.SET_PROVIDER,
+    type    : constants.SET_PROVIDER,
     provider: provider
   };
 }

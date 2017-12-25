@@ -31,31 +31,33 @@ class HomeView extends Component {
 
     if(provider.web3Provider !== null) {
       history.push('/register')
+      
     } else {
       const modalContent = (
         <div>
           <img className="metamask-logo" src={metaMaskImg } alt="MetaMask logo" />
-          <p className="message">
-            <a hreg="https://metamask.io/" target="_blank">MetaMask</a> is a wallet and Chrome extension that allows you to make Ethereum transactions from regular websites.
-            In order to register your asset on the blockchain, you need to have it installed.
+          <div className="message">
+            <p>
+              <a href="https://metamask.io/" target="_blank">MetaMask</a> is a wallet and Chrome extension that allows you to make Ethereum transactions from regular websites.
+              In order to register your asset on the blockchain, you need to have it installed.
+            </p>
             <br />
-            <br />
-            Get MetaMask &nbsp;
-            <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">here</a>.
-          </p>
+            <Button 
+              keyboardFocused={true}
+              label="Install MetaMask Now" 
+              raised={true}
+              onTouchTap={() => {
+                window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en','_blank');
+              }} 
+            />
+          </div>
         </div>
       )
-
-      const modalActions = [
-        <Button label="Close" raised={true} />,
-        <Button label="Install" raised={true} />
-      ]
 
       actions.ui.showModal({
         className : modalStyles,
         title     : 'You need to install MetaMask',
-        content   : modalContent,
-        actions   : modalActions
+        content   : modalContent
       })
     }
 

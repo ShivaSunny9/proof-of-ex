@@ -15,7 +15,8 @@ import { HashRouter,
 import './styles/app.scss'
 
 /* actions */
-import * as uiActionCreators  from 'core/actions/actions-ui'
+import * as uiActionCreators       from 'core/actions/actions-ui'
+import * as providerActionCreators from 'core/actions/actions-provider'
 
 /* application containers & components */
 import Header         from 'containers/Header'
@@ -36,7 +37,7 @@ export class App extends Component {
   componentDidMount() {
     const { actions } = this.props
 
-    /* Set the Provider */
+    /****** Set the Provider *******/
     if (typeof window.web3 !== 'undefined') {
       const currentProvider = window.web3.currentProvider
       const web3Provider = new Web3(currentProvider)
@@ -88,7 +89,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      ui: bindActionCreators(uiActionCreators, dispatch)
+      ui      : bindActionCreators(uiActionCreators, dispatch),
+      provider: bindActionCreators(providerActionCreators, dispatch)
     }
   }
 }

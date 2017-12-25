@@ -15,10 +15,10 @@ export function uiReducer(state = initialState, action) {
 
 	case constants.SHOW_MODAL:
 		return Object.assign({}, state, {
-			showModal    : true,
-			modalActions : action.actions,
-			modalTitle   : action.title,
-			modalContent : action.content,
+			showModal    	 : true,
+			modalActions 	 : action.actions,
+			modalTitle   	 : action.title,
+			modalContent 	 : action.content,
 			modalClassName : action.className
 		})
 

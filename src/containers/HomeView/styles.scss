@@ -24,16 +24,21 @@
 	.metamask-logo {
 		max-width: 30%;
 		float: left;
-		margin-right: 60px;
+		margin-right: 50px;
 	}
 
 	.modal-content {
 		position: relative;
-		padding: 0 40px;
+		padding: 0 40px 20px 40px;
 
-		.message {
-			line-height: 1.5;
-			color: $black;
+		.message {			
+			p {
+				color: $black;
+				line-height: 1.5;
+				text-align: justify;
+				position: relative;
+				left: 10px;
+			}
 		}
 	}
 
