@@ -38,7 +38,9 @@ class HomeView extends Component {
           <img className="metamask-logo" src={metaMaskImg } alt="MetaMask logo" />
           <div className="message">
             <p>
-              <a href="https://metamask.io/" target="_blank">MetaMask</a> is a wallet and Chrome extension that allows you to make Ethereum transactions from regular websites.
+              <a href="https://metamask.io/" target="_blank">MetaMask</a> 
+              is a wallet and Chrome extension that allows you to make Ethereum transactions from 
+              regular websites.
               In order to register your asset on the blockchain, you need to have it installed.
             </p>
             <br />
@@ -55,10 +57,10 @@ class HomeView extends Component {
       )
 
       actions.ui.showModal({
-        className : modalStyles,
+        className    : modalStyles,
         customStyles : { width: '1000' },
-        title     : 'You need to install MetaMask',
-        content   : modalContent
+        title        : 'You need to install MetaMask',
+        content      : modalContent
       })
     }
 
