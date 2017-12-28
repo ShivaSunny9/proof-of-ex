@@ -1,6 +1,29 @@
 import constants from 'core/types';
 
 /**
+ * showModal - Open the modal
+ */
+export function showModal(obj) {
+  return {
+    type          : constants.SHOW_MODAL,
+    title         : obj.title,
+    actions       : obj.actions,
+    content       : obj.content,
+    className     : obj.className,
+    customStyles  : obj.customStyles
+  };
+}
+
+/**
+ * closeModal - Close the  modal
+ */
+export function closeModal() {
+  return {
+    type: constants.CLOSE_MODAL
+  };
+}
+
+/**
  * openLeftNav - Open the left side nav
  */
 export function openLeftNav() {
@@ -42,25 +65,5 @@ export function closeRightNav() {
 export function clear() {
   return {
     type: constants.CLEAR_UI
-  };
-}
-
-/**
- * showModal - Open the modal
- */
-export function showModal(obj) {
-  return {
-    type        : constants.SHOW_MODAL,
-    title       : obj.title,
-    modalActions: obj.actions
-  };
-}
-
-/**
- * closeConfirm - Close the confirmation modal
- */
-export function closeModal() {
-  return {
-    type: constants.CLOSE_MODAL
   };
 }

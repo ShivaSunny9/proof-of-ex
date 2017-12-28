@@ -7,5 +7,6 @@ export default keyMirror({
   CLOSE_RIGHT_NAV    : null,
   CLEAR_UI           : null,
   SHOW_MODAL         : null,
-  CLOSE_MODAL        : null
+  CLOSE_MODAL        : null,
+  SET_PROVIDER       : null
 });

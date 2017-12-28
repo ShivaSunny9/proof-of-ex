@@ -3,10 +3,11 @@ import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter }         from 'react-router-dom';
 import { UploadBox }          from 'components/UploadBox'
-import Button                  from 'components/Button'
+import Button                 from 'components/Button'
+import metaMaskImg            from 'assets/images/metamask.png'
 
 /* component styles */
-import { styles } from './styles.scss';
+import { styles, modalStyles } from './styles.scss';
 
 /* actions */
 import * as uiActionCreators from 'core/actions/actions-ui';
@@ -26,8 +27,43 @@ class HomeView extends Component {
   }
 
   registerAsset=() => {    
-    const { history } = this.props
-    history.push('/register')
+    const { provider, history, actions } = this.props
+
+    if(provider.web3Provider !== null) {
+      history.push('/register')
+      
+    } else {
+      const modalContent = (
+        <div>
+          <img className="metamask-logo" src={metaMaskImg } alt="MetaMask logo" />
+          <div className="message">
+            <p>
+              <a href="https://metamask.io/" target="_blank">MetaMask</a> 
+              is a wallet and Chrome extension that allows you to make Ethereum transactions from 
+              regular websites.
+              In order to register your asset on the blockchain, you need to have it installed.
+            </p>
+            <br />
+            <Button 
+              keyboardFocused={true}
+              label="Install MetaMask Now" 
+              raised={true}
+              onTouchTap={() => {
+                window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en','_blank');
+              }} 
+            />
+          </div>
+        </div>
+      )
+
+      actions.ui.showModal({
+        className    : modalStyles,
+        customStyles : { width: '1000' },
+        title        : 'You need to install MetaMask',
+        content      : modalContent
+      })
+    }
+
   }
 
   render() {
@@ -53,6 +89,12 @@ class HomeView extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    provider: state.provider
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
@@ -62,5 +104,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(
-  connect(null, mapDispatchToProps)(HomeView)
+  connect(mapStateToProps, mapDispatchToProps)(HomeView)
 )
