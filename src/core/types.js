@@ -8,5 +8,6 @@ export default keyMirror({
   CLEAR_UI           : null,
   SHOW_MODAL         : null,
   CLOSE_MODAL        : null,
-  SET_PROVIDER       : null
+  SET_PROVIDER       : null,
+  ADD_ASSET          : null
 });

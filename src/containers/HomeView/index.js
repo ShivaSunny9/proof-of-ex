@@ -1,22 +1,24 @@
 import React, { Component }   from 'react'
-import { connect }            from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { withRouter }         from 'react-router-dom';
+import { connect }            from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withRouter }         from 'react-router-dom'
 import { UploadBox }          from 'components/UploadBox'
 import Button                 from 'components/Button'
 import metaMaskImg            from 'assets/images/metamask.png'
 
 /* component styles */
-import { styles, modalStyles } from './styles.scss';
+import { styles, modalStyles } from './styles.scss'
 
 /* actions */
-import * as uiActionCreators from 'core/actions/actions-ui';
+import * as uiActionCreators    from 'core/actions/actions-ui'
+import * as assetActionCreators from 'core/actions/actions-asset'
 
 class HomeView extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      fileAdded: false
+      fileAdded: false,
+      asset: null
     }
   }
 
@@ -28,14 +30,16 @@ class HomeView extends Component {
 
   registerAsset=() => {    
     const { provider, history, actions } = this.props
+    const { asset } = this.state
 
     if(provider.web3Provider !== null) {
+      actions.asset.addAsset(asset)
       history.push('/register')
-      
+
     } else {
       const modalContent = (
         <div>
-          <img className="metamask-logo" src={metaMaskImg } alt="MetaMask logo" />
+          <img className="metamask-logo" src={metaMaskImg} alt="MetaMask logo" />
           <div className="message">
             <p>
               <a href="https://metamask.io/" target="_blank">MetaMask</a> 
@@ -66,13 +70,19 @@ class HomeView extends Component {
 
   }
 
+  setUploadedFile=(file) => {
+    this.setState({
+      asset: file
+    })
+  }
+
   render() {
     const { fileAdded } = this.state
 
     return (
       <div className={styles}>   
         <div id="home-view">   
-          <UploadBox onDrop={this.onDrop} />
+          <UploadBox onDrop={this.onDrop} setUploadedFile={this.setUploadedFile} />
             <div className={!fileAdded ? 'opaque' : ''}>
               <div id="register-actions">
                 <Button 
@@ -98,7 +108,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      ui: bindActionCreators(uiActionCreators, dispatch)
+      ui: bindActionCreators(uiActionCreators, dispatch),
+      asset: bindActionCreators(assetActionCreators, dispatch)
     }
   };
 }

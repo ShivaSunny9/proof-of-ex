@@ -1,4 +1,5 @@
 import React, { Component } 												from 'react'
+import PropTypes                                    from 'prop-types'
 import { DragDropContext, DragDropContextProvider } from 'react-dnd'
 import HTML5Backend, { NativeTypes } 								from 'react-dnd-html5-backend'
 import DropTarget							 											from './DropTarget'
@@ -6,7 +7,7 @@ import DropTarget							 											from './DropTarget'
 import { styles } from './styles.scss'
 
 @DragDropContext(HTML5Backend)
-export default class UploadBox extends Component {
+class UploadBox extends Component {
   constructor(props) {
     super(props);
     this.state = { droppedFiles: [] }
@@ -18,9 +19,15 @@ export default class UploadBox extends Component {
     if (monitor) {
       const droppedFiles = monitor.getItem().files
       this.setState({ droppedFiles })
+      this.setUploadedFile(droppedFiles)
     }
     
     onDrop()
+  }
+
+  setUploadedFile=(file) => {
+    const { setUploadedFile } = this.props
+    setUploadedFile(file)
   }
 
   render() {
@@ -31,11 +38,19 @@ export default class UploadBox extends Component {
       <DragDropContextProvider backend={HTML5Backend}>
         <div className={styles}>
           <DropTarget
-          accepts={[FILE]}
-          onDrop={this.handleFileDrop}
-          files={droppedFiles} />
+            setUploadedFile={this.setUploadedFile}
+            accepts={[FILE]}
+            onDrop={this.handleFileDrop}
+            files={droppedFiles} />
         </div>
       </DragDropContextProvider>
     )
   }
 }
+
+UploadBox.PropTypes = {
+  setUploadedFile: PropTypes.func.isRequired
+}
+
+export default UploadBox
+

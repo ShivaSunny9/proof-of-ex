@@ -43,7 +43,7 @@ export default class DropTarget extends Component {
   getFileList(files) {
     const list = files.map(file =>
 			<li key={file.name}>
-				{`${file.name} of size ${file.size} and type ${file.type}`}
+				{`${file.name}, of size ${file.size}, and type ${file.type}`}
 			</li>
 		)
 		
@@ -60,10 +60,11 @@ export default class DropTarget extends Component {
 
   handleFileUpload=(evt) => {
     const files = evt.target.files
-    const { onDrop } = this.props
+    const { onDrop, setUploadedFile } = this.props
 
     if(files.length) {
       onDrop()
+      setUploadedFile(files)
       this.setState({ files: [files[0]] })
     }
   }

@@ -62,7 +62,7 @@ class Navigation extends Component {
           </Tab>
           <Tab
             icon={<ListenIcon />}
-            label="List"
+            label="Your Assets"
             value={'/list'}>
           </Tab>
         </Tabs>
