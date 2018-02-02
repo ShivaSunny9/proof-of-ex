@@ -5,7 +5,7 @@ import constants from 'core/types';
  */
 export function addAsset(asset) {
   return {
-    type    : constants.ADD_ASSET,
-    provider: asset
+    type  : constants.ADD_ASSET,
+    asset : asset
   };
 }

@@ -1,15 +1,15 @@
 import constants from 'core/types';
 
 const initialState = {
-  asset: null
+  stagedAsset: null
 };
 
-export function providerReducer(state = initialState, action) {
+export function assetReducer(state = initialState, action) {
   switch (action.type) {
 
   case constants.ADD_ASSET:
     return Object.assign({}, state, {
-      asset: action.asset
+      stagedAsset: action.asset[0]
     });
     
   default:

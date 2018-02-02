@@ -11,17 +11,50 @@ import * as assetActionCreators from 'core/actions/actions-asset'
 class RegisterView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      imagePreviewUrl: ''
+    }
   }
 
-  render() {
-    return (
-      <div className={styles}>    
-        <h2>Register Your Asset</h2>
+  componentDidMount() {
+    const { history, asset } = this.props
+    
+    if(!asset.stagedAsset) {
+      history.push('/')
+    } else {
+      const reader = new FileReader();
 
+      reader.onload = () => {
+        this.setState({
+          imagePreviewUrl: reader.result
+        });
+      }
+
+      reader.readAsDataURL(asset.stagedAsset)
+    } 
+  }
+
+
+  render() {
+    const { imagePreviewUrl } = this.state
+
+    return (
+      <div className={styles}> 
+        <div id="register-view">   
+          <h2>Register Your Photo</h2>
+          <img id="image-preview" src={imagePreviewUrl} />
+        </div>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    asset: state.asset
+  }
+}
+
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -31,4 +64,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(RegisterView))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterView))
