@@ -7,4 +7,17 @@
     border-radius: $border-radius;
   }
 
+  #registration-form {
+    padding: 20px;
+
+    h2 {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    form {
+      margin-top: 30px;
+    }
+  }
+
 }

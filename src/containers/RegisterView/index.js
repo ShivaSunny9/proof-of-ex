@@ -2,7 +2,9 @@ import React, { Component }    from 'react';
 import { connect }             from 'react-redux'
 import { bindActionCreators }  from 'redux'
 import { withRouter }          from 'react-router-dom'
-
+import { Paper }               from 'material-ui'
+import { Form, Label, Input }  from 'components/Form'
+ 
 /* component styles */
 import { styles } from './styles.scss'
 
@@ -20,7 +22,7 @@ class RegisterView extends Component {
     const { history, asset } = this.props
     
     if(!asset.stagedAsset) {
-      history.push('/')
+      // history.push('/')
     } else {
       const reader = new FileReader();
 
@@ -41,8 +43,24 @@ class RegisterView extends Component {
     return (
       <div className={styles}> 
         <div id="register-view">   
-          <h2>Register Your Photo</h2>
+          
           <img id="image-preview" src={imagePreviewUrl} />
+          <Paper>
+            <div id="registration-form">
+              <h2>Register Your Digital Asset</h2>
+              <span>Fill the form below</span>
+              <Form>
+                <Label text="Your Email Address" />
+                <Input type="text" />
+                <Label text="Your Ethereum Wallet Address (Public Key)" />
+                <Input type="text" />
+                <Label text="Your Asset's Unique Hash" />
+                <Input type="text" value={"2sdlkjfghl345345lkjh"} disabled/>
+                <Label text="Estimated Gas" />
+                <Input type="text" value={123123123} disabled/>
+              </Form>
+            </div>
+          </Paper>
         </div>
       </div>
     );
