@@ -22,7 +22,7 @@ class Label extends Component {
 }
 
 Label.PropTypes = {
-  
+  text: PropTypes.string.isRequred
 }
 
 export default Label

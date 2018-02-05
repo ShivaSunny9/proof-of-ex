@@ -1,20 +1,29 @@
 :local(.styles) {
-	
+
   #image-preview {
     height: auto;
     max-width: 30%;
-    border: 3px solid $lighterGrey;
-    border-radius: $border-radius;
+    margin-rigth: 40px;
+  }
+
+  #image-preview,
+  #registration-form {
+    display: inline-block;
   }
 
   #registration-form {
-    padding: 20px;
+    width: 66%;
+    background-color: $beige;
 
+    form {
+      padding: 20px;
+    }
+    
     h2 {
       font-weight: bold;
       margin-bottom: 10px;
     }
-    
+
     form {
       margin-top: 30px;
     }

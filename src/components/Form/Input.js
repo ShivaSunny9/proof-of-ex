@@ -13,7 +13,7 @@ class Input extends Component {
     const { type, value, placeholder, disabled } = this.props
     return (
       <div className={inputStyles}>
-        <input type={type} value={value} placeholder={placeholder}  disabled={disabled} />
+        <input type={type} value={value} placeholder={placeholder} disabled={disabled} />
       </div>
     )
   }
@@ -21,7 +21,10 @@ class Input extends Component {
 }
 
 Input.PropTypes = {
-  
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default Input
