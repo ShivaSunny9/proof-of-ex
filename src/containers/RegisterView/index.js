@@ -4,6 +4,7 @@ import { bindActionCreators }  from 'redux'
 import { withRouter }          from 'react-router-dom'
 import { Paper }               from 'material-ui'
 import { Form, Label, Input }  from 'components/Form'
+import Button                  from 'components/Button'
 import imagePlaceholderSvg     from 'assets/images/image-placeholder.svg' 
 
 /* component styles */
@@ -45,15 +46,13 @@ class RegisterView extends Component {
     return (
       <div className={styles}> 
         <div id="register-view">   
-          <div id="image-preview">
-            <Paper>
-              <div id="image-preview-header">Your Asset...</div>
+          <div  id="image-preview">
+            <Paper zDepth={2}>
               <img src={mainImage} />
             </Paper>
           </div>
-          
-          <div id="registration-form-container">
-            <Paper>
+          <div>
+            <Paper zDepth={2} id="registration-form-container">
               <div id="registration-form">
               <h2>Register Your Digital Asset</h2>
               <span>Fill the form below</span>
@@ -66,11 +65,11 @@ class RegisterView extends Component {
                 <Input type="text" value={"2sdlkjfghl345345lkjh"} disabled/>
                 <Label text="Estimated Gas" />
                 <Input type="text" value={123123123} disabled/>
+                <Button label="Next" raised={true} />
               </Form>
               </div>
             </Paper>
           </div>
-
         </div>
       </div>
     )

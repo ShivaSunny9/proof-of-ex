@@ -5,12 +5,9 @@
     height: auto;
     max-width: 30%;
     margin-right: 20px;
-    padding: 10px;
 
-    #image-preview-header {
-      background: $beige;
-      padding: 10px 20px;
-      color: $subduedBlack;
+    img {
+      margin: 0 0 -4px 0px;
     }
   }
 
@@ -22,7 +19,6 @@
 
   #registration-form-container {
     width: 65%;
-    margin-top: 10px;
 
     #registration-form {      
       padding: 20px;
