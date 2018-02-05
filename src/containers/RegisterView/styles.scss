@@ -1,31 +1,42 @@
 :local(.styles) {
 
   #image-preview {
+    width: 100%;
     height: auto;
     max-width: 30%;
-    margin-rigth: 40px;
+    margin-right: 20px;
+    padding: 10px;
+
+    #image-preview-header {
+      background: $beige;
+      padding: 10px 20px;
+      color: $subduedBlack;
+    }
   }
 
   #image-preview,
-  #registration-form {
+  #registration-form-container {
     display: inline-block;
+    float: left;
   }
 
-  #registration-form {
-    width: 66%;
-    background-color: $beige;
+  #registration-form-container {
+    width: 65%;
+    margin-top: 10px;
 
-    form {
+    #registration-form {      
       padding: 20px;
-    }
-    
-    h2 {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+      background-color: $beige;
+      width: 94.9%;
 
-    form {
-      margin-top: 30px;
+      h2 {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      form {
+        margin-top: 30px;
+      }
     }
   }
 

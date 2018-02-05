@@ -15,21 +15,23 @@ class RegisterView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imagePreviewUrl: ''
+      mainImage: ''
     }
   }
 
   componentDidMount() {
-    const { history, asset } = this.props
+    const { asset } = this.props
     
     if(!asset.stagedAsset) {
-      // history.push('/')
+      this.setState({
+        mainImage: imagePlaceholderSvg
+      })
     } else {
       const reader = new FileReader();
 
       reader.onload = () => {
         this.setState({
-          imagePreviewUrl: reader.result
+          mainImage: reader.result
         });
       }
 
@@ -37,16 +39,22 @@ class RegisterView extends Component {
     } 
   }
 
-
   render() {
-    const { imagePreviewUrl } = this.state
+    const { mainImage } = this.state
 
     return (
       <div className={styles}> 
         <div id="register-view">   
-          <img id="image-preview" src={imagePlaceholderSvg} />
-          <div id="registration-form">
+          <div id="image-preview">
             <Paper>
+              <div id="image-preview-header">Your Asset...</div>
+              <img src={mainImage} />
+            </Paper>
+          </div>
+          
+          <div id="registration-form-container">
+            <Paper>
+              <div id="registration-form">
               <h2>Register Your Digital Asset</h2>
               <span>Fill the form below</span>
               <Form>
@@ -59,11 +67,13 @@ class RegisterView extends Component {
                 <Label text="Estimated Gas" />
                 <Input type="text" value={123123123} disabled/>
               </Form>
+              </div>
             </Paper>
           </div>
+
         </div>
       </div>
-    );
+    )
   }
 }
 
