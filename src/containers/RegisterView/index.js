@@ -55,11 +55,10 @@ class RegisterView extends Component {
 
   renderContent() {
     const {finished, stepIndex} = this.state;
-    const contentStyle = {margin: '0 16px', overflow: 'hidden'};
 
     if (finished) {
       return (
-        <div style={contentStyle}>
+        <div>
           <p>
             <a
               href="#"
@@ -75,7 +74,7 @@ class RegisterView extends Component {
       );
     }
     return (
-      <div style={contentStyle}>
+      <div>
         <div>{this.getStepContent(stepIndex)}</div>
         <div id="button-controls">
           <Button
