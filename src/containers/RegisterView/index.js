@@ -1,15 +1,11 @@
-import React, { Component }    from 'react';
-import { connect }             from 'react-redux'
-import { bindActionCreators }  from 'redux'
-import { withRouter }          from 'react-router-dom'
-import { Form, Label, Input }  from 'components/Form'
-import Button                  from 'components/Button'
-import PhotoContainer          from './components/PhotoContainer'
-import {
-  Step,
-  Stepper,
-  StepLabel
-} from 'material-ui/Stepper';
+import React, { Component }         from 'react';
+import { connect }                  from 'react-redux'
+import { bindActionCreators }       from 'redux'
+import { withRouter }               from 'react-router-dom'
+import Button                       from 'components/Button'
+import Photo                        from './components/Photo'
+import Panel                        from './components/Panel'
+import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -60,7 +56,7 @@ class RegisterView extends Component {
 
     return (
       <div>
-        <div>{this.getStepContent(stepIndex)}</div>
+        <Panel stepIndex={stepIndex} />
         <div id="button-controls">
           <Button
             type="raised"
@@ -80,43 +76,6 @@ class RegisterView extends Component {
     );
   }
 
-  getStepContent(stepIndex) {
-    switch (stepIndex) {
-    case 0:
-      return (
-          <div id="registration-form">
-            <h2>Step 1 - Enter Your Credentials</h2>
-            <span>Your email address and public key are registered on the Blockchain</span>
-            <Form>
-              <Label text="Your Email Address" />
-              <Input type="text" />
-              <Label text="Your Ethereum Wallet Address (Public Key)" />
-              <Input type="text" />
-            </Form>
-          </div>)
-    case 1:
-      return (
-          <div id="registration-form">
-            <h2>Step 2 - Create A Unique Hash Of Your Asset</h2>
-            <span>The SHA256 algorithm is used to create a unique fingerprint of your asset</span>
-            <Form>
-              <Label text="Your Asset's Unique Hash" />
-              <Input type="text" value={"2sdlkjfghl345345lkjh"} disabled/>
-            </Form>
-          </div>)
-    case 2:
-      return (
-          <div id="registration-form">
-            <h2>Step 3 - Pay Gas & Confirm Transaction</h2>
-            <span>You need to pay gas in Ether in order to create a record on the Blockchain</span>
-            <Form>
-              <Label text="Estimated Gas" />
-              <Input type="text" value={123123123} disabled/>
-            </Form>
-          </div>)
-    }
-  }
-
   render() {
     const { stepIndex } = this.state
     const { asset } = this.props
@@ -124,24 +83,14 @@ class RegisterView extends Component {
     return (
       <div className={styles}> 
         <div id="register-view">   
-          <PhotoContainer asset={asset} />
-          <div>
-            <div id="registration-form-container">
-              <Stepper activeStep={stepIndex}>
-              <Step>
-                <StepLabel>Enter your credentials</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Generate a unique hash</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Pay Gas & Confirm</StepLabel>
-              </Step>
-              </Stepper>
-
-              {this.renderContent()}
-
-            </div>
+          <Photo asset={asset} />  
+          <div id="registration-form-container">
+            <Stepper activeStep={stepIndex}>
+              <Step><StepLabel>Enter your credentials</StepLabel></Step>
+              <Step><StepLabel>Generate a unique hash</StepLabel></Step>
+              <Step><StepLabel>Pay Gas & Confirm</StepLabel></Step>
+            </Stepper>
+            {this.renderContent()}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import getStyles            from 'core/utils/util-styles'
 /* component styles */
 import { styles } from '../styles.scss'
 
-export default class PhotoContainer extends Component {
+export default class Photo extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -62,5 +62,4 @@ export default class PhotoContainer extends Component {
       </div>
     )
   }
-
 }
