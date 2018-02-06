@@ -2,12 +2,9 @@ import React, { Component }    from 'react';
 import { connect }             from 'react-redux'
 import { bindActionCreators }  from 'redux'
 import { withRouter }          from 'react-router-dom'
-import { Paper }               from 'material-ui'
 import { Form, Label, Input }  from 'components/Form'
 import Button                  from 'components/Button'
-import imagePlaceholderSvg     from 'assets/images/image-placeholder.svg' 
-import ProgressIndicator       from 'components/ProgressIndicator'
-import getStyles               from 'core/utils/util-styles'
+import PhotoContainer          from './components/PhotoContainer'
 import {
   Step,
   Stepper,
@@ -23,17 +20,10 @@ class RegisterView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mainImage: '',
-      imagePlaceholder: '',
       loading: false,
       finished: false,
       stepIndex: 0
     }
-  }
-
-  componentDidMount() {    
-    this.setImage()
-    this.showImage()
   }
 
   dummyAsync = (cb) => {
@@ -144,51 +134,14 @@ class RegisterView extends Component {
     }
   }
 
-  setImage=() => {
-    const { asset } = this.props
-
-    if(!asset.stagedAsset) {
-      this.setState({ mainImage: imagePlaceholderSvg })
-    } else {
-      const reader = new FileReader();
-      reader.readAsDataURL(asset.stagedAsset)
-
-      reader.onload = () => {
-        this.setState({ mainImage: reader.result });
-      }
-
-    } 
-  }
-
-  showImage=() => {
-    this.setState({ imagePlaceholder: <ProgressIndicator 
-                                        color={getStyles('$lightBlue')}
-                                        type="circle"
-                                        size={60}
-                                        thickness={6} /> })
-
-    setTimeout(() => {
-      const { mainImage } = this.state
-
-      this.setState({ imagePlaceholder: <img src={mainImage} /> })
-    }, 1000)
-
-  }
-
   render() {
-    const { imagePlaceholder } = this.state
-    const { stepIndex} = this.state;
+    const { stepIndex } = this.state
+    const { asset } = this.props
 
     return (
       <div className={styles}> 
         <div id="register-view">   
-          <div id="image-container">
-            <Paper zDepth={1}>
-              <div id="image-preview">
-                {imagePlaceholder}
-              </div>
-            </Paper>
-          </div>
+          <PhotoContainer asset={asset} />
           <div>
             <div id="registration-form-container">
               <Stepper activeStep={stepIndex}>
