@@ -43,15 +43,15 @@ class HomeView extends Component {
           <div className="message">
             <p>
               <a href="https://metamask.io/" target="_blank">MetaMask</a> 
-              is a wallet and Chrome extension that allows you to make Ethereum transactions from 
+              &nbsp;is a wallet and Chrome extension that allows you to make Ethereum transactions from 
               regular websites.
-              In order to register your asset on the blockchain, you need to have it installed.
             </p>
+            <p>In order to register your asset on the blockchain, you need to have it installed.</p>
             <br />
             <Button 
-              keyboardFocused={true}
-              label="Install MetaMask Now" 
-              raised={true}
+              label="Install MetaMask" 
+              type="raised"
+              primary={true}
               onTouchTap={() => {
                 window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en','_blank');
               }} 
@@ -63,7 +63,7 @@ class HomeView extends Component {
       actions.ui.showModal({
         className    : modalStyles,
         customStyles : { width: '1000' },
-        title        : 'You need to install MetaMask',
+        title        : 'You need to install MetaMask!',
         content      : modalContent
       })
     }
@@ -88,7 +88,8 @@ class HomeView extends Component {
                 <Button 
                   onTouchTap={this.registerAsset}
                   label="Register Photo On Blockchain"
-                  raised={true}
+                  type="raised"
+                  primary={true}
                   className="tertiary" />
                 <a id="reset" href="#">Reset</a>
               </div>

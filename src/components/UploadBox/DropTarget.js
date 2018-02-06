@@ -103,7 +103,8 @@ export default class DropTarget extends Component {
           <Icon icon="upload" className="upload-icon" />
           <Button
             label="Choose photo to upload"
-            raised={true}
+            type="raised"
+            primary={true}
             disabled={disabled} 
             onTouchTap={this.showUploadDialogBox} />
           <input 

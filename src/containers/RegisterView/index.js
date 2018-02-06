@@ -8,6 +8,7 @@ import Button                  from 'components/Button'
 import imagePlaceholderSvg     from 'assets/images/image-placeholder.svg' 
 import ProgressIndicator       from 'components/ProgressIndicator'
 import getStyles               from 'core/utils/util-styles'
+import Icon                    from 'components/Icon'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -76,7 +77,7 @@ class RegisterView extends Component {
             <Paper zDepth={2} id="registration-form-container">
               <div id="registration-form">
               <h2>Register Your Digital Asset</h2>
-              <span>Create a permanent & unique record of your asset on the Blockchain</span>
+              <span>Create a permanent record of your asset on the Blockchain</span>
               <Form>
                 <Label text="Your Email Address" />
                 <Input type="text" />
@@ -86,7 +87,13 @@ class RegisterView extends Component {
                 <Input type="text" value={"2sdlkjfghl345345lkjh"} disabled/>
                 <Label text="Estimated Gas" />
                 <Input type="text" value={123123123} disabled/>
-                <Button label="Next" raised={true} />
+                <Button
+                  label="Next"
+                  labelPosition="before"
+                  type="raised"
+                  primary={true}
+                  icon={<Icon icon="upload"/>}
+                />
               </Form>
               </div>
             </Paper>
