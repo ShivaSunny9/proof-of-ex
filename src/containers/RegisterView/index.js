@@ -8,7 +8,6 @@ import Button                  from 'components/Button'
 import imagePlaceholderSvg     from 'assets/images/image-placeholder.svg' 
 import ProgressIndicator       from 'components/ProgressIndicator'
 import getStyles               from 'core/utils/util-styles'
-import Icon                    from 'components/Icon'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -92,7 +91,6 @@ class RegisterView extends Component {
                   labelPosition="before"
                   type="raised"
                   primary={true}
-                  icon={<Icon icon="upload"/>}
                 />
               </Form>
               </div>

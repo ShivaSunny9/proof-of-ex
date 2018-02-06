@@ -24,7 +24,9 @@ const Icon = props => {
 
   return (
 		<div className={`${styles} ${className}`}>
-      <FontAwesomeIcon icon={fontAwesomeIcons[icon]} />
+      <div className="icon">
+        <FontAwesomeIcon icon={fontAwesomeIcons[icon]} />
+      </div>
 		</div>
 	)
 }

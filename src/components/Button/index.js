@@ -24,7 +24,7 @@ export default function Button(props) {
 function createButton(props) {
   const { type, className } = props
   let buttonElem;
-  const finalClassName = `btn ${className} '}`
+  const finalClassName = `btn ${className}`
 
   switch(type) {
   case 'raised':
