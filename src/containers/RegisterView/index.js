@@ -6,6 +6,7 @@ import { Paper }               from 'material-ui'
 import { Form, Label, Input }  from 'components/Form'
 import Button                  from 'components/Button'
 import imagePlaceholderSvg     from 'assets/images/image-placeholder.svg' 
+import ProgressIndicator       from 'components/ProgressIndicator'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -16,13 +17,19 @@ class RegisterView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mainImage: ''
+      mainImage: '',
+      imagePlaceholder: ''
     }
   }
 
-  componentDidMount() {
+  componentDidMount() {    
+    this.setImage()
+    this.showImage()
+  }
+
+  setImage=() => {
     const { asset } = this.props
-    
+
     if(!asset.stagedAsset) {
       this.setState({
         mainImage: imagePlaceholderSvg
@@ -40,22 +47,39 @@ class RegisterView extends Component {
     } 
   }
 
+  showImage=() => {
+    this.setState({
+      imagePlaceholder: <ProgressIndicator type="circle" size={60} thickness={6} />
+    })
+
+    setTimeout(() => {
+      const { mainImage } = this.state
+
+      this.setState({
+        imagePlaceholder: <img src={mainImage} />
+      })
+    }, 50000)
+
+  }
+
   render() {
-    const { mainImage } = this.state
+    const { imagePlaceholder } = this.state
 
     return (
       <div className={styles}> 
         <div id="register-view">   
-          <div  id="image-preview">
+          <div id="image-container">
             <Paper zDepth={2}>
-              <img src={mainImage} />
+              <div id="image-preview">
+                {imagePlaceholder}
+              </div>
             </Paper>
           </div>
           <div>
             <Paper zDepth={2} id="registration-form-container">
               <div id="registration-form">
               <h2>Register Your Digital Asset</h2>
-              <span>Fill the form below</span>
+              <span>Create a permanent & unique record of your asset on the Blockchain</span>
               <Form>
                 <Label text="Your Email Address" />
                 <Input type="text" />
