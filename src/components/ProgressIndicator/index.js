@@ -18,12 +18,12 @@ class ProgressIndicator extends Component {
     let progressIndicator
 
     switch(type){
-      case 'circle':
-        progressIndicator = <CircularProgress {...this.props} />
-        break
-      case 'linear':
-        progressIndicator = <LinearProgress {...this.props} />
-        break
+    case 'circle':
+      progressIndicator = <CircularProgress {...this.props} />
+      break
+    case 'linear':
+      progressIndicator = <LinearProgress {...this.props} />
+      break
     }
 
     return (

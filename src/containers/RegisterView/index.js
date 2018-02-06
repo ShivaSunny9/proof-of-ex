@@ -7,6 +7,7 @@ import { Form, Label, Input }  from 'components/Form'
 import Button                  from 'components/Button'
 import imagePlaceholderSvg     from 'assets/images/image-placeholder.svg' 
 import ProgressIndicator       from 'components/ProgressIndicator'
+import getStyles               from 'core/utils/util-styles'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -31,34 +32,30 @@ class RegisterView extends Component {
     const { asset } = this.props
 
     if(!asset.stagedAsset) {
-      this.setState({
-        mainImage: imagePlaceholderSvg
-      })
+      this.setState({ mainImage: imagePlaceholderSvg })
     } else {
       const reader = new FileReader();
+      reader.readAsDataURL(asset.stagedAsset)
 
       reader.onload = () => {
-        this.setState({
-          mainImage: reader.result
-        });
+        this.setState({ mainImage: reader.result });
       }
 
-      reader.readAsDataURL(asset.stagedAsset)
     } 
   }
 
   showImage=() => {
-    this.setState({
-      imagePlaceholder: <ProgressIndicator type="circle" size={60} thickness={6} />
-    })
+    this.setState({ imagePlaceholder: <ProgressIndicator 
+                                        color={getStyles('$lightBlue')}
+                                        type="circle"
+                                        size={60}
+                                        thickness={6} /> })
 
     setTimeout(() => {
       const { mainImage } = this.state
 
-      this.setState({
-        imagePlaceholder: <img src={mainImage} />
-      })
-    }, 50000)
+      this.setState({ imagePlaceholder: <img src={mainImage} /> })
+    }, 1000)
 
   }
 
