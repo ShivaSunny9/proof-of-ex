@@ -1,6 +1,5 @@
 import React, { Component }   from 'react';
 import { Form, Label, Input } from 'components/Form'
-import Button                 from 'components/Button'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -17,6 +16,7 @@ export default class Panel extends Component {
 
   checkIfValid=(input) => {
     const { emailValid, publicKeyValid } = this.state
+    const { allowContinue } = this.props
 
     switch(input.type) {
     case 'email':
@@ -32,7 +32,7 @@ export default class Panel extends Component {
     }
 
     if(emailValid && publicKeyValid) {
-      this.setState({ disabled: false })
+      allowContinue(true)
     }
   }
 
@@ -75,36 +75,17 @@ export default class Panel extends Component {
           <span>You need to pay gas in Ether in order to create a record on the Blockchain</span>
           <Form>
             <Label text="Estimated Gas" />
-            <Input type="text" value={123123123} disabled/>
+            <Input type="text" value={123123123} />
           </Form>
         </div>)
     }
   }
 
   render() {
-    const { disabled } = this.state
-    const { stepIndex } = this.props
-
     return (
       <div className={styles}>
         <div id="registration-form">
           {this.getStepContent()}
-          <div id="button-controls">
-            <Button
-              type="raised"
-              label={stepIndex === 2 ? 'Pay & Confirm' : 'Next'}
-              primary={true}
-              disabled={disabled}
-              onClick={this.handleNext}
-            />
-            <Button
-              type="flat"
-              label="Back"
-              secondary={true}
-              disabled={stepIndex === 0}
-              onClick={this.handlePrev}
-            />
-          </div>
         </div>
       </div>
     )

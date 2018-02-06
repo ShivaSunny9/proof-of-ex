@@ -5,6 +5,7 @@ import { withRouter }               from 'react-router-dom'
 import Photo                        from './components/Photo'
 import Panel                        from './components/Panel'
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
+import Button                       from 'components/Button'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -17,7 +18,8 @@ class RegisterView extends Component {
     this.state = {
       loading: false,
       finished: false,
-      stepIndex: 0
+      stepIndex: 0,
+      disabled: true
     }
   }
 
@@ -46,17 +48,23 @@ class RegisterView extends Component {
         stepIndex: stepIndex - 1
       }));
     }
-  };
+  }
+
+  checkAllowContinue=(allow) => {
+    if(allow) {
+      this.setState({ disabled: false })
+    }
+  }
 
   renderContent() {
     const { finished, stepIndex } = this.state;
 
     if (finished) { return (<div>Success!</div>) }
-    return (<Panel stepIndex={stepIndex} />)
+    return (<Panel stepIndex={stepIndex} allowContinue={this.checkAllowContinue} />)
   }
 
   render() {
-    const { stepIndex } = this.state
+    const { stepIndex, disabled } = this.state
     const { asset } = this.props
 
     return (
@@ -70,6 +78,22 @@ class RegisterView extends Component {
               <Step><StepLabel>Pay Gas & Confirm</StepLabel></Step>
             </Stepper>
             {this.renderContent()}
+            <div id="button-controls">
+              <Button
+                type="raised"
+                label={stepIndex === 2 ? 'Pay & Confirm' : 'Next'}
+                primary={true}
+                disabled={disabled}
+                onClick={this.handleNext}
+              />
+              <Button
+                type="flat"
+                label="Back"
+                secondary={true}
+                disabled={stepIndex === 0}
+                onClick={this.handlePrev}
+              />
+            </div>
           </div>
         </div>
       </div>
