@@ -2,7 +2,6 @@ import React, { Component }         from 'react';
 import { connect }                  from 'react-redux'
 import { bindActionCreators }       from 'redux'
 import { withRouter }               from 'react-router-dom'
-import Button                       from 'components/Button'
 import Photo                        from './components/Photo'
 import Panel                        from './components/Panel'
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
@@ -53,27 +52,7 @@ class RegisterView extends Component {
     const { finished, stepIndex } = this.state;
 
     if (finished) { return (<div>Success!</div>) }
-
-    return (
-      <div>
-        <Panel stepIndex={stepIndex} />
-        <div id="button-controls">
-          <Button
-            type="raised"
-            label={stepIndex === 2 ? 'Pay & Confirm' : 'Next'}
-            primary={true}
-            onClick={this.handleNext}
-          />
-          <Button
-            type="flat"
-            label="Back"
-            secondary={true}
-            disabled={stepIndex === 0}
-            onClick={this.handlePrev}
-          />
-        </div>
-      </div>
-    );
+    return (<Panel stepIndex={stepIndex} />)
   }
 
   render() {
