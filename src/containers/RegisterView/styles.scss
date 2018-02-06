@@ -30,10 +30,25 @@
   #registration-form-container {
     width: 65%;
 
+    svg {
+      fill: $pink !important;
+    }
+
+    .btn {
+      float: right;
+    }
+
+    #button-controls{ 
+      margin-top: 20px;
+      width: 100%;
+    }
+
     #registration-form {      
+      height: 250px;
       padding: 20px;
       background-color: $beige;
       width: 94.9%;
+      border-radius: $radius;
 
       h2 {
         font-weight: bold;
