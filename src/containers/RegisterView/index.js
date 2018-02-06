@@ -26,16 +26,16 @@ class RegisterView extends Component {
     }
   }
 
-  dummyAsync = (cb) => {
+  showPanel = (callback) => {
     this.setState({loading: true}, () => {
-      this.asyncTimer = setTimeout(cb, 500);
+      this.asyncTimer = setTimeout(callback, 500);
     });
   };
 
   handleNext = () => {
     const {stepIndex} = this.state;
     if (!this.state.loading) {
-      this.dummyAsync(() => this.setState({
+      this.showPanel(() => this.setState({
         loading: false,
         stepIndex: stepIndex + 1,
         finished: stepIndex >= 2
@@ -46,7 +46,7 @@ class RegisterView extends Component {
   handlePrev = () => {
     const {stepIndex} = this.state;
     if (!this.state.loading) {
-      this.dummyAsync(() => this.setState({
+      this.showPanel(() => this.setState({
         loading: false,
         stepIndex: stepIndex - 1
       }));
@@ -54,25 +54,10 @@ class RegisterView extends Component {
   };
 
   renderContent() {
-    const {finished, stepIndex} = this.state;
+    const { finished, stepIndex } = this.state;
 
-    if (finished) {
-      return (
-        <div>
-          <p>
-            <a
-              href="#"
-              onClick={(event) => {
-                event.preventDefault();
-                this.setState({stepIndex: 0, finished: false});
-              }}
-            >
-              Click here
-            </a> to reset the example.
-          </p>
-        </div>
-      );
-    }
+    if (finished) { return (<div>Success!</div>) }
+
     return (
       <div>
         <div>{this.getStepContent(stepIndex)}</div>
@@ -89,7 +74,6 @@ class RegisterView extends Component {
             secondary={true}
             disabled={stepIndex === 0}
             onClick={this.handlePrev}
-            style={{marginRight: 12}}
           />
         </div>
       </div>
