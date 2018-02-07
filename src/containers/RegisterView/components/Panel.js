@@ -66,7 +66,7 @@ export default class Panel extends Component {
         <div>
           <h2>Step 2 - Create A Unique Hash Of Your Asset</h2>
           <span>The SHA256 algorithm is used to create a unique fingerprint of your asset</span>
-          <div id="unique-hash">2sdlkjfghl345345lkjh</div>
+          <div id="unique-hash">e5sb536c0307bbs22sd423334545345ee</div>
         </div>)
     case 2:
       return (
