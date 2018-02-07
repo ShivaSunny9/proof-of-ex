@@ -25,7 +25,7 @@ class RegisterView extends Component {
 
   showPanel = (callback) => {
     this.setState({loading: true}, () => {
-      this.asyncTimer = setTimeout(callback, 500);
+      this.asyncTimer = setTimeout(callback, 10);
     });
   };
 
