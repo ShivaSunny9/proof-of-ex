@@ -4,6 +4,7 @@ import {
   CircularProgress,
   LinearProgress 
 }                            from 'material-ui'
+import getStyles             from 'core/utils/util-styles'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -14,15 +15,15 @@ class ProgressIndicator extends Component {
   }
 
   render() {
-    const { type } = this.props
+    const { type, thickness, size, mode, color } = this.props
     let progressIndicator
 
     switch(type){
     case 'circle':
-      progressIndicator = <CircularProgress {...this.props} />
+      progressIndicator = <CircularProgress type={type} thickness={thickness} size={size} color={color} />
       break
     case 'linear':
-      progressIndicator = <LinearProgress {...this.props} />
+      progressIndicator = <LinearProgress type={type} mode={mode} color={color} />
       break
     }
 
@@ -45,7 +46,8 @@ ProgressIndicator.propTypes = {
 ProgressIndicator.defaultProps = {
   type: 'circle',
   size: 20,
-  thickness: 1
+  thickness: 1,
+  color: getStyles('$lightBlue')
 }
 
 export default ProgressIndicator

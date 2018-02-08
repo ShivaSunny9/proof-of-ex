@@ -1,5 +1,6 @@
 import React, { Component }   from 'react';
 import { Form, Label, Input } from 'components/Form'
+import ProgressIndicator      from 'components/ProgressIndicator'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -10,7 +11,8 @@ export default class Panel extends Component {
     this.state = {
       emailValid     : false,
       publicKeyValid : false,
-      disabled       : true
+      disabled       : true,
+      assetHash      : ''
     }
   }
 
@@ -33,6 +35,22 @@ export default class Panel extends Component {
 
     if(emailValid && publicKeyValid) {
       allowToProceed(true)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { assetDispatcher } = this.props
+
+    if((nextProps.stepIndex !== this.props.stepIndex) && nextProps.stepIndex === 1) {
+      setTimeout(()=> {
+        assetDispatcher.createAssetHash()
+      }, 8000)
+    }
+
+    if((nextProps.assetHash !== '') && (nextProps.stepIndex === 1)) {
+      this.setState({
+        assetHash: nextProps.assetHash
+      })
     }
   }
 
@@ -61,13 +79,28 @@ export default class Panel extends Component {
             />
           </Form>
         </div>)
-    case 1:
-      return (
-        <div>
-          <h2>Step 2 - Create A Unique Hash Of Your Asset</h2>
-          <span>The SHA256 algorithm is used to create a unique fingerprint of your asset</span>
-          <div id="unique-hash">e5sb536c0307bbs22sd423334545345ee</div>
-        </div>)
+    case 1: {
+      const { assetHash } = this.state
+      const heading = (<h2>Step 2 - Create A Unique Hash Of Your Asset</h2>)
+
+      if(assetHash) {
+        return (
+          <div>
+            {heading}
+            <span>The SHA256 algorithm is used to establish a unique fingerprint of your asset</span>
+            <div id="unique-hash">{assetHash}</div>
+          </div>)
+      } else {
+        return (
+          <div>
+            {heading}
+            <div id="hash-progress-indicator">
+              <ProgressIndicator type="linear" />
+              <span className="blink-me">Hold on, we're creating a unique hash of your asset...</span>
+            </div>
+          </div>)
+      }
+    }
     case 2:
       return (
         <div>

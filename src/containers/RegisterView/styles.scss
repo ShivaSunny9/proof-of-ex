@@ -71,4 +71,23 @@
     font-size: 36px;
   }
 
+  #hash-progress-indicator {
+    margin-top: 100px;
+    text-align: center;
+
+    span {
+      display: block;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  }
+
+  .blink-me {
+    animation: blinker 2s linear infinite;
+  }
+
+  @keyframes blinker {  
+    50% { opacity: 0; }
+  }
+
 }

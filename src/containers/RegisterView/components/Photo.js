@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Paper }            from 'material-ui'
 import imagePlaceholderSvg  from 'assets/images/image-placeholder.svg' 
 import ProgressIndicator    from 'components/ProgressIndicator'
-import getStyles            from 'core/utils/util-styles'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -12,8 +11,7 @@ export default class Photo extends Component {
     super(props)
     this.state = {
       mainImage      : null,
-      imageContainer : <ProgressIndicator 
-                        color={getStyles('$lightBlue')}
+      imageContainer : <ProgressIndicator
                         type="circle"
                         size={60}
                         thickness={6} /> 
