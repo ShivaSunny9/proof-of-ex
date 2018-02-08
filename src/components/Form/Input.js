@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes            from 'prop-types'
+import { isEmail }          from 'validator'
 
 /* component styles */
 import { inputStyles } from './styles.scss'
@@ -15,7 +16,7 @@ class Input extends Component {
   checkIfValid(type, value) {
     switch(type) {
     case 'email':
-      return { type, valid: true }
+      return { type, valid: isEmail(value) }
     case 'text':
       return { type, valid: value.length > 0 }
     default:
