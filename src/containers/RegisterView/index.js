@@ -50,8 +50,8 @@ class RegisterView extends Component {
     }
   }
 
-  checkAllowContinue=(allow) => {
-    if(allow) {
+  checkAllowToProceed=(allowed) => {
+    if(allowed) {
       this.setState({ disabled: false })
     }
   }
@@ -60,7 +60,7 @@ class RegisterView extends Component {
     const { finished, stepIndex } = this.state;
 
     if (finished) { return (<div>Success!</div>) }
-    return (<Panel stepIndex={stepIndex} allowContinue={this.checkAllowContinue} />)
+    return (<Panel stepIndex={stepIndex} allowToProceed={this.checkAllowToProceed} />)
   }
 
   render() {
@@ -81,7 +81,7 @@ class RegisterView extends Component {
             <div id="button-controls">
               <Button
                 type="raised"
-                label={stepIndex === 2 ? 'Pay & Confirm' : 'Next'}
+                label={stepIndex === 2 ? 'Pay Gas & Confirm' : 'Next'}
                 primary={true}
                 disabled={disabled}
                 onClick={this.handleNext}

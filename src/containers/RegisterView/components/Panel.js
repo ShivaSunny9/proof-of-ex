@@ -16,7 +16,7 @@ export default class Panel extends Component {
 
   checkIfValid=(input) => {
     const { emailValid, publicKeyValid } = this.state
-    const { allowContinue } = this.props
+    const { allowToProceed } = this.props
 
     switch(input.type) {
     case 'email':
@@ -32,7 +32,7 @@ export default class Panel extends Component {
     }
 
     if(emailValid && publicKeyValid) {
-      allowContinue(true)
+      allowToProceed(true)
     }
   }
 
