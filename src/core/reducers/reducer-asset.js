@@ -17,7 +17,7 @@ export function assetReducer(state = initialState, action) {
     return Object.assign({}, state, {
       assetHash: action.hash
     });
-    
+
   default:
     return state;
   }

@@ -22,12 +22,12 @@ export default class Panel extends Component {
 
     switch(input.type) {
     case 'email':
-      if(input.valid) { 
+      if(input.valid) {
         this.setState({ emailValid: true})
       }
       break
     case 'text':
-      if(input.valid) { 
+      if(input.valid) {
         this.setState({ publicKeyValid: true})
       }
       break
@@ -41,16 +41,13 @@ export default class Panel extends Component {
   componentWillReceiveProps(nextProps) {
     const { assetDispatcher } = this.props
 
+    /* If the second panel is display, go ahead and create the 256-SHA hash of the asset*/
     if((nextProps.stepIndex !== this.props.stepIndex) && nextProps.stepIndex === 1) {
-      setTimeout(()=> {
-        assetDispatcher.createAssetHash()
-      }, 5000)
+      assetDispatcher.createAssetHash()
     }
 
     if((nextProps.assetHash !== '') && (nextProps.stepIndex === 1)) {
-      this.setState({
-        assetHash: nextProps.assetHash
-      })
+      this.setState({ assetHash: nextProps.assetHash })
     }
   }
 
@@ -65,7 +62,7 @@ export default class Panel extends Component {
           <span>Your email address and public key are registered on the Blockchain</span>
           <Form onChange={this.onChange}>
             <Label text="Your Email Address" />
-            <Input 
+            <Input
               type="email"
               required={true}
               placeholder="yourname@email.com"
