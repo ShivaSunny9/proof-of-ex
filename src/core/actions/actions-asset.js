@@ -13,23 +13,24 @@ export function addAsset(asset) {
 }
 
 export function createAssetHash() {
-
-  /*
-    step 1 - get the bytes of the image
-    step 2 - pass it to the check() function in the smart contract
-          - if the hash already exists, notify the user
-          - if the hash DOES NOT already exist, create the hash and notify user
-  */
-
   return (dispatch, getState) => {
     const { stagedAsset } = getState().asset
-
+    const { web3Provider } = getState().provider
+    const ProofOfExContract = contract(ProofOfExistence);
 
     /* get string representation of image */
-    /* check the contract */
+    /* check if the image exists  */
 
+    ProofOfExContract.setProvider(web3Provider.currentProvider);
 
+    ProofOfExContract.deployed().then((contractInstance) => {
+      // causeListContractAddress = causeListInstance.address;
+      // return causeListInstance.existsCause(causeAddress, {from: accounts[0]})
+      debugger
 
+    }).then((result) => {
+
+    })
 
     setTimeout(()=> {
       dispatch((() => {
