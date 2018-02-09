@@ -30,7 +30,7 @@ const common = {
 
   resolve: {
     extensions: ['.jsx', '.js', '.json', '.scss'],
-    modules: ['node_modules', PATHS.app]
+    modules: ['node_modules', PATHS.app, PATHS.build]
   },
 
   module: {
