@@ -1,4 +1,6 @@
-import constants from 'core/types';
+import constants        from 'core/types'
+import contract         from 'truffle-contract'
+import ProofOfExistence from 'contracts/ProofOfExistence.json'
 
 /**
  * addAsset - Add an asset
@@ -25,6 +27,8 @@ export function createAssetHash() {
 
     /* get string representation of image */
     /* check the contract */
+
+
 
 
     setTimeout(()=> {
