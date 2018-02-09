@@ -44,7 +44,7 @@ export default class Panel extends Component {
     if((nextProps.stepIndex !== this.props.stepIndex) && nextProps.stepIndex === 1) {
       setTimeout(()=> {
         assetDispatcher.createAssetHash()
-      }, 8000)
+      }, 5000)
     }
 
     if((nextProps.assetHash !== '') && (nextProps.stepIndex === 1)) {
@@ -106,10 +106,11 @@ export default class Panel extends Component {
         <div>
           <h2>Step 3 - Pay Gas & Confirm Transaction</h2>
           <span>You need to pay gas in Ether in order to create a record on the Blockchain</span>
-          <Form>
-            <Label text="Estimated Gas" />
-            <Input type="text" value={123123123} />
-          </Form>
+          <ul>
+            <li>Your Email: mark.muskardin@gmail.com</li>
+            <li>Hash of asset: e5sb536c0307bbs22sd423334545345ee</li>
+            <li>Gas: 255555 ethere</li>
+          </ul>
         </div>)
     }
   }
