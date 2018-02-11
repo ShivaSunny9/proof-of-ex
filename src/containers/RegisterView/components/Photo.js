@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Paper }            from 'material-ui'
 import imagePlaceholderSvg  from 'assets/images/image-placeholder.svg'
 import ProgressIndicator    from 'components/ProgressIndicator'
+import { getString }        from 'core/utils/util-assets'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -29,13 +30,10 @@ export default class Photo extends Component {
     if(!asset.stagedAsset) {
       this.setState({ mainImage: imagePlaceholderSvg })
     } else {
-      const reader = new FileReader();
-      reader.readAsDataURL(asset.stagedAsset)
-
-      reader.onload = () => {
-        this.setState({ mainImage: reader.result });
-      }
-    } 
+      getString(asset.stagedAsset, (imageUrl) =>{
+        this.setState({ mainImage: imageUrl });
+      })
+    }
   }
 
   showImage=() => {

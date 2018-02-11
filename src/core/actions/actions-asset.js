@@ -27,26 +27,27 @@ export function createAssetHash() {
 
     ProofOfExContract.setProvider(web3Provider.currentProvider);
 
-    const theAsset = getString(stagedAsset)
-    const assetExists = checkIfExists(ProofOfExContract, theAsset)
+    getString(stagedAsset, (assetURL) => {
+      const assetExists = checkIfExists(ProofOfExContract, assetURL)
 
-    if(assetExists) {
-      dispatch((() => {
-        return {
-          type          : constants.CREATE_ASSET_HASH,
-          alreadyExists : true
-        }
-      })())
-    } else {
-      const assetHash = notarize(ProofOfExContract, theAsset)
+      if(assetExists) {
+        dispatch((() => {
+          return {
+            type          : constants.CREATE_ASSET_HASH,
+            alreadyExists : true
+          }
+        })())
+      } else {
+        const assetHash = notarize(ProofOfExContract, assetURL)
 
-      dispatch((() => {
-        return {
-          type     : constants.CREATE_ASSET_HASH,
-          assetHash: assetHash
-        }
-      })())
-    }
+        dispatch((() => {
+          return {
+            type     : constants.CREATE_ASSET_HASH,
+            assetHash: assetHash
+          }
+        })())
+      }
+    })
   }
 }
 
