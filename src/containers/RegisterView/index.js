@@ -1,10 +1,10 @@
-import React, { Component }         from 'react';
+import React, { Component }         from 'react'
 import { connect }                  from 'react-redux'
 import { bindActionCreators }       from 'redux'
 import { withRouter }               from 'react-router-dom'
 import Photo                        from './components/Photo'
 import Panel                        from './components/Panel'
-import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
+import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import Button                       from 'components/Button'
 
 /* component styles */
@@ -14,7 +14,7 @@ import * as assetActionCreators from 'core/actions/actions-asset'
 
 class RegisterView extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       loading: false,
       finished: false,
@@ -25,33 +25,37 @@ class RegisterView extends Component {
 
   showPanel = (callback) => {
     this.setState({loading: true}, () => {
-      this.asyncTimer = setTimeout(callback, 10);
-    });
-  };
+      this.asyncTimer = setTimeout(callback, 10)
+    })
+  }
 
   handleNext = () => {
-    const {stepIndex} = this.state;
-    if (!this.state.loading) {
+    const { asset } = this.props
+    const { stepIndex } = this.state
+
+    if (!this.state.loading && asset.stagedAsset) {
       this.showPanel(() => this.setState({
         loading: false,
         stepIndex: stepIndex + 1,
         finished: stepIndex >= 2
-      }));
+      }))
     }
-  };
+  }
 
   handlePrev = () => {
-    const {stepIndex} = this.state;
+    const {stepIndex} = this.state
     if (!this.state.loading) {
       this.showPanel(() => this.setState({
         loading: false,
         stepIndex: stepIndex - 1
-      }));
+      }))
     }
   }
 
   checkAllowToProceed=(allowed) => {
-    if(allowed) {
+    const { asset } = this.props
+
+    if(allowed && asset.stagedAsset) {
       this.setState({ disabled: false })
     }
   }
@@ -62,13 +66,13 @@ class RegisterView extends Component {
     const assetDispatcher= this.props.actions.asset
 
     if (finished) { return (<div>Success!</div>) }
-     
+
     return (
-      <Panel 
+      <Panel
         stepIndex={stepIndex}
         allowToProceed={this.checkAllowToProceed}
         assetHash={assetHash}
-        assetDispatcher={assetDispatcher} 
+        assetDispatcher={assetDispatcher}
       />)
   }
 
@@ -77,9 +81,9 @@ class RegisterView extends Component {
     const { asset } = this.props
 
     return (
-      <div className={styles}> 
-        <div id="register-view">   
-          <Photo asset={asset} />  
+      <div className={styles}>
+        <div id="register-view">
+          <Photo asset={asset} />
           <div id="registration-form-container">
             <Stepper activeStep={stepIndex}>
               <Step><StepLabel>Enter your credentials</StepLabel></Step>
