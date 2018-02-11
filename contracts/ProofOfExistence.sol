@@ -16,7 +16,7 @@ contract ProofOfExistence {
     return sha256(document);
   }
 
-  function checkDocument(string document) constant returns (bool) {
+  function checkIfExists(string document) constant returns (bool) {
     var proof = proofFor(document);
     return hasProof(proof);
   }

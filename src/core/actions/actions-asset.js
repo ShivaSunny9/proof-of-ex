@@ -1,9 +1,11 @@
 import constants        from 'core/types'
 import contract         from 'truffle-contract'
 import ProofOfExistence from 'contracts/ProofOfExistence.json'
+import { getString }    from 'core/utils/util-assets'
 
 /**
- * addAsset - Add an asset
+ * addAsset()
+ * Add an asset
  */
 export function addAsset(asset) {
   return {
@@ -12,33 +14,54 @@ export function addAsset(asset) {
   }
 }
 
+/**
+ * createAssetHash()
+ * Check if an asset's hash already exists.
+ * If not, go ahead and create the hash for the asset & notarize.
+ */
 export function createAssetHash() {
   return (dispatch, getState) => {
     const { stagedAsset } = getState().asset
     const { web3Provider } = getState().provider
-    const ProofOfExContract = contract(ProofOfExistence);
-
-    /* get string representation of image */
-    /* check if the image exists  */
+    const ProofOfExContract = contract(ProofOfExistence)
 
     ProofOfExContract.setProvider(web3Provider.currentProvider);
 
-    ProofOfExContract.deployed().then((contractInstance) => {
-      // causeListContractAddress = causeListInstance.address;
-      // return causeListInstance.existsCause(causeAddress, {from: accounts[0]})
-      debugger
+    const theAsset = getString(stagedAsset)
+    const assetExists = checkIfExists(ProofOfExContract, theAsset)
 
-    }).then((result) => {
-
-    })
-
-    setTimeout(()=> {
+    if(assetExists) {
       dispatch((() => {
         return {
-          type: constants.CREATE_ASSET_HASH,
-          hash: 'e5sb536c0307bbs22sd423334545345ee'
+          type          : constants.CREATE_ASSET_HASH,
+          alreadyExists : true
         }
       })())
-    }, 15000)
+    } else {
+      const assetHash = notarize(ProofOfExContract, theAsset)
+
+      dispatch((() => {
+        return {
+          type     : constants.CREATE_ASSET_HASH,
+          assetHash: assetHash
+        }
+      })())
+    }
   }
+}
+
+function checkIfExists(contract, asset) {
+  contract.deployed().then((poe) => {
+    return poe.checkIfExists(asset)
+  }).then((exists) => {
+    return exists = exists ? true : false
+  })
+}
+
+function notarize(contract, theAsset) {
+  contract.deployed().then((poe) => {
+    return poe.notarize(theAsset)
+  }).then(result => {
+    return (result !== null) ? result : null
+  })
 }

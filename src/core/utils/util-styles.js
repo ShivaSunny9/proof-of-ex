@@ -1,6 +1,6 @@
 const sharedVariables = require('sass-extract-loader!../../containers/App/styles/variables.scss')
 
-export default function getStyles(key) {
+export function getStyles(key) {
   const variables =  sharedVariables.global
 
   if (key instanceof Array) {

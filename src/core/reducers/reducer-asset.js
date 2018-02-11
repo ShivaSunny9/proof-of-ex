@@ -1,8 +1,9 @@
 import constants from 'core/types';
 
 const initialState = {
-  stagedAsset: null,
-  assetHash  : ''
+  stagedAsset   : null,
+  assetHash     : '',
+  alreadyExists : false
 };
 
 export function assetReducer(state = initialState, action) {
@@ -15,7 +16,8 @@ export function assetReducer(state = initialState, action) {
 
   case constants.CREATE_ASSET_HASH:
     return Object.assign({}, state, {
-      assetHash: action.hash
+      assetHash    : action.hash,
+      alreadyExists: action.alreadyExists || initialState.alreadyExists
     });
 
   default:

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Paper }            from 'material-ui'
-import imagePlaceholderSvg  from 'assets/images/image-placeholder.svg' 
+import imagePlaceholderSvg  from 'assets/images/image-placeholder.svg'
 import ProgressIndicator    from 'components/ProgressIndicator'
 
 /* component styles */
@@ -14,11 +14,11 @@ export default class Photo extends Component {
       imageContainer : <ProgressIndicator
                         type="circle"
                         size={60}
-                        thickness={6} /> 
+                        thickness={6} />
     }
   }
 
-  componentDidMount() {    
+  componentDidMount() {
     this.setImage()
     this.showImage()
   }
@@ -42,7 +42,7 @@ export default class Photo extends Component {
     setTimeout(() => {
       const { mainImage } = this.state
       this.setState({ imageContainer: <img src={mainImage} /> })
-    }, 1000)
+    }, 500)
   }
 
   render() {

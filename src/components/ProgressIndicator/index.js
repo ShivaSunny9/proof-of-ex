@@ -1,10 +1,10 @@
 import React, { Component }  from 'react'
 import PropTypes             from 'prop-types'
-import { 
+import {
   CircularProgress,
-  LinearProgress 
+  LinearProgress
 }                            from 'material-ui'
-import getStyles             from 'core/utils/util-styles'
+import { getStyles }         from 'core/utils/util-styles'
 
 /* component styles */
 import { styles } from './styles.scss'

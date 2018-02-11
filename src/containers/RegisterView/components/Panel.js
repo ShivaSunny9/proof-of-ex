@@ -41,13 +41,14 @@ export default class Panel extends Component {
   componentWillReceiveProps(nextProps) {
     const { assetDispatcher } = this.props
 
-    /* If the second panel is display, go ahead and create the 256-SHA hash of the asset*/
-    if((nextProps.stepIndex !== this.props.stepIndex) && nextProps.stepIndex === 1) {
-      assetDispatcher.createAssetHash()
-    }
+    if(nextProps.stepIndex === 1) {
+      if(nextProps.stepIndex !== this.props.stepIndex) {
+        assetDispatcher.createAssetHash()
+      }
 
-    if((nextProps.assetHash !== '') && (nextProps.stepIndex === 1)) {
-      this.setState({ assetHash: nextProps.assetHash })
+      if(nextProps.assetHash !== '') {
+        this.setState({ assetHash: nextProps.assetHash })
+      }
     }
   }
 
