@@ -10,8 +10,8 @@ import { HashRouter,
          Switch }             from 'react-router-dom'
 import Web3                   from 'web3'
 
-/* 
- * Import global styles into entire app 
+/*
+ * Import global styles into entire app
  */
 import './styles/app.scss'
 

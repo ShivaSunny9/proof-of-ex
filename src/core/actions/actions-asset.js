@@ -42,8 +42,9 @@ export function createAssetHash() {
 
         dispatch((() => {
           return {
-            type     : constants.CREATE_ASSET_HASH,
-            assetHash: assetHash
+            type          : constants.CREATE_ASSET_HASH,
+            assetHash     : assetHash,
+            alreadyExists : false
           }
         })())
       }
