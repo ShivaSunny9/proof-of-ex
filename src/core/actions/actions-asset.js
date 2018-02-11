@@ -1,7 +1,6 @@
 import constants        from 'core/types'
 import contract         from 'truffle-contract'
 import ProofOfExistence from 'contracts/ProofOfExistence.json'
-import { getString }    from 'core/utils/util-assets'
 
 /**
  * addAsset()
@@ -19,36 +18,33 @@ export function addAsset(asset) {
  * Check if an asset's hash already exists.
  * If not, go ahead and create the hash for the asset & notarize.
  */
-export function createAssetHash() {
+export function createAssetHash(assetUrl) {
   return (dispatch, getState) => {
-    const { stagedAsset } = getState().asset
     const { web3Provider } = getState().provider
     const ProofOfExContract = contract(ProofOfExistence)
 
     ProofOfExContract.setProvider(web3Provider.currentProvider);
 
-    getString(stagedAsset, (assetURL) => {
-      const assetExists = checkIfExists(ProofOfExContract, assetURL)
+    const assetExists = checkIfExists(ProofOfExContract, assetUrl)
 
-      if(assetExists) {
-        dispatch((() => {
-          return {
-            type          : constants.CREATE_ASSET_HASH,
-            alreadyExists : true
-          }
-        })())
-      } else {
-        const assetHash = notarize(ProofOfExContract, assetURL)
+    if(assetExists) {
+      dispatch((() => {
+        return {
+          type          : constants.CREATE_ASSET_HASH,
+          alreadyExists : true
+        }
+      })())
+    } else {
+      const assetHash = notarize(ProofOfExContract, assetUrl)
 
-        dispatch((() => {
-          return {
-            type          : constants.CREATE_ASSET_HASH,
-            assetHash     : assetHash,
-            alreadyExists : false
-          }
-        })())
-      }
-    })
+      dispatch((() => {
+        return {
+          type          : constants.CREATE_ASSET_HASH,
+          assetHash     : assetHash,
+          alreadyExists : false
+        }
+      })())
+    }
   }
 }
 
@@ -57,6 +53,8 @@ function checkIfExists(contract, asset) {
     return poe.checkIfExists(asset)
   }).then((exists) => {
     return exists = exists ? true : false
+  }).catch((error) => {
+    console.log('error', error)
   })
 }
 

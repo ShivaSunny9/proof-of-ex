@@ -62,8 +62,8 @@ class RegisterView extends Component {
 
   renderContent() {
     const { finished, stepIndex } = this.state
-    const { assetHash } = this.props.asset
-    const assetDispatcher= this.props.actions.asset
+    const { asset, actions } = this.props
+    const assetDispatcher = actions.asset
 
     if (finished) { return (<div>Success!</div>) }
 
@@ -71,7 +71,7 @@ class RegisterView extends Component {
       <Panel
         stepIndex={stepIndex}
         allowToProceed={this.checkAllowToProceed}
-        assetHash={assetHash}
+        asset={asset}
         assetDispatcher={assetDispatcher}
       />)
   }

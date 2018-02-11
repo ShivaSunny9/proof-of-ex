@@ -1,6 +1,7 @@
 import React, { Component }   from 'react';
 import { Form, Label, Input } from 'components/Form'
 import ProgressIndicator      from 'components/ProgressIndicator'
+import { getString }          from 'core/utils/util-assets'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -43,11 +44,13 @@ export default class Panel extends Component {
 
     if(nextProps.stepIndex === 1) {
       if(nextProps.stepIndex !== this.props.stepIndex) {
-        assetDispatcher.createAssetHash()
+        getString(nextProps.asset.stagedAsset, (assetUrl) => {
+          assetDispatcher.createAssetHash(assetUrl);
+        })
       }
 
-      if(nextProps.assetHash !== '') {
-        this.setState({ assetHash: nextProps.assetHash })
+      if(nextProps.asset.assetHash !== '') {
+        this.setState({ assetHash: nextProps.asset.assetHash })
       }
     }
   }
