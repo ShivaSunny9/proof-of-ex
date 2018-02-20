@@ -7,21 +7,12 @@ contract ProofOfExistence {
     proofs[proof] = true;
   }
 
-  function notarize(string asset) {
-    var proof = proofFor(asset);
+  function notarize(string assetHash) {
     storeProof(proof);
   }
 
-  function proofFor(string asset) constant returns (bytes32) {
-    return sha256(asset);
-  }
-
-  function checkIfExists(string asset) constant returns (bool) {
-    var proof = proofFor(asset);
-    return hasProof(proof);
-  }
-
-  function hasProof(bytes32 proof) constant returns(bool) {
+  function checkIfExists(string assetHash) constant returns (bool) {
     return proofs[proof];
   }
+
 }
