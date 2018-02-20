@@ -23,45 +23,56 @@ export function createAssetHash(assetUrl) {
     const { web3Provider } = getState().provider
     const ProofOfExContract = contract(ProofOfExistence)
 
-    ProofOfExContract.setProvider(web3Provider.currentProvider);
+    ProofOfExContract.setProvider(web3Provider.currentProvider)
+    ProofOfExContract.defaults({from: web3Provider.eth.defaultAccount})
 
-    const assetExists = checkIfExists(ProofOfExContract, assetUrl)
-
-    if(assetExists) {
-      dispatch((() => {
-        return {
-          type          : constants.CREATE_ASSET_HASH,
-          alreadyExists : true
-        }
-      })())
-    } else {
-      const assetHash = notarize(ProofOfExContract, assetUrl)
-
-      dispatch((() => {
-        return {
-          type          : constants.CREATE_ASSET_HASH,
-          assetHash     : assetHash,
-          alreadyExists : false
-        }
-      })())
-    }
+    return new Promise((resolve, reject) => {
+      checkIfExists(ProofOfExContract, assetUrl, resolve, reject)
+    })
+    .then((assetExists) => {
+      if(assetExists) {
+        dispatch((() => {
+          return {
+            type          : constants.CREATE_ASSET_HASH,
+            alreadyExists : true
+          }
+        })())
+      } else {
+        return new Promise((resolve, reject) => {
+          notarize(ProofOfExContract, assetUrl, resolve, reject)
+        })
+        .then((assetHash) => {
+          dispatch((() => {
+            return {
+              type          : constants.CREATE_ASSET_HASH,
+              alreadyExists : false,
+              assetHash     : assetHash
+            }
+          })())
+        })
+      }
+    })
   }
 }
 
-function checkIfExists(contract, asset) {
+function checkIfExists(contract, asset, resolve, reject) {
   contract.deployed().then((poe) => {
     return poe.checkIfExists(asset)
   }).then((exists) => {
-    return exists = exists ? true : false
+    const assetExists = exists ? true : false
+    resolve(assetExists)
   }).catch((error) => {
-    console.log('error', error)
+    reject(error)
   })
 }
 
-function notarize(contract, theAsset) {
+function notarize(contract, theAsset, resolve, reject) {
   contract.deployed().then((poe) => {
     return poe.notarize(theAsset)
   }).then(result => {
-    return (result !== null) ? result : null
+    const assetHash = (result !== null) ? result : null
+    resolve(assetHash)
+  }).catch((error) => {
+    reject(error)
   })
 }
