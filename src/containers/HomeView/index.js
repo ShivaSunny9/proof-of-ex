@@ -28,7 +28,7 @@ class HomeView extends Component {
     })
   }
 
-  registerAsset=() => {    
+  registerAsset=() => {
     const { provider, history, actions } = this.props
     const { asset } = this.state
 
@@ -42,14 +42,14 @@ class HomeView extends Component {
           <img className="metamask-logo" src={metaMaskImg} alt="MetaMask logo" />
           <div className="message">
             <p>
-              <a href="https://metamask.io/" target="_blank">MetaMask</a> 
-              &nbsp;is a wallet and Chrome extension that allows you to make Ethereum transactions from 
+              <a href="https://metamask.io/" target="_blank">MetaMask</a>
+              &nbsp;is a wallet and Chrome extension that allows you to make Ethereum transactions from
               regular websites.
             </p>
             <p>In order to register your asset on the blockchain, you need to have it installed.</p>
             <br />
-            <Button 
-              label="Install MetaMask" 
+            <Button
+              label="Install MetaMask"
               type="raised"
               primary={true}
               onTouchTap={() => {
@@ -80,12 +80,12 @@ class HomeView extends Component {
     const { fileAdded } = this.state
 
     return (
-      <div className={styles}>   
-        <div id="home-view">   
+      <div className={styles}>
+        <div id="home-view">
           <UploadBox onDrop={this.onDrop} setUploadedFile={this.setUploadedFile} />
             <div className={!fileAdded ? 'opaque' : ''}>
               <div id="register-actions">
-                <Button 
+                <Button
                   onTouchTap={this.registerAsset}
                   label="Register Photo On Blockchain"
                   type="raised"

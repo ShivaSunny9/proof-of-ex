@@ -2,6 +2,7 @@ import React, { Component }   from 'react';
 import { Form, Label, Input } from 'components/Form'
 import ProgressIndicator      from 'components/ProgressIndicator'
 import { getString }          from 'core/utils/util-assets'
+import Link                   from 'react-router'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -10,10 +11,11 @@ export default class Panel extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      emailValid     : false,
-      publicKeyValid : false,
-      disabled       : true,
-      assetHash      : ''
+      emailValid        : false,
+      publicKeyValid    : false,
+      disabled          : true,
+      assetAlreadyExists: false,
+      assetHash         : ''
     }
   }
 
@@ -42,17 +44,28 @@ export default class Panel extends Component {
   componentWillReceiveProps(nextProps) {
     const { assetDispatcher } = this.props
 
-    if(nextProps.stepIndex === 1) {
+    if(nextProps.stepIndex === 1) { /* If you're on the 2nd panel */
       if(nextProps.stepIndex !== this.props.stepIndex) {
         getString(nextProps.asset.stagedAsset, (assetUrl) => {
-          assetDispatcher.createAssetHash(assetUrl);
+          assetDispatcher.checkIfAssetExists(assetUrl);
         })
       }
 
-      if(nextProps.asset.assetHash !== '') {
-        this.setState({ assetHash: nextProps.asset.assetHash })
+      if(nextProps.asset.alreadyExists) {
+        this.setState({ alreadyExists: true })
+      } else {
+        setTimeout(() => {
+          this.setState({ assetHash: nextProps.asset.assetHash})
+        }, 3000)
+
       }
     }
+
+    // if(nextProps.setIndex === 2) /* If you're on the 3rd panel */
+    //   getString(nextProps.asset.stagedAsset, (assetUrl) => {
+    //     // assetDispatcher.createAssetHash(assetUrl)
+    //   })
+    // }
   }
 
   getStepContent() {
@@ -62,8 +75,8 @@ export default class Panel extends Component {
     case 0:
       return (
         <div>
-          <h2>Step 1 - Enter Your Credentials</h2>
-          <span>Your email address and public key are registered on the Blockchain</span>
+          <h2>Enter Your Credentials</h2>
+          <span>Your email address and public key will be registered on the Blockchain</span>
           <Form onChange={this.onChange}>
             <Label text="Your Email Address" />
             <Input
@@ -81,23 +94,29 @@ export default class Panel extends Component {
           </Form>
         </div>)
     case 1: {
-      const { assetHash } = this.state
-      const heading = (<h2>Step 2 - Create A Unique Hash Of Your Asset</h2>)
+      const { alreadyExists, assetHash } = this.state
 
-      if(assetHash) {
+      if(alreadyExists) {
         return (
           <div>
-            {heading}
-            <span>The SHA256 algorithm is used to establish a unique fingerprint of your asset</span>
-            <div id="unique-hash">{assetHash}</div>
+            <h2>Someone already registered this asset</h2>
+            <span>A fingerprint for this asset already exists!</span>
+            <Link to="/home">Upload a new photo</Link>
           </div>)
+      } else if (assetHash) {
+        return (
+          <div>
+            <h2>This Hash is unique.  Click Next to register.</h2>
+            <div id="unique-hash">{assetHash}</div>
+          </div>
+        )
       } else {
         return (
           <div>
-            {heading}
+            <h2>Checking if hash already exists</h2>
             <div id="hash-progress-indicator">
               <ProgressIndicator type="linear" />
-              <span className="blink-me">Hold on, we're creating a unique hash of your asset...</span>
+              <span className="blink-me">Hold on, we're checking...</span>
             </div>
           </div>)
       }
@@ -105,7 +124,7 @@ export default class Panel extends Component {
     case 2:
       return (
         <div>
-          <h2>Step 3 - Pay Gas & Confirm Transaction</h2>
+          <h2>Pay Gas & Confirm Transaction</h2>
           <span>You need to pay gas in Ether in order to create a record on the Blockchain</span>
           <ul>
             <li>Your Email: mark.muskardin@gmail.com</li>

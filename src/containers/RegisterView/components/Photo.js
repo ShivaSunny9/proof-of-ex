@@ -30,7 +30,7 @@ export default class Photo extends Component {
     if(!asset.stagedAsset) {
       this.setState({ mainImage: imagePlaceholderSvg })
     } else {
-      getString(asset.stagedAsset, (imageUrl) =>{
+      getString(asset.stagedAsset, (imageUrl) => {
         this.setState({ mainImage: imageUrl });
       })
     }

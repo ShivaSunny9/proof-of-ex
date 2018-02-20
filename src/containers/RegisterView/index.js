@@ -87,7 +87,7 @@ class RegisterView extends Component {
           <div id="registration-form-container">
             <Stepper activeStep={stepIndex}>
               <Step><StepLabel>Enter your credentials</StepLabel></Step>
-              <Step><StepLabel>Generate a unique hash</StepLabel></Step>
+              <Step><StepLabel>Check If Hash Exists</StepLabel></Step>
               <Step><StepLabel>Pay Gas & Confirm</StepLabel></Step>
             </Stepper>
             {this.renderContent()}

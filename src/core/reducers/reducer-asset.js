@@ -16,8 +16,13 @@ export function assetReducer(state = initialState, action) {
 
   case constants.CREATE_ASSET_HASH:
     return Object.assign({}, state, {
-      assetHash    : action.hash,
-      alreadyExists: action.alreadyExists || initialState.alreadyExists
+      assetHash: action.hash
+    });
+
+  case constants.CHECK_ASSET:
+    return Object.assign({}, state, {
+      assetHash    : action.assetHash,
+      alreadyExists: action.alreadyExists
     });
 
   default:

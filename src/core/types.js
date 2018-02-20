@@ -10,5 +10,6 @@ export default keyMirror({
   CLOSE_MODAL        : null,
   SET_PROVIDER       : null,
   ADD_ASSET          : null,
+  CHECK_ASSET        : null,
   CREATE_ASSET_HASH  : null
 });
