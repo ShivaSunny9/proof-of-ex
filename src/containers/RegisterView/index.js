@@ -87,14 +87,14 @@ class RegisterView extends Component {
           <div id="registration-form-container">
             <Stepper activeStep={stepIndex}>
               <Step><StepLabel>Enter your credentials</StepLabel></Step>
-              <Step><StepLabel>Check If Hash Exists</StepLabel></Step>
-              <Step><StepLabel>Pay Gas & Confirm</StepLabel></Step>
+              <Step><StepLabel>Check If Asset Is Unique</StepLabel></Step>
+              <Step><StepLabel>Pay Gas & Register</StepLabel></Step>
             </Stepper>
             {this.renderContent()}
             <div id="button-controls">
               <Button
                 type="raised"
-                label={stepIndex === 2 ? 'Pay Gas & Confirm' : 'Next'}
+                label={stepIndex === 2 ? 'Pay Gas & Register' : 'Next'}
                 primary={true}
                 disabled={disabled}
                 onClick={this.handleNext}

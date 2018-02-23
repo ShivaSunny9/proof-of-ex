@@ -10,8 +10,9 @@ export default class ListView extends Component {
 
   render() {
     return (
-      <div className={styles}>    
+      <div className={styles}>
         <h2>Your Assets</h2>
+        <div>Coming soon...</div>
       </div>
     );
   }

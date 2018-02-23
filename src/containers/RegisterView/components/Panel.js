@@ -77,7 +77,7 @@ export default class Panel extends Component {
         <div>
           <h2>Enter Your Credentials</h2>
           <span>Your email address and public key will be registered on the Blockchain</span>
-          <Form onChange={this.onChange}>
+          <Form>
             <Label text="Your Email Address" />
             <Input
               type="email"
@@ -106,17 +106,18 @@ export default class Panel extends Component {
       } else if (assetHash) {
         return (
           <div>
-            <h2>This Hash is unique.  Click Next to register.</h2>
+            <h2>Unique hash of your photo asset</h2>
+            <span>Click Next to register your asset</span>
             <div id="unique-hash">{assetHash}</div>
           </div>
         )
       } else {
         return (
           <div>
-            <h2>Checking if hash already exists</h2>
+            <h2>Generating a unique hash of your asset...</h2>
             <div id="hash-progress-indicator">
               <ProgressIndicator type="linear" />
-              <span className="blink-me">Hold on, we're checking...</span>
+              <span className="blink-me">Please hold on...</span>
             </div>
           </div>)
       }
@@ -124,13 +125,28 @@ export default class Panel extends Component {
     case 2:
       return (
         <div>
-          <h2>Pay Gas & Confirm Transaction</h2>
-          <span>You need to pay gas in Ether in order to create a record on the Blockchain</span>
-          <ul>
-            <li>Your Email: mark.muskardin@gmail.com</li>
-            <li>Hash of asset: e5sb536c0307bbs22sd423334545345ee</li>
-            <li>Gas: 255555 ethere</li>
-          </ul>
+          <h2>Confirm Transaction</h2>
+          <span>Summary of your order</span>
+          <div id="registration-details">
+            <ul>
+              <li>
+                <span>Your Email:</span>
+                <span>mark.muskardin@gmail.com</span>
+              </li>
+              <li>
+                <span>Your Public Key:</span>
+                <span>user_public_key_goes_here</span>
+              </li>
+              <li>
+                <span>Unique Hash:</span>
+                <span>8365df4d4f0e798736c4102c4569c5f94541169f5268fbaa7c17f222b29a3e0c</span>
+              </li>
+              <li>
+                <span>Gas:</span>
+                <span>255555 ETH</span>
+              </li>
+            </ul>
+          </div>
         </div>)
     }
   }
