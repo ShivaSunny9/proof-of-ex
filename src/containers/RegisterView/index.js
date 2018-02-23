@@ -40,6 +40,11 @@ class RegisterView extends Component {
         finished: stepIndex >= 2
       }))
     }
+
+    if(stepIndex ===2 ) {
+      const { actions } = this.props
+      actions.asset.createAssetHash()
+    }
   }
 
   handlePrev = () => {

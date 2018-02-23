@@ -60,12 +60,6 @@ export default class Panel extends Component {
 
       }
     }
-
-    // if(nextProps.setIndex === 2) /* If you're on the 3rd panel */
-    //   getString(nextProps.asset.stagedAsset, (assetUrl) => {
-    //     // assetDispatcher.createAssetHash(assetUrl)
-    //   })
-    // }
   }
 
   getStepContent() {

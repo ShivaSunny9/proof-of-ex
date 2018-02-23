@@ -41,11 +41,12 @@ export function checkIfAssetExists(assetUrl) {
   }
 }
 
-export function createAssetHash(assetUrl) {
+export function createAssetHash() {
   return (dispatch, getState) => {
     const { web3Provider } = getState().provider
+    const { assetHash } = getState().asset
     const ProofOfExContract = contract(ProofOfExistence)
-    const assetHash = sha256(assetUrl)
+
 
     ProofOfExContract.setProvider(web3Provider.currentProvider)
     ProofOfExContract.defaults({from: web3Provider.eth.defaultAccount})
