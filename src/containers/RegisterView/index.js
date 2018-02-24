@@ -39,9 +39,11 @@ class RegisterView extends Component {
         stepIndex: stepIndex + 1,
         finished: stepIndex >= 2
       }))
+
+      this.setState({ disabled: true })
     }
 
-    if(stepIndex ===2 ) {
+    if(stepIndex === 2 ) {
       const { actions } = this.props
       actions.asset.createAssetHash()
     }
@@ -91,8 +93,8 @@ class RegisterView extends Component {
           <Photo asset={asset} />
           <div id="registration-form-container">
             <Stepper activeStep={stepIndex}>
-              <Step><StepLabel>Enter your credentials</StepLabel></Step>
-              <Step><StepLabel>Check If Asset Is Unique</StepLabel></Step>
+              <Step><StepLabel>Enter Credentials</StepLabel></Step>
+              <Step><StepLabel>Generate Unique Hash</StepLabel></Step>
               <Step><StepLabel>Pay Gas & Register</StepLabel></Step>
             </Stepper>
             {this.renderContent()}

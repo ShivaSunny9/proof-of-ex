@@ -13,38 +13,55 @@ export default class Panel extends Component {
     this.state = {
       emailValid        : false,
       publicKeyValid    : false,
-      disabled          : true,
       assetAlreadyExists: false,
       assetHash         : ''
     }
   }
 
-  checkIfValid=(input) => {
-    const { emailValid, publicKeyValid } = this.state
-    const { allowToProceed } = this.props
-
+  checkIfInputValid=(input) => {
     switch(input.type) {
     case 'email':
-      if(input.valid) {
-        this.setState({ emailValid: true})
-      }
+      if(input.valid) { this.setState({ emailValid: true}) }
       break
     case 'text':
-      if(input.valid) {
-        this.setState({ publicKeyValid: true})
-      }
+      if(input.valid) { this.setState({ publicKeyValid: true}) }
       break
     }
 
-    if(emailValid && publicKeyValid) {
-      allowToProceed(true)
+    this.checkIfAllowedToProceed()
+  }
+
+  checkIfAllowedToProceed=() => {
+    const { allowToProceed, stepIndex } = this.props
+    const {
+      emailValid,
+      publicKeyValid,
+      assetHash,
+      assetAlreadyExists
+    } = this.state
+
+    switch(stepIndex) {
+    case 0:
+      if(emailValid && publicKeyValid) { allowToProceed(true) }
+      break
+    case 1:
+      if(assetAlreadyExists) { allowToProceed(false)
+      } else if(assetHash) { allowToProceed(true) }
+      break
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
     const { assetDispatcher } = this.props
 
-    if(nextProps.stepIndex === 1) { /* If you're on the 2nd panel */
+    /*
+      stepIndex 0 = "Enter Credentials" panel
+      stepIndex 1 = "Generate Unique Hash" panel
+      stepIndex 2 = "Confirm Transaction" panel
+    */
+
+    if(nextProps.stepIndex === 1) {
       if(nextProps.stepIndex !== this.props.stepIndex) {
         getString(nextProps.asset.stagedAsset, (assetUrl) => {
           assetDispatcher.checkIfAssetExists(assetUrl);
@@ -52,12 +69,17 @@ export default class Panel extends Component {
       }
 
       if(nextProps.asset.alreadyExists) {
-        this.setState({ alreadyExists: true })
-      } else {
-        setTimeout(() => {
-          this.setState({ assetHash: nextProps.asset.assetHash})
-        }, 3000)
+        this.setState({
+          alreadyExists: true
+        }, () => { this.checkIfAllowedToProceed() })
 
+      } else if(nextProps.asset.assetHash) {
+
+        setTimeout(() => {
+          this.setState({
+            assetHash: nextProps.asset.assetHash
+          }, () => { this.checkIfAllowedToProceed() })
+        }, 3000)
       }
     }
   }
@@ -77,13 +99,13 @@ export default class Panel extends Component {
               type="email"
               required={true}
               placeholder="yourname@email.com"
-              isValid={this.checkIfValid}
+              isValid={this.checkIfInputValid}
             />
             <Label text="Your Ethereum Wallet Address (Public Key)" />
             <Input
               type="text"
               required={true}
-              isValid={this.checkIfValid}
+              isValid={this.checkIfInputValid}
             />
           </Form>
         </div>)
@@ -146,6 +168,7 @@ export default class Panel extends Component {
   }
 
   render() {
+
     return (
       <div className={styles}>
         <div id="registration-form">

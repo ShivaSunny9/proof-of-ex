@@ -61,9 +61,9 @@ const common = {
 };
 
 if (TARGET === 'start' || !TARGET) {
-  module.exports = merge(development, common);
+  module.exports = merge(common, development);
 }
 
 if (TARGET === 'build' || !TARGET) {
-  module.exports = merge(production, common);
+  module.exports = merge(common, production);
 }

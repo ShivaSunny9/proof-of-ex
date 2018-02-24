@@ -1,18 +1,18 @@
 pragma solidity ^0.4.15;
 
 contract ProofOfExistence {
-  mapping (bytes32 => bool) private proofs;
+  mapping (string => bool) private proofs;
 
-  function storeProof(bytes32 proof) {
+  function storeProof(string proof) {
     proofs[proof] = true;
   }
 
   function notarize(string assetHash) {
-    storeProof(proof);
+    storeProof(assetHash);
   }
 
   function checkIfExists(string assetHash) constant returns (bool) {
-    return proofs[proof];
+    return proofs[assetHash];
   }
 
 }
