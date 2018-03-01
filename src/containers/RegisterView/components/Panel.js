@@ -84,7 +84,7 @@ export default class Panel extends Component {
     }
   }
 
-  getStepContent() {
+  getPanelContent() {
     const { stepIndex } = this.props
 
     switch (stepIndex) {
@@ -172,7 +172,7 @@ export default class Panel extends Component {
     return (
       <div className={styles}>
         <div id="registration-form">
-          {this.getStepContent()}
+          {this.getPanelContent()}
         </div>
       </div>
     )

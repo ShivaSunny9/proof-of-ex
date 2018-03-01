@@ -37,23 +37,23 @@ class RegisterView extends Component {
     if(stepIndex === 2) { /* stepIndex 2 is the final screen */
       const { actions } = this.props
       actions.asset.createAssetHash()
-      
+
     } else if (!this.state.loading && asset.stagedAsset) {
       this.showPanel(() => this.setState({
         loading: false,
         stepIndex: stepIndex + 1,
-        finished: stepIndex >= 2
+        finished: stepIndex >= 2,
+        disabled: true
       }, () => {
         if(stepIndex === 1) { this.setState({ disabled: false }) }
       }))
-
-      this.setState({ disabled: true })
     }
 
   }
 
   handlePrev = () => {
     const {stepIndex} = this.state
+    
     if (!this.state.loading) {
       this.showPanel(() => this.setState({
         loading: false,
