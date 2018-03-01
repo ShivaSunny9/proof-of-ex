@@ -28,10 +28,10 @@ export default class Photo extends Component {
     const { asset } = this.props
 
     if(!asset.stagedAsset) {
-      this.setState({ mainImage: imagePlaceholderSvg })
+      this.setState({ mainImage: <img className="placholder-image" src={imagePlaceholderSvg} /> })
     } else {
       getString(asset.stagedAsset, (imageUrl) => {
-        this.setState({ mainImage: imageUrl });
+        this.setState({ mainImage: <img className="uploaded-image" src={imageUrl} /> });
       })
     }
   }
@@ -39,7 +39,7 @@ export default class Photo extends Component {
   showImage=() => {
     setTimeout(() => {
       const { mainImage } = this.state
-      this.setState({ imageContainer: <img src={mainImage} /> })
+      this.setState({ imageContainer:  mainImage })
     }, 500)
   }
 

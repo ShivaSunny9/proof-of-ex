@@ -123,7 +123,7 @@ export default class Panel extends Component {
         return (
           <div>
             <h2>Unique hash of your photo asset</h2>
-            <span>Click Next to register your asset</span>
+            <span>Click 'Next' to register your asset</span>
             <div id="unique-hash">{assetHash}</div>
           </div>
         )
