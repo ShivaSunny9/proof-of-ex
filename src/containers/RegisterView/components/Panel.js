@@ -45,8 +45,10 @@ export default class Panel extends Component {
       if(emailValid && publicKeyValid) { allowToProceed(true) }
       break
     case 1:
-      if(assetAlreadyExists) { allowToProceed(false)
-      } else if(assetHash) { allowToProceed(true) }
+      if(assetAlreadyExists) {
+        allowToProceed(false)
+      } else if(assetHash) {
+        allowToProceed(true) }
       break
     }
 
@@ -168,7 +170,6 @@ export default class Panel extends Component {
   }
 
   render() {
-
     return (
       <div className={styles}>
         <div id="registration-form">

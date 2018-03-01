@@ -23,12 +23,6 @@ class RegisterView extends Component {
     }
   }
 
-  showPanel = (callback) => {
-    this.setState({loading: true}, () => {
-      this.asyncTimer = setTimeout(callback, 10)
-    })
-  }
-
   handleNext = () => {
     const { asset } = this.props
     const { stepIndex } = this.state
@@ -39,26 +33,26 @@ class RegisterView extends Component {
       actions.asset.createAssetHash()
 
     } else if (!this.state.loading && asset.stagedAsset) {
-      this.showPanel(() => this.setState({
+      this.setState({
         loading: false,
         stepIndex: stepIndex + 1,
-        finished: stepIndex >= 2,
+        finished: stepIndex === 2,
         disabled: true
       }, () => {
         if(stepIndex === 1) { this.setState({ disabled: false }) }
-      }))
+      })
     }
 
   }
 
   handlePrev = () => {
     const {stepIndex} = this.state
-    
+
     if (!this.state.loading) {
-      this.showPanel(() => this.setState({
+      this.setState({
         loading: false,
         stepIndex: stepIndex - 1
-      }))
+      })
     }
   }
 
