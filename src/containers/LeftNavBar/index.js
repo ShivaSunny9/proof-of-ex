@@ -30,7 +30,7 @@ class LeftNavBar extends Component {
           onRequestChange={this.closeNav}>
           <AppBar title={appConfig.name} />
           <div id="left-nav-container">
-            
+            Auxiliary information and links can go here.
           </div>
         </Drawer>
       </div>

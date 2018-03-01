@@ -24,7 +24,6 @@ import Header         from 'containers/Header'
 import LeftNavBar     from 'containers/LeftNavBar'
 import HomeView       from 'containers/HomeView'
 import ListView       from 'containers/ListView'
-import DetailsView    from 'containers/DetailsView'
 import RegisterView   from 'containers/RegisterView'
 import Modal          from 'components/Modal'
 
@@ -64,7 +63,6 @@ export class App extends Component {
                 </Switch>
               </div>
               <LeftNavBar />
-              <DetailsView />
               <Modal />
             </div>
           </HashRouter>
