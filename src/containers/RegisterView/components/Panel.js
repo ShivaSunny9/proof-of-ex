@@ -32,7 +32,7 @@ export default class Panel extends Component {
   }
 
   checkIfAllowedToProceed=() => {
-    const { allowToProceed, stepIndex } = this.props
+    const { continueToNextPanel, stepIndex } = this.props
     const {
       emailValid,
       publicKeyValid,
@@ -42,13 +42,13 @@ export default class Panel extends Component {
 
     switch(stepIndex) {
     case 0:
-      if(emailValid && publicKeyValid) { allowToProceed(true) }
+      if(emailValid && publicKeyValid) { continueToNextPanel(true) }
       break
     case 1:
       if(assetAlreadyExists) {
-        allowToProceed(false)
+        continueToNextPanel(false)
       } else if(assetHash) {
-        allowToProceed(true) }
+        continueToNextPanel(true) }
       break
     }
 
@@ -76,7 +76,6 @@ export default class Panel extends Component {
         }, () => { this.checkIfAllowedToProceed() })
 
       } else if(nextProps.asset.assetHash) {
-
         setTimeout(() => {
           this.setState({
             assetHash: nextProps.asset.assetHash

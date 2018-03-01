@@ -47,12 +47,8 @@ class RegisterView extends Component {
     this.setState({ stepIndex: stepIndex - 1 })
   }
 
-  checkAllowToProceed=(allowed) => {
-    const { asset } = this.props
-
-    if(allowed && asset.stagedAsset) {
-      this.setState({ disabled: false })
-    }
+  continueToNextPanel=(allowed) => {
+    if(allowed) { this.setState({ disabled: false }) }
   }
 
   renderContent() {
@@ -65,7 +61,7 @@ class RegisterView extends Component {
     return (
       <Panel
         stepIndex={stepIndex}
-        allowToProceed={this.checkAllowToProceed}
+        continueToNextPanel={this.continueToNextPanel}
         asset={asset}
         assetDispatcher={assetDispatcher}
       />)
