@@ -16,7 +16,6 @@ class RegisterView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: false,
       finished: false,
       stepIndex: 0,
       disabled: true
@@ -27,14 +26,12 @@ class RegisterView extends Component {
     const { asset } = this.props
     const { stepIndex } = this.state
 
-
     if(stepIndex === 2) { /* stepIndex 2 is the final screen */
       const { actions } = this.props
       actions.asset.createAssetHash()
 
-    } else if (!this.state.loading && asset.stagedAsset) {
+    } else if (asset.stagedAsset) {
       this.setState({
-        loading: false,
         stepIndex: stepIndex + 1,
         finished: stepIndex === 2,
         disabled: true
@@ -47,13 +44,7 @@ class RegisterView extends Component {
 
   handlePrev = () => {
     const {stepIndex} = this.state
-
-    if (!this.state.loading) {
-      this.setState({
-        loading: false,
-        stepIndex: stepIndex - 1
-      })
-    }
+    this.setState({ stepIndex: stepIndex - 1 })
   }
 
   checkAllowToProceed=(allowed) => {
