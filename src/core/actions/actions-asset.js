@@ -47,7 +47,6 @@ export function createAssetHash() {
     const { assetHash } = getState().asset
     const ProofOfExContract = contract(ProofOfExistence)
 
-
     ProofOfExContract.setProvider(web3Provider.currentProvider)
     ProofOfExContract.defaults({from: web3Provider.eth.defaultAccount})
 
