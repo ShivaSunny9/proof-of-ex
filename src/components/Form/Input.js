@@ -14,16 +14,17 @@ class Input extends Component {
   }
 
   componentDidMount() {
-    const { value } = this.props
+    const { value, autoFocus } = this.props
     if(value){ this.setState({ value: value }) }
+    if(autoFocus) { this.input.focus() }
   }
 
   checkIfValid(type, value) {
     switch(type) {
     case 'email':
-      return { type, valid: isEmail(value) }
+      return { type, valid: isEmail(value), value: value }
     case 'text':
-      return { type, valid: value.length > 0 }
+      return { type, valid: value.length > 0, value: value }
     default:
       return false
     }
@@ -52,6 +53,7 @@ class Input extends Component {
           type={type}
           required={required}
           value={value}
+          ref={(input) => { this.input = input }}
           placeholder={placeholder}
           onChange={this.onChange}
           onBlur={this.onBlur}

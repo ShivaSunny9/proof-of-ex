@@ -12,41 +12,10 @@ class Panel extends Component {
     super(props)
     this.state = {
       emailValid        : false,
+      email             : '',
       assetAlreadyExists: false,
       assetHash         : ''
     }
-  }
-
-  checkIfInputValid=(input) => {
-    switch(input.type) {
-    case 'email':
-      if(input.valid) { this.setState({ emailValid: true}) }
-      break
-    }
-
-    this.checkIfAllowedToProceed()
-  }
-
-  checkIfAllowedToProceed=() => {
-    const { continueToNextPanel, stepIndex } = this.props
-    const {
-      emailValid,
-      assetHash,
-      assetAlreadyExists
-    } = this.state
-
-    switch(stepIndex) {
-    case 0:
-      if(emailValid) { continueToNextPanel(true) }
-      break
-    case 1:
-      if(assetAlreadyExists) {
-        continueToNextPanel(false)
-      } else if(assetHash) {
-        continueToNextPanel(true) }
-      break
-    }
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -85,6 +54,42 @@ class Panel extends Component {
     }
   }
 
+  checkIfInputValid=(input) => {
+    switch(input.type) {
+    case 'email':
+      if(input.valid) {
+        this.setState({
+          emailValid: true,
+          email: input.value
+        })}
+      break
+    }
+
+    this.checkIfAllowedToProceed()
+  }
+
+  checkIfAllowedToProceed=() => {
+    const { continueToNextPanel, stepIndex } = this.props
+    const {
+      emailValid,
+      assetHash,
+      assetAlreadyExists
+    } = this.state
+
+    switch(stepIndex) {
+    case 0:
+      if(emailValid) { continueToNextPanel(true) }
+      break
+    case 1:
+      if(assetAlreadyExists) {
+        continueToNextPanel(false)
+      } else if(assetHash) {
+        continueToNextPanel(true) }
+      break
+    }
+
+  }
+
   getPanelContent() {
     const { stepIndex, provider } = this.props
 
@@ -100,7 +105,8 @@ class Panel extends Component {
               <Input
                 type="email"
                 required={true}
-                placeholder="yourname@email.com"
+                autoFocus={true}
+                placeholder="your_email@email.com"
                 isValid={this.checkIfInputValid}
               />
             </div>
