@@ -11,7 +11,7 @@ export function providerReducer(state = initialState, action) {
     return Object.assign({}, state, {
       web3Provider : action.provider,
       account      : action.account
-    });
+    })
 
   default:
     return state
