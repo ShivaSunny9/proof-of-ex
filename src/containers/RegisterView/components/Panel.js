@@ -2,12 +2,12 @@ import React, { Component }   from 'react';
 import { Form, Label, Input } from 'components/Form'
 import ProgressIndicator      from 'components/ProgressIndicator'
 import { getString }          from 'core/utils/util-assets'
-import Link                   from 'react-router'
+import { withRouter, Link }   from 'react-router'
 
 /* component styles */
 import { styles } from '../styles.scss'
 
-export default class Panel extends Component {
+class Panel extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -83,8 +83,10 @@ export default class Panel extends Component {
         }, 3000)
       }
     }
-    if(nextProps.stepIndex === 2 && nextProps.transaction !== null) {
-      alert('ready to move on')
+
+    if(nextProps.stepIndex === 2 && nextProps.asset.transaction) {
+      const { history } = this.props
+      history.push('/assets')
     }
   }
 
@@ -181,3 +183,5 @@ export default class Panel extends Component {
     )
   }
 }
+
+export default withRouter(Panel)

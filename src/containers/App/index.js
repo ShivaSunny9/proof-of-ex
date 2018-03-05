@@ -57,7 +57,7 @@ export class App extends Component {
               <div className="container">
                 <Switch>
                   <Route path="/home" component={HomeView} />
-                  <Route path="/list" component={ListView} />
+                  <Route path="/assets" component={ListView} />
                   <Route path="/register" component={RegisterView} />
                   <Redirect from="/" to="/home" />
                 </Switch>
