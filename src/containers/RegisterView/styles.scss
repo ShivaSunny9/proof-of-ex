@@ -115,4 +115,21 @@
     50% { opacity: 0; }
   }
 
+  .form-section {
+    display: inline-block;
+    width: 100%;
+
+    input,
+    .input-hint {
+      float: left;
+    }
+
+    .input-hint {
+      display: inline-block;
+      margin-top: 15px;
+      margin-left: 10px;
+      opacity: 0.5;
+    }
+  }
+
 }

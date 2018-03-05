@@ -91,7 +91,7 @@ class Panel extends Component {
   }
 
   getPanelContent() {
-    const { stepIndex } = this.props
+    const { stepIndex, provider } = this.props
 
     switch (stepIndex) {
     case 0:
@@ -100,19 +100,24 @@ class Panel extends Component {
           <h2>Enter Your Credentials</h2>
           <span>Your email address and public key will be registered on the Blockchain</span>
           <Form>
-            <Label text="Your Email Address" />
-            <Input
-              type="email"
-              required={true}
-              placeholder="yourname@email.com"
-              isValid={this.checkIfInputValid}
-            />
-            <Label text="Your Ethereum Wallet Address (Public Key)" />
-            <Input
-              type="text"
-              required={true}
-              isValid={this.checkIfInputValid}
-            />
+            <div className="form-section">
+              <Label text="Your Email Address" />
+              <Input
+                type="email"
+                required={true}
+                placeholder="yourname@email.com"
+                isValid={this.checkIfInputValid}
+              />
+            </div>
+            <div className="form-section">
+              <Label text="Your Account" />
+              <Input
+                type="text"
+                disabled={true}
+                value={provider.account}
+              />
+              <span className="input-hint">(from MetaMask)</span>
+            </div>
           </Form>
         </div>)
     case 1: {

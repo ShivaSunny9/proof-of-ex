@@ -13,6 +13,11 @@ class Input extends Component {
     }
   }
 
+  componentDidMount() {
+    const { value } = this.props
+    this.setState({ value: value })
+  }
+
   checkIfValid(type, value) {
     switch(type) {
     case 'email':
@@ -31,17 +36,18 @@ class Input extends Component {
     this.setState({
       value: value
     }, () => {
-      isValid(this.checkIfValid(type, value))
+      if(isValid) {
+        isValid(this.checkIfValid(type, value))
+      }
     })
-  }
-
-  onBlur=() => {
-    console.log('on blur')
   }
 
   render(){
     const { value } = this.state
     const { type, placeholder, disabled, required } = this.props
+
+    console.log('state value ', value)
+    console.log('disabled: ', disabled)
 
     return (
       <div className={inputStyles}>

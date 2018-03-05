@@ -53,7 +53,7 @@ class RegisterView extends Component {
 
   renderContent() {
     const { finished, stepIndex } = this.state
-    const { asset, actions } = this.props
+    const { asset, provider, actions } = this.props
     const assetDispatcher = actions.asset
 
     if (finished) { return (<div>Success!</div>) }
@@ -63,6 +63,7 @@ class RegisterView extends Component {
         stepIndex={stepIndex}
         continueToNextPanel={this.continueToNextPanel}
         asset={asset}
+        provider={provider}
         assetDispatcher={assetDispatcher}
       />)
   }
@@ -107,7 +108,8 @@ class RegisterView extends Component {
 
 function mapStateToProps(state) {
   return {
-    asset: state.asset
+    asset    : state.asset,
+    provider : state.provider
   }
 }
 
