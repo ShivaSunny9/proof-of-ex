@@ -9,10 +9,11 @@ export function providerReducer(state = initialState, action) {
 
   case constants.SET_PROVIDER:
     return Object.assign({}, state, {
-      web3Provider: action.provider
+      web3Provider : action.provider,
+      account      : action.account
     });
 
   default:
-    return state;
+    return state
   }
 }

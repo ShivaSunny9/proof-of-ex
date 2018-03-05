@@ -4,15 +4,22 @@ import constants from 'core/types';
  * setProvider - Set the Provider (MetaMask)
  */
 export function setProvider(provider) {
+  return (dispatch, getState) => {
 
-  /* Set the default account */
-  provider.eth.getAccounts((error, accounts) => {
-    if(error) { return }
-    provider.eth.defaultAccount = accounts[0]
-  })
+    /* Set the default account */
+    provider.eth.getAccounts((error, accounts) => {
+      if(error) { return }
 
-  return {
-    type    : constants.SET_PROVIDER,
-    provider: provider
-  };
+      const userAccount = accounts[0]
+      provider.eth.defaultAccount = userAccount
+
+      dispatch((() => {
+        return {
+          type     : constants.SET_PROVIDER,
+          provider : provider,
+          account  : userAccount
+        }
+      })())
+    })
+  }
 }
