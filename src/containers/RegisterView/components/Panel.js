@@ -157,7 +157,7 @@ class Panel extends Component {
               </li>
               <li>
                 <span>Your Public Key:</span>
-                <span>user_public_key_goes_here</span>
+                <span>{provider.account}</span>
               </li>
               <li>
                 <span>Unique Hash:</span>
