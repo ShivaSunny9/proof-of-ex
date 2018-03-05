@@ -8,7 +8,7 @@ class Label extends Component {
   constructor(props) {
     super(props)
   }
-  
+
   render(){
     const { text } = this.props
 

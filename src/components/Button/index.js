@@ -2,28 +2,28 @@
  * Button - A common button
  */
 
-import React                    from 'react';
-import PropTypes                from 'prop-types';
+import React                    from 'react'
+import PropTypes                from 'prop-types'
 import { FlatButton,
          RaisedButton,
          FloatingActionButton,
-         IconButton }           from 'material-ui';
+         IconButton }           from 'material-ui'
 
 /* component styles */
-import { styles } from './styles.scss';
+import { styles } from './styles.scss'
 
 export default function Button(props) {
-  const buttonElem = createButton(props);
+  const buttonElem = createButton(props)
   return (
     <div className={styles}>
       {buttonElem}
     </div>
-  );
+  )
 }
 
 function createButton(props) {
   const { type, className } = props
-  let buttonElem;
+  let buttonElem
   const finalClassName = `btn ${className}`
 
   switch(type) {
@@ -41,12 +41,12 @@ function createButton(props) {
     break
   }
 
-  return buttonElem;
+  return buttonElem
 }
 
 Button.propTypes = {
   type: PropTypes.string
-};
+}
 
 Button.defaultProps = {
   type: 'raised'

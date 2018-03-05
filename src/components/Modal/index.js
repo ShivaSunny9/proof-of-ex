@@ -25,7 +25,7 @@ class Modal extends Component {
   render() {
     const { actions, title, content, className, customStyles } = this.props
     const mergedStyles = styles + ' ' + className
-    
+
     return(
       <div>
         <Dialog

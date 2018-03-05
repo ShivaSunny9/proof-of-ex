@@ -12,7 +12,7 @@ const propTypes = {
 }
 
 /* Create a key map of Font Awesome icons here.
- * Update this key map when you want to add 
+ * Update this key map when you want to add
  * a new icon to the app.
  */
 const fontAwesomeIcons = {

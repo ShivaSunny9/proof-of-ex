@@ -1,4 +1,4 @@
-import constants from 'core/types';
+import constants from 'core/types'
 
 /**
  * showModal - Open the modal
@@ -11,7 +11,7 @@ export function showModal(obj) {
     content       : obj.content,
     className     : obj.className,
     customStyles  : obj.customStyles
-  };
+  }
 }
 
 /**
@@ -20,7 +20,7 @@ export function showModal(obj) {
 export function closeModal() {
   return {
     type: constants.CLOSE_MODAL
-  };
+  }
 }
 
 /**
@@ -29,7 +29,7 @@ export function closeModal() {
 export function openLeftNav() {
   return {
     type: constants.OPEN_LEFT_NAV
-  };
+  }
 }
 
 /**
@@ -38,7 +38,7 @@ export function openLeftNav() {
 export function closeLeftNav() {
   return {
     type: constants.CLOSE_LEFT_NAV
-  };
+  }
 }
 
 /**
@@ -47,7 +47,7 @@ export function closeLeftNav() {
 export function openRightNav() {
   return {
     type: constants.OPEN_RIGHT_NAV
-  };
+  }
 }
 
 /**
@@ -56,7 +56,7 @@ export function openRightNav() {
 export function closeRightNav() {
   return {
     type: constants.CLOSE_RIGHT_NAV
-  };
+  }
 }
 
 /**
@@ -65,5 +65,5 @@ export function closeRightNav() {
 export function clear() {
   return {
     type: constants.CLEAR_UI
-  };
+  }
 }
