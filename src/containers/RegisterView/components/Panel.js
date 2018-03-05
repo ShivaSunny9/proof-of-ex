@@ -12,7 +12,6 @@ class Panel extends Component {
     super(props)
     this.state = {
       emailValid        : false,
-      publicKeyValid    : false,
       assetAlreadyExists: false,
       assetHash         : ''
     }
@@ -23,9 +22,6 @@ class Panel extends Component {
     case 'email':
       if(input.valid) { this.setState({ emailValid: true}) }
       break
-    case 'text':
-      if(input.valid) { this.setState({ publicKeyValid: true}) }
-      break
     }
 
     this.checkIfAllowedToProceed()
@@ -35,14 +31,13 @@ class Panel extends Component {
     const { continueToNextPanel, stepIndex } = this.props
     const {
       emailValid,
-      publicKeyValid,
       assetHash,
       assetAlreadyExists
     } = this.state
 
     switch(stepIndex) {
     case 0:
-      if(emailValid && publicKeyValid) { continueToNextPanel(true) }
+      if(emailValid) { continueToNextPanel(true) }
       break
     case 1:
       if(assetAlreadyExists) {
