@@ -83,6 +83,9 @@ export default class Panel extends Component {
         }, 3000)
       }
     }
+    if(nextProps.stepIndex === 2 && nextProps.transaction !== null) {
+      alert('ready to move on')
+    }
   }
 
   getPanelContent() {

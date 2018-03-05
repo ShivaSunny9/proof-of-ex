@@ -53,9 +53,9 @@ export function createAssetHash() {
     return new Promise((resolve, reject) => {
       notarize(ProofOfExContract, assetHash, resolve, reject)
     })
-    .then((success) => {
-      if(success) {
-        dispatchAssetCreated(dispatch)
+    .then((transaction) => {
+      if(transaction) {
+        dispatchAssetCreated(transaction, assetHash, dispatch)
       } else {
         dispatchCreationError(dispatch)
       }
@@ -104,22 +104,22 @@ function dispatchAssetDoesNotExist(assetHash, dispatch) {
   })())
 }
 
-function dispatchAssetCreated(assetHash, dispatch) {
+function dispatchAssetCreated(transaction, assetHash, dispatch) {
   dispatch((() => {
     return {
-      type          : constants.CREATE_ASSET_HASH,
-      assetHash     : assetHash,
-      success       : true
+      type        : constants.CREATE_ASSET_HASH,
+      assetHash   : assetHash,
+      transaction : transaction,
+      success     : true
     }
   })())
 }
 
-function dispatchCreationError(assetHash, dispatch) {
+function dispatchCreationError(dispatch) {
   dispatch((() => {
     return {
-      type          : constants.CREATE_ASSET_HASH,
-      assetHash     : assetHash,
-      success       : false
+      types   : constants.CREATE_ASSET_HASH,
+      success : false
     }
   })())
 }

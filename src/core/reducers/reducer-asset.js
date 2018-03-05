@@ -3,7 +3,9 @@ import constants from 'core/types';
 const initialState = {
   stagedAsset   : null,
   assetHash     : '',
-  alreadyExists : false
+  alreadyExists : false,
+  transaction   : null,
+  success       : false
 };
 
 export function assetReducer(state = initialState, action) {
@@ -16,7 +18,9 @@ export function assetReducer(state = initialState, action) {
 
   case constants.CREATE_ASSET_HASH:
     return Object.assign({}, state, {
-      assetHash: action.hash
+      assetHash   : action.hash,
+      success     : action.success,
+      transaction : action.transaction
     });
 
   case constants.CHECK_ASSET:
