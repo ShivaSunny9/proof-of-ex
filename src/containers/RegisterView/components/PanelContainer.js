@@ -3,6 +3,7 @@ import { Form, Label, Input } from 'components/Form'
 import ProgressIndicator      from 'components/ProgressIndicator'
 import { getString }          from 'core/utils/util-assets'
 import { withRouter, Link }   from 'react-router'
+import CredentialsPanel       from './CredentialsPanel'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -54,19 +55,7 @@ class PanelContainer extends Component {
     }
   }
 
-  checkIfInputValid=(input) => {
-    switch(input.type) {
-    case 'email':
-      if(input.valid) {
-        this.setState({
-          emailValid: true,
-          email: input.value
-        })}
-      break
-    }
 
-    this.checkIfAllowedToProceed()
-  }
 
   checkIfAllowedToProceed=() => {
     const { continueToNextPanel, panel } = this.props
@@ -95,32 +84,7 @@ class PanelContainer extends Component {
 
     switch (panel) {
     case 0:
-      return (
-        <div>
-          <h2>Enter Your Credentials</h2>
-          <span>Your email address and public key will be registered on the Blockchain</span>
-          <Form>
-            <div className="form-section">
-              <Label text="Your Email Address" />
-              <Input
-                type="email"
-                required={true}
-                autoFocus={true}
-                placeholder="your_email@email.com"
-                isValid={this.checkIfInputValid}
-              />
-            </div>
-            <div className="form-section">
-              <Label text="Your Account" />
-              <Input
-                type="text"
-                disabled={true}
-                value={provider.account}
-              />
-              <span className="input-hint">(from MetaMask)</span>
-            </div>
-          </Form>
-        </div>)
+      return (<CredentialsPanel account={provider.account} />)
     case 1: {
       const { alreadyExists, assetHash } = this.state
 
