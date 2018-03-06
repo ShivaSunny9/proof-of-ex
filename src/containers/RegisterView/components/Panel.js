@@ -150,7 +150,7 @@ class Panel extends Component {
           </div>)
       }
     }
-    case 2:
+    case 2: {
       const { assetHash } = this.state
       return (
         <div>
@@ -173,6 +173,7 @@ class Panel extends Component {
             </ul>
           </div>
         </div>)
+    }
     }
   }
 
