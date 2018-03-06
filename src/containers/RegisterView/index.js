@@ -47,10 +47,6 @@ class RegisterView extends Component {
     this.setState({ panel: panel - 1 })
   }
 
-  continueToNextPanel=(allowed) => {
-    if(allowed) { this.setState({ disabled: false }) }
-  }
-
   renderContent() {
     const { finished, panel } = this.state
     const { asset, provider, actions } = this.props
@@ -61,7 +57,6 @@ class RegisterView extends Component {
     return (
       <PanelContainer
         panel={panel}
-        continueToNextPanel={this.continueToNextPanel}
         asset={asset}
         provider={provider}
         assetDispatcher={assetDispatcher}

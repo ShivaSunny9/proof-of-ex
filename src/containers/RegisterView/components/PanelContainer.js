@@ -39,13 +39,13 @@ class PanelContainer extends Component {
       if(nextProps.asset.alreadyExists) {
         this.setState({
           alreadyExists: true
-        }, () => { this.checkIfAllowedToProceed() })
+        })
 
       } else if(nextProps.asset.assetHash) {
         setTimeout(() => {
           this.setState({
             assetHash: nextProps.asset.assetHash
-          }, () => { this.checkIfAllowedToProceed() })
+          })
         }, 3000)
       }
     }
@@ -54,28 +54,6 @@ class PanelContainer extends Component {
       const { history } = this.props
       history.push('/assets')
     }
-  }
-
-  checkIfAllowedToProceed=() => {
-    const { continueToNextPanel, panel } = this.props
-    const {
-      emailValid,
-      assetHash,
-      assetAlreadyExists
-    } = this.state
-
-    switch(panel) {
-    case 0:
-      if(emailValid) { continueToNextPanel(true) }
-      break
-    case 1:
-      if(assetAlreadyExists) {
-        continueToNextPanel(false)
-      } else if(assetHash) {
-        continueToNextPanel(true) }
-      break
-    }
-
   }
 
   getPanelContent() {
