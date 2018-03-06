@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component }from 'react'
 import PropTypes            from 'prop-types'
-import { getString }        from 'core/utils/util-assets'
-import { withRouter }       from 'react-router'
+import { getString }from 'core/utils/util-assets'
+import { withRouter }from 'react-router'
 import CredentialsPanel     from './panels/CredentialsPanel'
 import GenerateHashPanel    from './panels/GenerateHashPanel'
 import RegisterAssetPanel   from './panels/RegisterAssetPanel'
 
 /* component styles */
-import { styles } from '../styles.scss'
+import { styles }from '../styles.scss'
 
 class PanelContainer extends Component {
   constructor(props) {
@@ -88,7 +88,7 @@ PanelContainer.propTypes = {
   account: PropTypes.string.isRequired,
   assetDispatcher: PropTypes.func.isRequired,
   history: PropTypes.func.isRequired,
-  panel: PropTypes.numbers.isRequired
+  panel: PropTypes.number.isRequired
 }
 
 export default withRouter(PanelContainer)
