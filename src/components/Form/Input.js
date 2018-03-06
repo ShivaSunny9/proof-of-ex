@@ -22,9 +22,17 @@ class Input extends Component {
   checkIfValid(type, value) {
     switch(type) {
     case 'email':
-      return { type, valid: isEmail(value), value: value }
+      return {
+        type,
+        valid: isEmail(value),
+        value: value
+      }
     case 'text':
-      return { type, valid: value.length > 0, value: value }
+      return {
+        type,
+        valid: value.length > 0,
+        value: value
+      }
     default:
       return false
     }
