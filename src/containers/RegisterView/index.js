@@ -2,7 +2,6 @@ import React, { Component }         from 'react'
 import PropTypes                    from 'prop-types'
 import { connect }                  from 'react-redux'
 import { bindActionCreators }       from 'redux'
-import { withRouter }               from 'react-router-dom'
 import Photo                        from './components/Photo'
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import Button                       from 'components/Button'
@@ -120,15 +119,12 @@ class RegisterView extends Component {
 
 RegisterView.propTypes = {
   asset: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  provider: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    asset: state.asset,
-    provider: state.provider
+    asset: state.asset
   }
 }
 
@@ -141,4 +137,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterView))
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterView)

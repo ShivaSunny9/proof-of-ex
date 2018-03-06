@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import ProgressIndicator    from 'components/ProgressIndicator'
+import { Link }             from 'react-router-dom'
 
-export default class GenerateHashPanel extends Component {
-
-  renderContent() {
+class GenerateHashPanel extends Component {
+  render() {
     const { alreadyExists, assetHash } = this.props
     let content
 
-    if(alreadyExists) {
+    if (alreadyExists) {
       content = (
         <div>
           <h2>Someone already registered this asset</h2>
@@ -18,7 +18,7 @@ export default class GenerateHashPanel extends Component {
     } else if (assetHash) {
       content = (
         <div>
-          <h2>Unique hash of your photo asset</h2>
+          <h2>Unique hash (SHA-256) of your photo asset</h2>
           <span>Click 'Next' to register your asset</span>
           <div id="unique-hash">{assetHash}</div>
         </div>
@@ -36,10 +36,11 @@ export default class GenerateHashPanel extends Component {
     }
     return content
   }
-
-  render() {
-    return (
-      <div>{this.renderContent}</div>
-    )
-  }
 }
+
+GenerateHashPanel.propTypes = {
+  alreadyExists: PropTypes.boolean,
+  assetHash: PropTypes.string
+}
+
+export default GenerateHashPanel
