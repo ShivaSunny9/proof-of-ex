@@ -7,7 +7,7 @@ import { withRouter, Link }   from 'react-router'
 /* component styles */
 import { styles } from '../styles.scss'
 
-class Panel extends Component {
+class PanelContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -188,4 +188,4 @@ class Panel extends Component {
   }
 }
 
-export default withRouter(Panel)
+export default withRouter(PanelContainer)

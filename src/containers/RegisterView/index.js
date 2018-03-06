@@ -3,7 +3,7 @@ import { connect }                  from 'react-redux'
 import { bindActionCreators }       from 'redux'
 import { withRouter }               from 'react-router-dom'
 import Photo                        from './components/Photo'
-import Panel                        from './components/Panel'
+import PanelContainer               from './components/PanelContainer'
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import Button                       from 'components/Button'
 
@@ -59,7 +59,7 @@ class RegisterView extends Component {
     if (finished) { return (<div>Success!</div>) }
 
     return (
-      <Panel
+      <PanelContainer
         panel={panel}
         continueToNextPanel={this.continueToNextPanel}
         asset={asset}
@@ -80,13 +80,13 @@ class RegisterView extends Component {
             <Stepper activeStep={panel}>
               <Step><StepLabel>Enter Credentials</StepLabel></Step>
               <Step><StepLabel>Generate Unique Hash</StepLabel></Step>
-              <Step><StepLabel>Pay Gas & Register</StepLabel></Step>
+              <Step><StepLabel>Register</StepLabel></Step>
             </Stepper>
             {this.renderContent()}
             <div id="button-controls">
               <Button
                 type="raised"
-                label={panel === 2 ? 'Pay Gas & Register' : 'Next'}
+                label={panel === 2 ? 'Register' : 'Next'}
                 primary={true}
                 disabled={disabled}
                 onClick={this.handleNext}
