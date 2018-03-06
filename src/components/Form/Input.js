@@ -19,7 +19,8 @@ class Input extends Component {
     if(autoFocus) { this.input.focus() }
   }
 
-  checkIfValid(type, value) {
+  /****** Validity rules go here *******/
+  determineValidity(type, value) {
     switch(type) {
     case 'email':
       return {
@@ -40,15 +41,13 @@ class Input extends Component {
 
   onChange=(evt) => {
     const value = evt.currentTarget.value
-    const { type, isValid } = this.props
+    const { type, checkIfValid } = this.props
 
-    this.setState({
-      value: value
-    }, () => {
-      if(isValid) {
-        isValid(this.checkIfValid(type, value))
-      }
-    })
+    this.setState({ value: value })
+
+    if(checkIfValid) {
+      checkIfValid(this.determineValidity(type, value))
+    }
   }
 
   render(){
@@ -74,11 +73,12 @@ class Input extends Component {
 }
 
 Input.PropTypes = {
+  autoFocus: PropTypes.boolean,
+  disabled: PropTypes.bool,
+  placeholder: PropTypes.string,
+  checkIfValid: PropTypes.func,
   type: PropTypes.string.isRequired,
   value: PropTypes.string,
-  placeholder: PropTypes.string,
-  disabled: PropTypes.bool,
-  isValid: PropTypes.func
 }
 
 export default Input

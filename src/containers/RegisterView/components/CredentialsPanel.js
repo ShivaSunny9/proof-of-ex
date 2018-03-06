@@ -6,18 +6,12 @@ import { styles } from '../styles.scss'
 
 export default class CredentialsPanel extends Component {
 
-  checkIfInputValid=(input) => {
-    switch(input.type) {
-    case 'email':
-      if(input.valid) {
-        this.setState({
-          emailValid: true,
-          email: input.value
-        })}
-      break
+  setValidStatus=(input) => {
+    if(input.valid) {
+      //allow form to proceed here
     }
-
   }
+
   render() {
     const { account } = this.props
     return (
@@ -30,10 +24,9 @@ export default class CredentialsPanel extends Component {
               <Label text="Your Email Address" />
               <Input
                 type="email"
-                required={true}
                 autoFocus={true}
                 placeholder="your_email@email.com"
-                isValid={this.checkIfInputValid}
+                checkIfValid={this.setValidStatus}
               />
             </div>
             <div className="form-section">
