@@ -93,6 +93,8 @@ class Panel extends Component {
   getPanelContent() {
     const { stepIndex, provider } = this.props
 
+    console.log('provider is: ', provider)
+
     switch (stepIndex) {
     case 0:
       return (
@@ -151,6 +153,7 @@ class Panel extends Component {
       }
     }
     case 2:
+      const { assetHash } = this.state
       return (
         <div>
           <h2>Confirm Transaction</h2>
@@ -167,7 +170,7 @@ class Panel extends Component {
               </li>
               <li>
                 <span>Unique Hash:</span>
-                <span>8365df4d4f0e798736c4102c4569c5f94541169f5268fbaa7c17f222b29a3e0c</span>
+                <span>{assetHash}</span>
               </li>
               <li>
                 <span>Gas:</span>
