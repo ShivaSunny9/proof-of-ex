@@ -37,9 +37,7 @@ class CredentialsPanel extends Component {
   setValidStatus=(input) => {
     const { isValid } = this.props
 
-    if (input.valid) {
-      isValid(true)
-    }
+    if (input.valid) { isValid(true) }
   }
 }
 

@@ -1,7 +1,11 @@
-import React, { Component } from 'react'
-import PropTypes            from 'prop-types'
-import ProgressIndicator    from 'components/ProgressIndicator'
-import { Link }             from 'react-router-dom'
+import React, { Component }   from 'react'
+import PropTypes              from 'prop-types'
+import { connect }            from 'react-redux'
+import { bindActionCreators } from 'redux'
+import ProgressIndicator      from 'components/ProgressIndicator'
+import { Link }               from 'react-router-dom'
+
+import * as assetActionCreators from 'core/actions/actions-asset'
 
 class GenerateHashPanel extends Component {
   render() {
@@ -40,8 +44,24 @@ class GenerateHashPanel extends Component {
 }
 
 GenerateHashPanel.propTypes = {
-  alreadyExists: PropTypes.boolean,
+  alreadyExists: PropTypes.bool,
   assetHash: PropTypes.string
 }
 
-export default GenerateHashPanel
+function mapStateToProps(state) {
+  return {
+    asset: state.asset
+  }
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      asset: bindActionCreators(assetActionCreators, dispatch)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GenerateHashPanel)
+
