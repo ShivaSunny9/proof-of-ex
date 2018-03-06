@@ -22,13 +22,13 @@ class Panel extends Component {
     const { assetDispatcher } = this.props
 
     /*
-      stepIndex 0 = "Enter Credentials" panel
-      stepIndex 1 = "Generate Unique Hash" panel
-      stepIndex 2 = "Confirm Transaction" panel
+      panel 0 = "Enter Credentials" panel
+      panel 1 = "Generate Unique Hash" panel
+      panel 2 = "Confirm Transaction" panel
     */
 
-    if(nextProps.stepIndex === 1) {
-      if(nextProps.stepIndex !== this.props.stepIndex) {
+    if(nextProps.panel === 1) {
+      if(nextProps.panel !== this.props.panel) {
         getString(nextProps.asset.stagedAsset, (assetUrl) => {
           assetDispatcher.checkIfAssetExists(assetUrl);
         })
@@ -48,7 +48,7 @@ class Panel extends Component {
       }
     }
 
-    if(nextProps.stepIndex === 2 && nextProps.asset.transaction) {
+    if(nextProps.panel === 2 && nextProps.asset.transaction) {
       const { history } = this.props
       history.push('/assets')
     }
@@ -69,14 +69,14 @@ class Panel extends Component {
   }
 
   checkIfAllowedToProceed=() => {
-    const { continueToNextPanel, stepIndex } = this.props
+    const { continueToNextPanel, panel } = this.props
     const {
       emailValid,
       assetHash,
       assetAlreadyExists
     } = this.state
 
-    switch(stepIndex) {
+    switch(panel) {
     case 0:
       if(emailValid) { continueToNextPanel(true) }
       break
@@ -91,9 +91,9 @@ class Panel extends Component {
   }
 
   getPanelContent() {
-    const { stepIndex, provider } = this.props
+    const { panel, provider } = this.props
 
-    switch (stepIndex) {
+    switch (panel) {
     case 0:
       return (
         <div>

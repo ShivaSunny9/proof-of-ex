@@ -17,34 +17,34 @@ class RegisterView extends Component {
     super(props)
     this.state = {
       finished: false,
-      stepIndex: 0,
+      panel: 0,
       disabled: true
     }
   }
 
   handleNext = () => {
     const { asset } = this.props
-    const { stepIndex } = this.state
+    const { panel } = this.state
 
-    if(stepIndex === 2) { /* stepIndex 2 is the final screen */
+    if(panel === 2) { /* panel 2 is the final screen */
       const { actions } = this.props
       actions.asset.createAssetHash()
 
     } else if (asset.stagedAsset) {
       this.setState({
-        stepIndex: stepIndex + 1,
-        finished: stepIndex === 2,
+        panel: panel + 1,
+        finished: panel === 2,
         disabled: true
       }, () => {
-        if(stepIndex === 1) { this.setState({ disabled: false }) }
+        if(panel === 1) { this.setState({ disabled: false }) }
       })
     }
 
   }
 
   handlePrev = () => {
-    const {stepIndex} = this.state
-    this.setState({ stepIndex: stepIndex - 1 })
+    const {panel} = this.state
+    this.setState({ panel: panel - 1 })
   }
 
   continueToNextPanel=(allowed) => {
@@ -52,7 +52,7 @@ class RegisterView extends Component {
   }
 
   renderContent() {
-    const { finished, stepIndex } = this.state
+    const { finished, panel } = this.state
     const { asset, provider, actions } = this.props
     const assetDispatcher = actions.asset
 
@@ -60,7 +60,7 @@ class RegisterView extends Component {
 
     return (
       <Panel
-        stepIndex={stepIndex}
+        panel={panel}
         continueToNextPanel={this.continueToNextPanel}
         asset={asset}
         provider={provider}
@@ -69,7 +69,7 @@ class RegisterView extends Component {
   }
 
   render() {
-    const { stepIndex, disabled } = this.state
+    const { panel, disabled } = this.state
     const { asset } = this.props
 
     return (
@@ -77,7 +77,7 @@ class RegisterView extends Component {
         <div id="register-view">
           <Photo asset={asset} />
           <div id="registration-form-container">
-            <Stepper activeStep={stepIndex}>
+            <Stepper activeStep={panel}>
               <Step><StepLabel>Enter Credentials</StepLabel></Step>
               <Step><StepLabel>Generate Unique Hash</StepLabel></Step>
               <Step><StepLabel>Pay Gas & Register</StepLabel></Step>
@@ -86,7 +86,7 @@ class RegisterView extends Component {
             <div id="button-controls">
               <Button
                 type="raised"
-                label={stepIndex === 2 ? 'Pay Gas & Register' : 'Next'}
+                label={panel === 2 ? 'Pay Gas & Register' : 'Next'}
                 primary={true}
                 disabled={disabled}
                 onClick={this.handleNext}
@@ -95,7 +95,7 @@ class RegisterView extends Component {
                 type="flat"
                 label="Back"
                 secondary={true}
-                disabled={stepIndex === 0}
+                disabled={panel === 0}
                 onClick={this.handlePrev}
               />
             </div>
