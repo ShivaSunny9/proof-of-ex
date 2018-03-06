@@ -2,7 +2,9 @@ import React, { Component }   from 'react';
 import { Form, Label, Input } from 'components/Form'
 import { getString }          from 'core/utils/util-assets'
 import { withRouter, Link }   from 'react-router'
-import CredentialsPanel       from './CredentialsPanel'
+import CredentialsPanel       from './panels/CredentialsPanel'
+import GenerateHashPanel      from './panels/GenerateHashPanel'
+import RegisterAssetPanel     from './panels/RegisterAssetPanel'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -54,8 +56,6 @@ class PanelContainer extends Component {
     }
   }
 
-
-
   checkIfAllowedToProceed=() => {
     const { continueToNextPanel, panel } = this.props
     const {
@@ -86,31 +86,9 @@ class PanelContainer extends Component {
     case 0:
       return (<CredentialsPanel account={provider.account} />)
     case 1:
-      return (<GenerateHashPanel alreadyExists={alreadyExists} assetHash={assetHash})
-    case 2: {
-      const { assetHash } = this.state
-      return (
-        <div>
-          <h2>Confirm Transaction</h2>
-          <span>Summary of your order</span>
-          <div id="registration-details">
-            <ul>
-              <li>
-                <span>Your Email:</span>
-                <span>mark.muskardin@gmail.com</span>
-              </li>
-              <li>
-                <span>Your Public Key:</span>
-                <span>{provider.account}</span>
-              </li>
-              <li>
-                <span>Unique Hash:</span>
-                <span>{assetHash}</span>
-              </li>
-            </ul>
-          </div>
-        </div>)
-    }
+      return (<GenerateHashPanel alreadyExists={alreadyExists} assetHash={assetHash} />)
+    case 2:
+      return (<RegisterAssetPanel account={account.provider} assetHash={assetHash} />)
     }
   }
 

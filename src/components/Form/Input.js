@@ -78,7 +78,7 @@ Input.PropTypes = {
   placeholder: PropTypes.string,
   checkIfValid: PropTypes.func,
   type: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.string
 }
 
 export default Input
