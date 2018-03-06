@@ -1,10 +1,10 @@
-import React, { Component }   from 'react';
-import { Form, Label, Input } from 'components/Form'
-import { getString }          from 'core/utils/util-assets'
-import { withRouter, Link }   from 'react-router'
-import CredentialsPanel       from './panels/CredentialsPanel'
-import GenerateHashPanel      from './panels/GenerateHashPanel'
-import RegisterAssetPanel     from './panels/RegisterAssetPanel'
+import React, { Component } from 'react'
+import PropTypes            from 'prop-types'
+import { getString }        from 'core/utils/util-assets'
+import { withRouter }       from 'react-router'
+import CredentialsPanel     from './panels/CredentialsPanel'
+import GenerateHashPanel    from './panels/GenerateHashPanel'
+import RegisterAssetPanel   from './panels/RegisterAssetPanel'
 
 /* component styles */
 import { styles } from '../styles.scss'
@@ -13,10 +13,10 @@ class PanelContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      emailValid        : false,
-      email             : '',
+      emailValid: false,
+      email: '',
       assetAlreadyExists: false,
-      assetHash         : ''
+      assetHash: ''
     }
   }
 
@@ -29,19 +29,18 @@ class PanelContainer extends Component {
       panel 2 = "Confirm Transaction" panel
     */
 
-    if(nextProps.panel === 1) {
-      if(nextProps.panel !== this.props.panel) {
+    if (nextProps.panel === 1) {
+      if (nextProps.panel !== this.props.panel) {
         getString(nextProps.asset.stagedAsset, (assetUrl) => {
-          assetDispatcher.checkIfAssetExists(assetUrl);
+          assetDispatcher.checkIfAssetExists(assetUrl)
         })
       }
 
-      if(nextProps.asset.alreadyExists) {
+      if (nextProps.asset.alreadyExists) {
         this.setState({
           alreadyExists: true
         })
-
-      } else if(nextProps.asset.assetHash) {
+      } else if (nextProps.asset.assetHash) {
         setTimeout(() => {
           this.setState({
             assetHash: nextProps.asset.assetHash
@@ -50,23 +49,25 @@ class PanelContainer extends Component {
       }
     }
 
-    if(nextProps.panel === 2 && nextProps.asset.transaction) {
+    if (nextProps.panel === 2 && nextProps.asset.transaction) {
       const { history } = this.props
       history.push('/assets')
     }
   }
 
   getPanelContent() {
-    const { panel, provider } = this.props
+    const { panel, account } = this.props
     const { alreadyExists, assetHash } = this.state
 
     switch (panel) {
     case 0:
-      return (<CredentialsPanel account={provider.account} />)
+      return (<CredentialsPanel account={account} />)
     case 1:
       return (<GenerateHashPanel alreadyExists={alreadyExists} assetHash={assetHash} />)
     case 2:
-      return (<RegisterAssetPanel account={account.provider} assetHash={assetHash} />)
+      return (<RegisterAssetPanel account={account} assetHash={assetHash} />)
+    default:
+      return
     }
   }
 
@@ -75,10 +76,19 @@ class PanelContainer extends Component {
       <div className={styles}>
         <div id="registration-form">
           {this.getPanelContent()}
+
         </div>
       </div>
     )
   }
+}
+
+PanelContainer.propTypes = {
+  asset: PropTypes.object.isRequired,
+  account: PropTypes.string.isRequired,
+  assetDispatcher: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
+  panel: PropTypes.numbers.isRequired
 }
 
 export default withRouter(PanelContainer)

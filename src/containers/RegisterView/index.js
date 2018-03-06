@@ -1,11 +1,11 @@
-import React, { Component }         from 'react'
-import { connect }                  from 'react-redux'
-import { bindActionCreators }       from 'redux'
-import { withRouter }               from 'react-router-dom'
-import Photo                        from './components/Photo'
-import PanelContainer               from './components/PanelContainer'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
+import Photo from './components/Photo'
+import PanelContainer from './components/PanelContainer'
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
-import Button                       from 'components/Button'
+import Button from 'components/Button'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -22,31 +22,6 @@ class RegisterView extends Component {
     }
   }
 
-  handleNext = () => {
-    const { asset } = this.props
-    const { panel } = this.state
-
-    if(panel === 2) { /* panel 2 is the final screen */
-      const { actions } = this.props
-      actions.asset.createAssetHash()
-
-    } else if (asset.stagedAsset) {
-      this.setState({
-        panel: panel + 1,
-        finished: panel === 2,
-        disabled: true
-      }, () => {
-        if(panel === 1) { this.setState({ disabled: false }) }
-      })
-    }
-
-  }
-
-  handlePrev = () => {
-    const {panel} = this.state
-    this.setState({ panel: panel - 1 })
-  }
-
   renderContent() {
     const { finished, panel } = this.state
     const { asset, provider, actions } = this.props
@@ -58,7 +33,7 @@ class RegisterView extends Component {
       <PanelContainer
         panel={panel}
         asset={asset}
-        provider={provider}
+        account={provider.account}
         assetDispatcher={assetDispatcher}
       />)
   }
@@ -82,14 +57,14 @@ class RegisterView extends Component {
               <Button
                 type="raised"
                 label={panel === 2 ? 'Register' : 'Next'}
-                primary={true}
+                primary
                 disabled={disabled}
                 onClick={this.handleNext}
               />
               <Button
                 type="flat"
                 label="Back"
-                secondary={true}
+                secondary
                 disabled={panel === 0}
                 onClick={this.handlePrev}
               />
@@ -99,12 +74,43 @@ class RegisterView extends Component {
       </div>
     )
   }
+
+  handleNext = () => {
+    const { asset } = this.props
+    const { panel } = this.state
+
+    if (panel === 2) { /* panel 2 is the final screen */
+      const { actions } = this.props
+      actions.asset.createAssetHash()
+    } else if (asset.stagedAsset) {
+      this.setState({
+        panel: panel + 1,
+        finished: panel === 2,
+        disabled: true
+      }, () => {
+        if (panel === 1) { this.setState({ disabled: false }) }
+      })
+    }
+  }
+
+  handlePrev = () => {
+    const { panel } = this.state
+    this.setState({ panel: panel - 1 })
+  }
+
+}
+
+RegisterView.propTypes = {
+  asset: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  provider: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    asset    : state.asset,
-    provider : state.provider
+    asset: state.asset,
+    provider: state.provider
   }
 }
 
