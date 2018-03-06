@@ -7,6 +7,7 @@
     "build": "webpack --progress --verbose --colors --display-error-details --config config/webpack/common.config.js",
     "build:production": "npm run clean && npm run build",
     "lint": "eslint src --fix",
+    "precommit": "lint-staged",
     "start": "cross-env NODE_ENV=development node bin/server.js",
     "test": "jest --verbose"
   },
@@ -39,6 +40,8 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.8.5",
     "ghooks": "^2.0.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
     "html-webpack-plugin": "^2.15.0",
     "ignore-styles": "^2.0.0",
     "imports-loader": "^0.6.5",
@@ -55,9 +58,12 @@
     "redux-logger": "2.4.0",
     "resolve-url-loader": "^1.4.3",
     "rimraf": "^2.5.0",
+    "sass-extract": "^2.0.0",
     "sass-extract-loader": "^1.1.0",
     "sass-loader": "^6.0.3",
+    "solc": "^0.4.19",
     "style-loader": "^0.13.0",
+    "truffle": "^4.0.6",
     "url-loader": "^0.5.7",
     "webpack": "^3.0.0",
     "webpack-dev-middleware": "^1.5.0",
@@ -80,13 +86,16 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.1.4",
     "redux-thunk": "^2.2.0",
-    "sass-extract": "^2.0.0",
     "sha256": "^0.2.0",
-    "solc": "^0.4.19",
-    "truffle": "^4.0.6",
     "truffle-contract": "^3.0.3",
     "validator": "^9.4.0",
     "web3": "^1.0.0-beta.27"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "config": {
     "ghooks": {
