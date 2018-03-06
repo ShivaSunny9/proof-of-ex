@@ -4,9 +4,11 @@ import { connect }                  from 'react-redux'
 import { bindActionCreators }       from 'redux'
 import { withRouter }               from 'react-router-dom'
 import Photo                        from './components/Photo'
-import PanelContainer               from './components/PanelContainer'
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import Button                       from 'components/Button'
+import CredentialsPanel             from './components/panels/CredentialsPanel'
+import GenerateHashPanel            from './components/panels/GenerateHashPanel'
+import RegisterAssetPanel           from './components/panels/RegisterAssetPanel'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -24,19 +26,18 @@ class RegisterView extends Component {
   }
 
   renderContent() {
-    const { finished, panel } = this.state
-    const { asset, provider, actions } = this.props
-    const assetDispatcher = actions.asset
+    const { panel } = this.state
 
-    if (finished) { return (<div>Success!</div>) }
-
-    return (
-      <PanelContainer
-        panel={panel}
-        asset={asset}
-        account={provider.account}
-        assetDispatcher={assetDispatcher}
-      />)
+    switch (panel) {
+    case 0:
+      return (<CredentialsPanel isValid={this.proceedIfValid}  />)
+    case 1:
+      return (<GenerateHashPanel isValid={this.proceedIfValid} />)
+    case 2:
+      return (<RegisterAssetPanel isValid={this.proceedIfValid} />)
+    default:
+      break
+    }
   }
 
   render() {
@@ -53,7 +54,7 @@ class RegisterView extends Component {
               <Step><StepLabel>Generate Unique Hash</StepLabel></Step>
               <Step><StepLabel>Register</StepLabel></Step>
             </Stepper>
-            {this.renderContent()}
+            <div id="registration-form">{this.renderContent()}</div>
             <div id="button-controls">
               <Button
                 type="raised"
@@ -76,22 +77,38 @@ class RegisterView extends Component {
     )
   }
 
-  handleNext = () => {
+  proceedIfValid = (isValid) => {
     const { asset } = this.props
+
+    if (asset.stagedAsset && isValid) {
+      this.setState({ disabled: false })
+    }
+  }
+
+  handleNext = () => {
+    const { actions } = this.props
     const { panel } = this.state
 
-    if (panel === 2) { /* panel 2 is the final screen */
-      const { actions } = this.props
+    switch (panel) {
+    case 0:
+      alert('panel 0')
+      break
+    case 1:
+      alert('panel 1')
+      break
+    case 2:
+      alert('panel 2')
       actions.asset.createAssetHash()
-    } else if (asset.stagedAsset) {
-      this.setState({
-        panel: panel + 1,
-        finished: panel === 2,
-        disabled: true
-      }, () => {
-        if (panel === 1) { this.setState({ disabled: false }) }
-      })
+      break
+    default:
+      break
     }
+
+    this.setState({
+      panel: panel + 1,
+      finished: panel === 2,
+      disabled: true
+    })
   }
 
   handlePrev = () => {

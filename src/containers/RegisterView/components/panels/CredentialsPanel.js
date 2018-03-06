@@ -1,13 +1,8 @@
 import React, { Component }   from 'react'
+import PropTypes              from 'prop-types'
 import { Form, Label, Input } from 'components/Form'
 
-export default class CredentialsPanel extends Component {
-  setValidStatus=(input) => {
-    if(input.valid) {
-      //allow form to proceed here
-    }
-  }
-
+class CredentialsPanel extends Component {
   render() {
     const { account } = this.props
 
@@ -20,7 +15,7 @@ export default class CredentialsPanel extends Component {
             <Label text="Your Email Address" />
             <Input
               type="email"
-              autoFocus={true}
+              autoFocus
               placeholder="your_email@email.com"
               checkIfValid={this.setValidStatus}
             />
@@ -29,7 +24,7 @@ export default class CredentialsPanel extends Component {
             <Label text="Your Account" />
             <Input
               type="text"
-              disabled={true}
+              disabled
               value={account}
             />
             <span className="input-hint">(from MetaMask)</span>
@@ -38,5 +33,20 @@ export default class CredentialsPanel extends Component {
       </div>
     )
   }
+
+  setValidStatus=(input) => {
+    const { isValid } = this.props
+
+    if (input.valid) {
+      isValid(true)
+    }
+  }
 }
+
+CredentialsPanel.propTypes = {
+  account: PropTypes.string,
+  isValid: PropTypes.func
+}
+
+export default CredentialsPanel
 

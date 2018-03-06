@@ -1,24 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes            from 'prop-types'
 import { getString } from 'core/utils/util-assets'
-import { withRouter } from 'react-router'
-import CredentialsPanel     from './panels/CredentialsPanel'
-import GenerateHashPanel    from './panels/GenerateHashPanel'
-import RegisterAssetPanel   from './panels/RegisterAssetPanel'
+
 
 /* component styles */
 import { styles } from '../styles.scss'
 
 class PanelContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      emailValid: false,
-      email: '',
-      assetAlreadyExists: false,
-      assetHash: ''
-    }
-  }
 
   componentWillReceiveProps(nextProps) {
     const { assetDispatcher } = this.props
@@ -55,29 +43,11 @@ class PanelContainer extends Component {
     }
   }
 
-  getPanelContent() {
-    const { panel, account } = this.props
-    const { alreadyExists, assetHash } = this.state
-
-    switch (panel) {
-    case 0:
-      return (<CredentialsPanel account={account} />)
-    case 1:
-      return (<GenerateHashPanel alreadyExists={alreadyExists} assetHash={assetHash} />)
-    case 2:
-      return (<RegisterAssetPanel account={account} assetHash={assetHash} />)
-    default:
-      return
-    }
-  }
 
   render() {
     return (
       <div className={styles}>
-        <div id="registration-form">
-          {this.getPanelContent()}
-
-        </div>
+        <div id="registration-form" />
       </div>
     )
   }
