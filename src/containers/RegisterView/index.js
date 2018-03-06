@@ -1,14 +1,14 @@
-import React, { Component }   from 'react'
-import { connect }            from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { withRouter }         from 'react-router-dom'
-import Photo from './components/Photo'
-import PanelContainer from './components/PanelContainer'
-import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
-import Button from 'components/Button'
+import React, { Component }from 'react'
+import { connect }from 'react-redux'
+import { bindActionCreators }from 'redux'
+import { withRouter }from 'react-router-dom'
+import Photo                        from './components/Photo'
+import PanelContainer               from './components/PanelContainer'
+import { Step, Stepper, StepLabel }from 'material-ui/Stepper'
+import Button                       from 'components/Button'
 
 /* component styles */
-import { styles } from './styles.scss'
+import { styles }from './styles.scss'
 
 import * as assetActionCreators from 'core/actions/actions-asset'
 
@@ -27,7 +27,7 @@ class RegisterView extends Component {
     const { asset, provider, actions } = this.props
     const assetDispatcher = actions.asset
 
-    if(finished) { return (<div>Success!</div>) }
+    if (finished) { return (<div>Success!</div>) }
 
     return (
       <PanelContainer
@@ -79,16 +79,16 @@ class RegisterView extends Component {
     const { asset } = this.props
     const { panel } = this.state
 
-    if(panel === 2) { /* panel 2 is the final screen */
+    if (panel === 2) { /* panel 2 is the final screen */
       const { actions } = this.props
       actions.asset.createAssetHash()
-    } else if(asset.stagedAsset) {
+    } else if (asset.stagedAsset) {
       this.setState({
         panel: panel + 1,
         finished: panel === 2,
         disabled: true
       }, () => {
-        if(panel === 1) { this.setState({ disabled: false }) }
+        if (panel === 1) { this.setState({ disabled: false }) }
       })
     }
   }
