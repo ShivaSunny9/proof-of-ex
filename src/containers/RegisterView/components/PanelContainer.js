@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes            from 'prop-types'
-import { getString } from 'core/utils/util-assets'
 
 
 /* component styles */

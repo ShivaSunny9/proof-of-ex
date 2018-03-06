@@ -4,15 +4,24 @@ import { connect }            from 'react-redux'
 import { bindActionCreators } from 'redux'
 import ProgressIndicator      from 'components/ProgressIndicator'
 import { Link }               from 'react-router-dom'
+import { getString }          from 'core/utils/util-assets'
 
 import * as assetActionCreators from 'core/actions/actions-asset'
 
 class GenerateHashPanel extends Component {
+  componentDidMount() {
+    const { actions, asset } = this.props
+
+    getString(asset.stagedAsset, (assetUrl) => {
+      actions.asset.checkIfAssetExists(assetUrl)
+    })
+  }
+
   render() {
-    const { alreadyExists, assetHash } = this.props
+    const { asset } = this.props
     let content
 
-    if (alreadyExists) {
+    if (asset.alreadyExists) {
       content = (
         <div>
           <h2>Someone already registered this asset</h2>
@@ -20,7 +29,7 @@ class GenerateHashPanel extends Component {
           <Link to="/home">Upload a new photo</Link>
         </div>
       )
-    } else if (assetHash) {
+    } else if (asset.assetHash) {
       content = (
         <div>
           <h2>Unique hash (SHA-256) of your photo asset</h2>
@@ -39,13 +48,15 @@ class GenerateHashPanel extends Component {
         </div>
       )
     }
+
     return content
   }
 }
 
 GenerateHashPanel.propTypes = {
+  actions: PropTypes.object.isRequired,
   alreadyExists: PropTypes.bool,
-  assetHash: PropTypes.string
+  asset: PropTypes.object
 }
 
 function mapStateToProps(state) {
@@ -53,7 +64,6 @@ function mapStateToProps(state) {
     asset: state.asset
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -64,4 +74,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenerateHashPanel)
-

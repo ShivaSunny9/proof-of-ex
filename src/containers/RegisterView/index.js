@@ -90,13 +90,10 @@ class RegisterView extends Component {
 
     switch (panel) {
     case 0:
-      alert('panel 0')
       break
     case 1:
-      alert('panel 1')
       break
     case 2:
-      alert('panel 2')
       actions.asset.createAssetHash()
       break
     default:

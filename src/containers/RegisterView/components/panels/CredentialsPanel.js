@@ -47,4 +47,3 @@ CredentialsPanel.propTypes = {
 }
 
 export default CredentialsPanel
-
