@@ -1,6 +1,5 @@
 import React, { Component }   from 'react';
 import { Form, Label, Input } from 'components/Form'
-import ProgressIndicator      from 'components/ProgressIndicator'
 import { getString }          from 'core/utils/util-assets'
 import { withRouter, Link }   from 'react-router'
 import CredentialsPanel       from './CredentialsPanel'
@@ -81,39 +80,13 @@ class PanelContainer extends Component {
 
   getPanelContent() {
     const { panel, provider } = this.props
+    const { alreadyExists, assetHash } = this.state
 
     switch (panel) {
     case 0:
       return (<CredentialsPanel account={provider.account} />)
-    case 1: {
-      const { alreadyExists, assetHash } = this.state
-
-      if(alreadyExists) {
-        return (
-          <div>
-            <h2>Someone already registered this asset</h2>
-            <span>A fingerprint for this asset already exists!</span>
-            <Link to="/home">Upload a new photo</Link>
-          </div>)
-      } else if (assetHash) {
-        return (
-          <div>
-            <h2>Unique hash of your photo asset</h2>
-            <span>Click 'Next' to register your asset</span>
-            <div id="unique-hash">{assetHash}</div>
-          </div>
-        )
-      } else {
-        return (
-          <div>
-            <h2>Generating a unique hash of your asset...</h2>
-            <div id="hash-progress-indicator">
-              <ProgressIndicator type="linear" />
-              <span className="blink-me">Please hold on...</span>
-            </div>
-          </div>)
-      }
-    }
+    case 1:
+      return (<GenerateHashPanel alreadyExists={alreadyExists} assetHash={assetHash})
     case 2: {
       const { assetHash } = this.state
       return (

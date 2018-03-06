@@ -5,7 +5,6 @@ import { Form, Label, Input } from 'components/Form'
 import { styles } from '../styles.scss'
 
 export default class CredentialsPanel extends Component {
-
   setValidStatus=(input) => {
     if(input.valid) {
       //allow form to proceed here
