@@ -19,9 +19,10 @@ class GenerateHashPanel extends Component {
 
   render() {
     const { asset } = this.props
+    const { alreadyExists, assetHash } = asset
     let content
 
-    if (asset.alreadyExists) {
+    if (alreadyExists) {
       content = (
         <div>
           <h2>Someone already registered this asset</h2>
@@ -29,7 +30,7 @@ class GenerateHashPanel extends Component {
           <Link to="/home">Upload a new photo</Link>
         </div>
       )
-    } else if (asset.assetHash) {
+    } else if (assetHash) {
       content = (
         <div>
           <h2>Unique hash (SHA-256) of your photo asset</h2>
