@@ -1,14 +1,14 @@
-import React, { Component }from 'react'
-import { connect }from 'react-redux'
-import { bindActionCreators }from 'redux'
-import { withRouter }from 'react-router-dom'
+import React, { Component }         from 'react'
+import { connect }                  from 'react-redux'
+import { bindActionCreators }       from 'redux'
+import { withRouter }               from 'react-router-dom'
 import Photo                        from './components/Photo'
 import PanelContainer               from './components/PanelContainer'
-import { Step, Stepper, StepLabel }from 'material-ui/Stepper'
+import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import Button                       from 'components/Button'
 
 /* component styles */
-import { styles }from './styles.scss'
+import { styles } from './styles.scss'
 
 import * as assetActionCreators from 'core/actions/actions-asset'
 
