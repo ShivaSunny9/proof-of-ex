@@ -85,7 +85,7 @@ class PanelContainer extends Component {
 
 PanelContainer.propTypes = {
   asset: PropTypes.object.isRequired,
-  account: PropTypes.string.isRequired,
+  account: PropTypes.string,
   assetDispatcher: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   panel: PropTypes.number.isRequired
