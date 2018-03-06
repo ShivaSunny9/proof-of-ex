@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes            from 'prop-types'
 import ProgressIndicator    from 'components/ProgressIndicator'
 import { Link }             from 'react-router-dom'
 
