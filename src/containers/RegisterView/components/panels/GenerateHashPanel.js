@@ -13,14 +13,18 @@ class GenerateHashPanel extends Component {
     const { actions, asset } = this.props
 
     getString(asset.stagedAsset, (assetUrl) => {
-      actions.asset.checkIfAssetExists(assetUrl)
+      setTimeout(() => {
+        actions.asset.checkIfAssetExists(assetUrl)
+      }, 2000)
     })
   }
 
   render() {
-    const { asset } = this.props
+    const { asset, isValid } = this.props
     const { alreadyExists, assetHash } = asset
     let content
+
+    if (assetHash) { isValid(true) }
 
     if (alreadyExists) {
       content = (
@@ -57,7 +61,8 @@ class GenerateHashPanel extends Component {
 GenerateHashPanel.propTypes = {
   actions: PropTypes.object.isRequired,
   alreadyExists: PropTypes.bool,
-  asset: PropTypes.object
+  asset: PropTypes.object,
+  isValid: PropTypes.func
 }
 
 function mapStateToProps(state) {
