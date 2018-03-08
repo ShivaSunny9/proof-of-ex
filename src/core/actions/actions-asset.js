@@ -1,5 +1,5 @@
 import constants        from 'core/types'
-import { contract as createContract } from 'truffle-contract'
+import contract         from 'truffle-contract'
 import ProofOfExistence from 'contracts/ProofOfExistence.json'
 import sha256           from 'sha256'
 
@@ -10,11 +10,10 @@ export function addAsset(asset) {
   }
 }
 
-function checkIfExists(contract, assetHash, resolve, reject) {
-  if (contract.isDeployed()) {
-    contract.deployed().then((poe) => {
-      return poe.checkIfExists(assetHash)
-    })
+function checkIfExists(ProofOfExContract, assetHash, resolve, reject) {
+  ProofOfExContract.deployed().then((poe) => {
+    return poe.checkIfExists(assetHash)
+  })
     .then((exists) => {
       const assetExists = exists ? true : false
       resolve(assetExists)
@@ -22,13 +21,10 @@ function checkIfExists(contract, assetHash, resolve, reject) {
     .catch((error) => {
       reject(error)
     })
-  } else {
-    reject('The Smart Contract has not been deployed.')
-  }
 }
 
-function notarize(contract, assetHash, resolve, reject) {
-  contract.deployed().then((poe) => {
+function notarize(ProofOfExContract, assetHash, resolve, reject) {
+  ProofOfExContract.deployed().then((poe) => {
     return poe.notarize(assetHash)
   })
   .then(result => {
@@ -91,7 +87,7 @@ function dispatchError(error, dispatch) {
 export function checkIfAssetExists(assetUrl) {
   return (dispatch, getState) => {
     const { web3Provider } = getState().provider
-    const ProofOfExContract = createContract(ProofOfExistence)
+    const ProofOfExContract = contract(ProofOfExistence)
     const assetHash = sha256(assetUrl)
 
     ProofOfExContract.setProvider(web3Provider.currentProvider)
@@ -117,7 +113,7 @@ export function createAssetHash() {
   return (dispatch, getState) => {
     const { web3Provider } = getState().provider
     const { assetHash } = getState().asset
-    const ProofOfExContract = createContract(ProofOfExistence)
+    const ProofOfExContract = contract(ProofOfExistence)
 
     ProofOfExContract.setProvider(web3Provider.currentProvider)
     ProofOfExContract.defaults({from: web3Provider.eth.defaultAccount})
