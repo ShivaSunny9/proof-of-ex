@@ -10,7 +10,7 @@ class CredentialsPanel extends Component {
     return (
       <div>
         <h2>Enter Your Credentials</h2>
-        <span>Your email address and public key will be registered on the Blockchain</span>
+        <span>Your email address and account ID will be registered on the Blockchain</span>
         <Form>
           <div className="form-section">
             <Label text="Your Email Address" />
@@ -22,13 +22,12 @@ class CredentialsPanel extends Component {
             />
           </div>
           <div className="form-section">
-            <Label text="Your Account" />
+            <Label text="Your Account ID (from MetaMask)" />
             <Input
               type="text"
               disabled
               value={id}
             />
-            <span className="input-hint">(from MetaMask)</span>
           </div>
         </Form>
       </div>

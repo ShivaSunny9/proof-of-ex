@@ -29,11 +29,11 @@ class GenerateHashPanel extends Component {
               <span>{email}</span>
             </li>
             <li>
-              <span>Your Public Key:</span>
+              <span>MetaMask ID:</span>
               <span>{id}</span>
             </li>
             <li>
-              <span>Unique Hash:</span>
+              <span>Unique Hash of Photo:</span>
               <span>{assetHash}</span>
             </li>
           </ul>
