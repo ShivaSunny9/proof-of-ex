@@ -21,7 +21,7 @@ class GenerateHashPanel extends Component {
 
   render() {
     const { asset, isValid } = this.props
-    const { alreadyExists, assetHash } = asset
+    const { alreadyExists, assetHash, error } = asset
     let content
 
     if (assetHash) { isValid(true) }
@@ -40,6 +40,13 @@ class GenerateHashPanel extends Component {
           <h2>Unique hash (SHA-256) of your photo asset</h2>
           <span>Click 'Next' to register your asset</span>
           <div id="unique-hash">{assetHash}</div>
+        </div>
+      )
+    } else if (error) {
+      content = (
+        <div id="error-message">
+          <h2>Sorry, there's an error!</h2>
+          <span>{error}</span>
         </div>
       )
     } else {

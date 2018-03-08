@@ -69,6 +69,20 @@
     margin-top: 40px;
   }
 
+  #error-message {
+    height: 100%;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-style: italic;
+      height: 100%;
+      font-size: 22px;
+      margin-top: -40px;
+    }
+  }
+
   #hash-progress-indicator {
     margin-top: 100px;
     text-align: center;
