@@ -81,16 +81,19 @@
   }
 
   #registration-details {
-    width: 70%;
     margin: 0 auto;
     margin-top: 30px;
 
     li {
       padding: 10px;
 
+      span:nth-child(1) {
+        display: inline-block;
+        width: 140px;
+      }
+
       span:nth-child(2) {
         text-align: right;
-        float: right;
         max-width: 340px;
         overflow: hidden;
         text-overflow: ellipsis;

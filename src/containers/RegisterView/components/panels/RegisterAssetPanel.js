@@ -4,8 +4,11 @@ import { connect }          from 'react-redux'
 
 class GenerateHashPanel extends Component {
   render() {
-    const { id } = this.props.account
+    const { id, email } = this.props.account
+    const { isValid } = this.props
     const { assetHash } = this.props.asset
+
+    isValid(true)
 
     return (
       <div>
@@ -15,7 +18,7 @@ class GenerateHashPanel extends Component {
           <ul>
             <li>
               <span>Your Email:</span>
-              <span>EMAIL GOES HERE</span>
+              <span>{email}</span>
             </li>
             <li>
               <span>Your Public Key:</span>
@@ -33,7 +36,8 @@ class GenerateHashPanel extends Component {
 
 GenerateHashPanel.propTypes = {
   account: PropTypes.object,
-  asset: PropTypes.object
+  asset: PropTypes.object,
+  isValid: PropTypes.func
 }
 
 function mapStateToProps(state) {

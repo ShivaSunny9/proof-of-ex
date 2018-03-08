@@ -12,15 +12,17 @@ import RegisterAssetPanel           from './components/panels/RegisterAssetPanel
 /* component styles */
 import { styles } from './styles.scss'
 
+import * as accountActionCreators from 'core/actions/actions-account'
 import * as assetActionCreators from 'core/actions/actions-asset'
 
 class RegisterView extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      disabled: true,
+      email: '',
       finished: false,
-      panel: 0,
-      disabled: true
+      panel: 0
     }
   }
 
@@ -57,7 +59,7 @@ class RegisterView extends Component {
             <div id="button-controls">
               <Button
                 type="raised"
-                label={panel === 2 ? 'Register' : 'Next'}
+                label={panel === 2 ? 'Register Asset' : 'Next'}
                 primary
                 disabled={disabled}
                 onClick={this.handleNext}
@@ -76,20 +78,26 @@ class RegisterView extends Component {
     )
   }
 
-  proceedIfValid = (isValid) => {
+  proceedIfValid = (isValid, email) => {
     const { asset } = this.props
 
-    if (asset.stagedAsset && isValid) {
-      this.setState({ disabled: false })
+    if (isValid) {
+      if (asset.stagedAsset) {
+        this.setState({disabled: false})
+      }
+      if (email) {
+        this.setState({email: email})
+      }
     }
   }
 
   handleNext = () => {
     const { actions } = this.props
-    const { panel } = this.state
+    const { panel, email } = this.state
 
     switch (panel) {
     case 0:
+      actions.account.setEmail(email)
       break
     case 1:
       break
@@ -101,7 +109,7 @@ class RegisterView extends Component {
     }
 
     this.setState({
-      panel: panel + 1,
+      panel: (panel === 2) ? 2 : panel + 1,
       finished: panel === 2,
       disabled: true
     })
@@ -129,6 +137,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
+      account: bindActionCreators(accountActionCreators, dispatch),
       asset: bindActionCreators(assetActionCreators, dispatch)
     }
   }

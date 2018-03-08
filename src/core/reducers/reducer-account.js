@@ -1,6 +1,7 @@
 import constants from 'core/types'
 
 const initialState = {
+  email: '',
   id: null
 }
 
@@ -10,6 +11,11 @@ export function accountReducer(state = initialState, action) {
   case constants.SET_ACCOUNT:
     return Object.assign({}, state, {
       id: action.id
+    })
+
+  case constants.SET_ACCOUNT_EMAIL:
+    return Object.assign({}, state, {
+      email: action.email
     })
 
   default:

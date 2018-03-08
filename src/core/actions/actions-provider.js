@@ -5,11 +5,12 @@ import constants from 'core/types'
  */
 export function setProvider(provider) {
   return (dispatch) => {
-    /* Set the default account */
     provider.eth.getAccounts((error, accounts) => {
       if (error) { return }
 
       const userAccount = accounts[0]
+
+      /* Set the default account */
       provider.eth.defaultAccount = userAccount
 
       dispatch((() => {
