@@ -1,15 +1,15 @@
 import constants from 'core/types'
 
 const initialState = {
-  web3Provider: null
+  id: null
 }
 
-export function providerReducer(state = initialState, action) {
+export function accountReducer(state = initialState, action) {
   switch (action.type) {
 
-  case constants.SET_PROVIDER:
+  case constants.SET_ACCOUNT:
     return Object.assign({}, state, {
-      web3Provider: action.provider
+      id: action.id
     })
 
   default:

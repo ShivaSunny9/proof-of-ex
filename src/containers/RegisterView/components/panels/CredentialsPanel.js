@@ -5,7 +5,7 @@ import { Form, Label, Input } from 'components/Form'
 
 class CredentialsPanel extends Component {
   render() {
-    const { account } = this.props.provider
+    const { id } = this.props.account
 
     return (
       <div>
@@ -26,7 +26,7 @@ class CredentialsPanel extends Component {
             <Input
               type="text"
               disabled
-              value={account}
+              value={id}
             />
             <span className="input-hint">(from MetaMask)</span>
           </div>
@@ -38,18 +38,20 @@ class CredentialsPanel extends Component {
   setValidStatus=(input) => {
     const { isValid } = this.props
 
-    if (input.valid) { isValid(true) }
+    if (input.valid) {
+      isValid(true)
+    }
   }
 }
 
 CredentialsPanel.propTypes = {
-  provider: PropTypes.string,
+  account: PropTypes.object,
   isValid: PropTypes.func
 }
 
 function mapStateToProps(state) {
   return {
-    provider: state.provider
+    account: state.account
   }
 }
 

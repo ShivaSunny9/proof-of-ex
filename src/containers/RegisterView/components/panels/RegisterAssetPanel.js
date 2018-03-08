@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes            from 'prop-types'
+import { connect }          from 'react-redux'
 
-export default class GenerateHashPanel extends Component {
+class GenerateHashPanel extends Component {
   render() {
-    const { account, assetHash } = this.props
+    const { id } = this.props.account
+    const { assetHash } = this.props.asset
 
     return (
       <div>
         <h2>Confirm Transaction</h2>
-        <span>Summary of your order</span>
+        <span>Summary of your information</span>
         <div id="registration-details">
           <ul>
             <li>
@@ -16,7 +19,7 @@ export default class GenerateHashPanel extends Component {
             </li>
             <li>
               <span>Your Public Key:</span>
-              <span>{account}</span>
+              <span>{id}</span>
             </li>
             <li>
               <span>Unique Hash:</span>
@@ -27,3 +30,17 @@ export default class GenerateHashPanel extends Component {
       </div>)
   }
 }
+
+GenerateHashPanel.propTypes = {
+  account: PropTypes.object,
+  asset: PropTypes.object
+}
+
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+    asset: state.asset
+  }
+}
+
+export default connect(mapStateToProps)(GenerateHashPanel)
