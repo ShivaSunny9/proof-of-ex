@@ -1,10 +1,11 @@
 import React, { Component }   from 'react'
 import PropTypes              from 'prop-types'
+import { connect }            from 'react-redux'
 import { Form, Label, Input } from 'components/Form'
 
 class CredentialsPanel extends Component {
   render() {
-    const { account } = this.props
+    const { account } = this.props.provider
 
     return (
       <div>
@@ -42,8 +43,14 @@ class CredentialsPanel extends Component {
 }
 
 CredentialsPanel.propTypes = {
-  account: PropTypes.string,
+  provider: PropTypes.string,
   isValid: PropTypes.func
 }
 
-export default CredentialsPanel
+function mapStateToProps(state) {
+  return {
+    provider: state.provider
+  }
+}
+
+export default connect(mapStateToProps)(CredentialsPanel)
