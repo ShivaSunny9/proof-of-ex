@@ -82,12 +82,8 @@ class RegisterView extends Component {
     const { asset } = this.props
 
     if (isValid) {
-      if (asset.stagedAsset) {
-        this.setState({disabled: false})
-      }
-      if (email) {
-        this.setState({email: email})
-      }
+      if (asset.stagedAsset) { this.setState({disabled: false}) }
+      if (email) { this.setState({email: email}) }
     }
   }
 
