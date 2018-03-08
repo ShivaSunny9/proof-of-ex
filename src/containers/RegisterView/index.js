@@ -13,7 +13,7 @@ import RegisterAssetPanel           from './components/panels/RegisterAssetPanel
 import { styles } from './styles.scss'
 
 import * as accountActionCreators from 'core/actions/actions-account'
-import * as assetActionCreators from 'core/actions/actions-asset'
+import * as assetActionCreators   from 'core/actions/actions-asset'
 
 class RegisterView extends Component {
   constructor(props) {

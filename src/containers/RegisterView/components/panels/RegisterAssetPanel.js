@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes            from 'prop-types'
 import { connect }          from 'react-redux'
+import { withRouter }       from 'react-router-dom'
 
 class GenerateHashPanel extends Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.asset.transaction) {
+      const { history } = this.props
+      history.push('/assets')
+    }
+  }
+
   render() {
     const { id, email } = this.props.account
     const { isValid } = this.props
@@ -37,6 +45,7 @@ class GenerateHashPanel extends Component {
 GenerateHashPanel.propTypes = {
   account: PropTypes.object,
   asset: PropTypes.object,
+  history: PropTypes.object.isRequired,
   isValid: PropTypes.func
 }
 
@@ -47,4 +56,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(GenerateHashPanel)
+export default withRouter(connect(mapStateToProps)(GenerateHashPanel))
