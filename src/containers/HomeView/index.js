@@ -36,13 +36,14 @@ class HomeView extends Component {
       <div className={styles}>
         <div id="home-view">
           <UploadBox onDrop={this.onDrop} setUploadedFile={this.setUploadedFile} />
-            <div className={!fileAdded ? 'opaque' : ''}>
+            <div>
               <div id="register-actions">
                 <Button
                   onTouchTap={this.registerAsset}
                   label="Register Photo On Blockchain"
                   type="raised"
                   primary
+                  disabled={!fileAdded ? true : false}
                 />
                 <a id="reset" href="#">Reset</a>
               </div>
