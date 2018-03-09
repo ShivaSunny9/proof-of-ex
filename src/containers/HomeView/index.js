@@ -43,7 +43,7 @@ class HomeView extends Component {
                   label="Register Photo On Blockchain"
                   type="raised"
                   primary
-                  className="tertiary" />
+                />
                 <a id="reset" href="#">Reset</a>
               </div>
             </div>

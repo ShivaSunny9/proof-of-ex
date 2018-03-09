@@ -1,7 +1,7 @@
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-const styleVariables = require('sass-extract-loader!../variables.scss');
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+const styleVariables = require('sass-extract-loader!../variables.scss')
 
-const { 
+const {
   $beige,
   $black,
   $lightBlue,
@@ -9,9 +9,9 @@ const {
   $white
 } = styleVariables.global
 
-/* 
+/*
  * Reference
- * https://github.com/mui-org/material-ui/blob/master/src/styles/getMuiTheme.js 
+ * https://github.com/mui-org/material-ui/blob/master/src/styles/getMuiTheme.js
  */
 
 export default getMuiTheme({
@@ -40,4 +40,4 @@ export default getMuiTheme({
     primaryColor: $lightBlue.value.hex,
     secondaryColor: $pink.value.hex
   }
-});
+})

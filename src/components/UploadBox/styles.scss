@@ -1,9 +1,7 @@
-@import '../../containers/App/styles/variables';
-
 :local(.styles) {
 	color: $black;
 	margin: 50px 0 40px 0;
-	
+
 	#upload-container {
 		display: flex;
 		justify-content: center;
@@ -13,7 +11,7 @@
 		width: 70%;
 		margin: 0 auto;
 		background:  $beige;
-		
+
 		&.drop {
 			border: 3px dashed $pink;
 		}
