@@ -3,6 +3,8 @@ import PropTypes              from 'prop-types'
 import { connect }            from 'react-redux'
 import { Form, Label, Input } from 'components/Form'
 
+import * as accountActionCreators from 'core/actions/actions-account'
+
 class CredentialsPanel extends Component {
   render() {
     const { id } = this.props.account
@@ -18,7 +20,7 @@ class CredentialsPanel extends Component {
               type="email"
               autoFocus
               placeholder="your_email@email.com"
-              checkIfValid={this.setValidStatus}
+              checkIfValid={this.setEmail}
             />
           </div>
           <div className="form-section">
@@ -34,18 +36,17 @@ class CredentialsPanel extends Component {
     )
   }
 
-  setValidStatus=(input) => {
-    const { isValid } = this.props
-
-    if (input.valid) {
-      isValid(true, input.value)
+  setEmail=(input) => {
+    const { actions } = this.props
+    if (input.valid && input.type === 'email') {
+      actions.account.setEmail(input.value)
     }
   }
 }
 
 CredentialsPanel.propTypes = {
   account: PropTypes.object,
-  isValid: PropTypes.func
+  actions: PropTypes.object
 }
 
 function mapStateToProps(state) {
@@ -54,4 +55,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(CredentialsPanel)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      account: bindActionCreators(accountActionCreators, dispatch)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CredentialsPanel)

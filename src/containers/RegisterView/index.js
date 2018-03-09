@@ -36,11 +36,11 @@ class RegisterView extends Component {
 
     switch (panel) {
     case 0:
-      return (<CredentialsPanel isValid={this.proceedIfValid}  />)
+      return (<CredentialsPanel   />)
     case 1:
-      return (<GenerateHashPanel isValid={this.proceedIfValid} />)
+      return (<GenerateHashPanel  />)
     case 2:
-      return (<RegisterAssetPanel isValid={this.proceedIfValid} />)
+      return (<RegisterAssetPanel />)
     default:
       break
     }
@@ -83,22 +83,12 @@ class RegisterView extends Component {
     )
   }
 
-  proceedIfValid = (isValid, email) => {
-    const { asset } = this.props
-
-    if (isValid) {
-      if (asset.stagedAsset) { this.setState({disabled: false}) }
-      if (email) { this.setState({email: email}) }
-    }
-  }
-
   handleNext = () => {
     const { actions } = this.props
-    const { panel, email } = this.state
+    const { panel } = this.state
 
     switch (panel) {
     case 0:
-      actions.account.setEmail(email)
       break
     case 1:
       break
@@ -133,7 +123,6 @@ function mapStateToProps(state) {
     asset: state.asset
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {
