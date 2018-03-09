@@ -23,15 +23,20 @@ class RegisterView extends Component {
     actions.asset.clear()
   }
 
-  renderContent() {
-    const location = this.props.location.search.substr(1)
+  getPanel = () => {
+    const { location } = this.props
+    return parseInt(location.search.substr(1).split('=')[1], 10)
+  }
 
-    switch (location) {
-    case 'credentials':
+  renderContent() {
+    const panel = this.getPanel()
+
+    switch (panel) {
+    case 1:
       return <CredentialsPanel />
-    case 'generatehash':
-      return <GenerateHashPanel />
     case 2:
+      return <GenerateHashPanel />
+    case 3:
     default:
       break
     }
@@ -39,7 +44,7 @@ class RegisterView extends Component {
 
   render() {
     const { asset } = this.props
-    const { panel } = this.props.location.search
+    const panel = this.getPanel()
 
     return (
       <div className={styles}>

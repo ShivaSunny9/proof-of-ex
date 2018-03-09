@@ -65,7 +65,7 @@ class HomeView extends Component {
 
     if (provider.web3Provider !== null) {
       actions.asset.addAsset(asset)
-      history.push('/register?credentials')
+      history.push('/register?panel=1')
     } else {
       const modalContent = (
         <div>

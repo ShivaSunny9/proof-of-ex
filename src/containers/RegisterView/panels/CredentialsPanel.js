@@ -54,7 +54,7 @@ class CredentialsPanel extends Component {
     const { email } = this.state
 
     actions.account.setEmail(email)
-    history.push('/register?generatehash')
+    history.push('/register?panel=2')
   }
 
   setEmailStatus=(input) => {
