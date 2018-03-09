@@ -10,6 +10,12 @@ export function addAsset(asset) {
   }
 }
 
+export function clear() {
+  return {
+    type: constants.CLEAR_ASSETS
+  }
+}
+
 function checkIfExists(ProofOfExContract, assetHash, resolve, reject) {
   ProofOfExContract.deployed().then((poe) => {
     return poe.checkIfExists(assetHash)

@@ -28,17 +28,16 @@ class GenerateHashPanel extends Component {
 
     if (alreadyExists) {
       content = (
-        <div>
-          <h2>Someone already registered this asset</h2>
-          <span>A fingerprint for this asset already exists!</span>
-          <Link to="/home">Upload a new photo</Link>
+        <div id="already-exists-message">
+          <h2>Someone already registered this asset!</h2>
+          <span><Link to="/home">Upload a new photo</Link></span>
         </div>
       )
     } else if (assetHash) {
       content = (
         <div>
           <h2>Unique hash (SHA-256) of your photo asset</h2>
-          <span>Click 'Next' to register your asset</span>
+          <span>Click Next to register your asset</span>
           <div id="unique-hash">{assetHash}</div>
         </div>
       )

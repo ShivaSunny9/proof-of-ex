@@ -3,7 +3,7 @@ import PropTypes            from 'prop-types'
 import { connect }          from 'react-redux'
 import { withRouter }       from 'react-router-dom'
 
-class GenerateHashPanel extends Component {
+class RegisterAssetPanel extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.asset.transaction) {
       const { history } = this.props
@@ -42,7 +42,7 @@ class GenerateHashPanel extends Component {
   }
 }
 
-GenerateHashPanel.propTypes = {
+RegisterAssetPanel.propTypes = {
   account: PropTypes.object,
   asset: PropTypes.object,
   history: PropTypes.object.isRequired,
@@ -56,4 +56,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(GenerateHashPanel))
+export default withRouter(connect(mapStateToProps)(RegisterAssetPanel))

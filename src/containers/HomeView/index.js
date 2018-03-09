@@ -28,14 +28,42 @@ class HomeView extends Component {
     })
   }
 
+  render() {
+    const { fileAdded } = this.state
+
+    return (
+      <div className={styles}>
+        <div id="home-view">
+          <UploadBox onDrop={this.onDrop} setUploadedFile={this.setUploadedFile} />
+            <div className={!fileAdded ? 'opaque' : ''}>
+              <div id="register-actions">
+                <Button
+                  onTouchTap={this.registerAsset}
+                  label="Register Photo On Blockchain"
+                  type="raised"
+                  primary
+                  className="tertiary" />
+                <a id="reset" href="#">Reset</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    )
+  }
+
+  setUploadedFile=(file) => {
+    this.setState({
+      asset: file
+    })
+  }
+
   registerAsset=() => {
     const { provider, history, actions } = this.props
     const { asset } = this.state
 
-    if(provider.web3Provider !== null) {
+    if (provider.web3Provider !== null) {
       actions.asset.addAsset(asset)
       history.push('/register')
-
     } else {
       const modalContent = (
         <div>
@@ -51,53 +79,29 @@ class HomeView extends Component {
             <Button
               label="Install MetaMask"
               type="raised"
-              primary={true}
+              primary
               onTouchTap={() => {
-                window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en','_blank');
-              }} 
+                window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en', '_blank')
+              }}
             />
           </div>
         </div>
       )
 
       actions.ui.showModal({
-        className    : modalStyles,
-        customStyles : { width: '1000' },
-        title        : 'You need to install MetaMask!',
-        content      : modalContent
+        className: modalStyles,
+        customStyles: { width: '1000' },
+        title: 'You need to install MetaMask!',
+        content: modalContent
       })
     }
-
   }
+}
 
-  setUploadedFile=(file) => {
-    this.setState({
-      asset: file
-    })
-  }
-
-  render() {
-    const { fileAdded } = this.state
-
-    return (
-      <div className={styles}>
-        <div id="home-view">
-          <UploadBox onDrop={this.onDrop} setUploadedFile={this.setUploadedFile} />
-            <div className={!fileAdded ? 'opaque' : ''}>
-              <div id="register-actions">
-                <Button
-                  onTouchTap={this.registerAsset}
-                  label="Register Photo On Blockchain"
-                  type="raised"
-                  primary={true}
-                  className="tertiary" />
-                <a id="reset" href="#">Reset</a>
-              </div>
-            </div>
-        </div>
-      </div>
-    );
-  }
+HomeView.propTypes = {
+  actions: PropTypes.object,
+  history: PropTypes.object,
+  provider: PropTypes.object
 }
 
 function mapStateToProps(state) {
@@ -112,7 +116,7 @@ function mapDispatchToProps(dispatch) {
       ui: bindActionCreators(uiActionCreators, dispatch),
       asset: bindActionCreators(assetActionCreators, dispatch)
     }
-  };
+  }
 }
 
 export default withRouter(

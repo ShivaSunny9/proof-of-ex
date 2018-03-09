@@ -35,6 +35,9 @@ export function assetReducer(state = initialState, action) {
       error: action.error
     })
 
+  case constants.CLEAR_ASSETS:
+    return initialState
+
   default:
     return state
   }

@@ -26,6 +26,11 @@ class RegisterView extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.asset.clear()
+  }
+
   renderContent() {
     const { panel } = this.state
 

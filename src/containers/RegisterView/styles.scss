@@ -64,11 +64,12 @@
   #unique-hash {
     font-size: 36px;
     word-break: break-all;
-    width: 85%;
+    width: 95%;
     margin: 0 auto;
     margin-top: 40px;
   }
 
+  #already-exists-message,
   #error-message {
     height: 100%;
 
@@ -76,9 +77,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-style: italic;
       height: 100%;
       font-size: 22px;
+      font-weight: bold;
       margin-top: -40px;
     }
   }
