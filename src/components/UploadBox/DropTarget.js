@@ -58,7 +58,7 @@ class DropTarget extends Component {
     if (isActive) {
       helperText = 'Release to drop'
     } else if (!isActive && files.length === 0) {
-      helperText = 'Or drag file here'
+      helperText = 'or drag file here'
     }
 
     return <span>{helperText}</span>

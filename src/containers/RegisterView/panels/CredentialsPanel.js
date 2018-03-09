@@ -1,13 +1,25 @@
 import React, { Component }   from 'react'
 import PropTypes              from 'prop-types'
 import { connect }            from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withRouter }         from 'react-router-dom'
 import { Form, Label, Input } from 'components/Form'
+import Controls               from '../components/Controls'
 
 import * as accountActionCreators from 'core/actions/actions-account'
 
 class CredentialsPanel extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: '',
+      nextBtnDisabled: true
+    }
+  }
+
   render() {
     const { id } = this.props.account
+    const { nextBtnDisabled } = this.state
 
     return (
       <div>
@@ -20,7 +32,7 @@ class CredentialsPanel extends Component {
               type="email"
               autoFocus
               placeholder="your_email@email.com"
-              checkIfValid={this.setEmail}
+              checkIfValid={this.setEmailStatus}
             />
           </div>
           <div className="form-section">
@@ -32,21 +44,33 @@ class CredentialsPanel extends Component {
             />
           </div>
         </Form>
+        <Controls nextDisabled={nextBtnDisabled} handleNext={this.proceed} />
       </div>
     )
   }
 
-  setEmail=(input) => {
-    const { actions } = this.props
+  proceed = () => {
+    const { actions, history } = this.props
+    const { email } = this.state
+
+    actions.account.setEmail(email)
+    history.push('/register?generatehash')
+  }
+
+  setEmailStatus=(input) => {
     if (input.valid && input.type === 'email') {
-      actions.account.setEmail(input.value)
+      this.setState({
+        email: input.value,
+        nextBtnDisabled: false
+      })
     }
   }
 }
 
 CredentialsPanel.propTypes = {
   account: PropTypes.object,
-  actions: PropTypes.object
+  actions: PropTypes.object,
+  history: PropTypes.object
 }
 
 function mapStateToProps(state) {
@@ -63,4 +87,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CredentialsPanel)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CredentialsPanel))

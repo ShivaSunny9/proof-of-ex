@@ -13,10 +13,7 @@ class RegisterAssetPanel extends Component {
 
   render() {
     const { id, email } = this.props.account
-    const { isValid } = this.props
     const { assetHash } = this.props.asset
-
-    isValid(true)
 
     return (
       <div>
@@ -45,8 +42,7 @@ class RegisterAssetPanel extends Component {
 RegisterAssetPanel.propTypes = {
   account: PropTypes.object,
   asset: PropTypes.object,
-  history: PropTypes.object.isRequired,
-  isValid: PropTypes.func
+  history: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {

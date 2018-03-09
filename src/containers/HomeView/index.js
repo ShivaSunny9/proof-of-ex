@@ -64,7 +64,7 @@ class HomeView extends Component {
 
     if (provider.web3Provider !== null) {
       actions.asset.addAsset(asset)
-      history.push('/register')
+      history.push('/register?credentials')
     } else {
       const modalContent = (
         <div>
@@ -120,6 +120,5 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(HomeView)
-)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeView))
+
