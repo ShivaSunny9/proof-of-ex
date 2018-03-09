@@ -33,7 +33,7 @@ class RegisterAssetPanel extends Component {
               <span>{id}</span>
             </li>
             <li>
-              <span>Unique Hash of Photo:</span>
+              <span>Unique Hash <br />of Photo:</span>
               <span>{assetHash}</span>
             </li>
           </ul>
