@@ -5,10 +5,18 @@ import { bindActionCreators } from 'redux'
 import ProgressIndicator      from 'components/ProgressIndicator'
 import { Link }               from 'react-router-dom'
 import { getString }          from 'core/utils/util-assets'
+import Controls               from '../components/Controls'
 
 import * as assetActionCreators from 'core/actions/actions-asset'
 
 class GenerateHashPanel extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      nextBtnDisabled: true
+    }
+  }
+
   componentDidMount() {
     const { actions, asset } = this.props
 
@@ -17,6 +25,11 @@ class GenerateHashPanel extends Component {
         actions.asset.checkIfAssetExists(assetUrl)
       }, 2000)
     })
+  }
+
+  getControls = () => {
+    const { nextBtnDisabled } = this.state
+    return (<Controls nextDisabled={nextBtnDisabled} handleNext={this.proceed} />)
   }
 
   render() {
@@ -43,7 +56,7 @@ class GenerateHashPanel extends Component {
       content = (
         <div id="error-message">
           <h2>Sorry, there's an error!</h2>
-          <span>{error}</span>
+          <span>{error} - <Link to="/home"> Please try again</Link></span>
         </div>
       )
     } else {
@@ -58,7 +71,16 @@ class GenerateHashPanel extends Component {
       )
     }
 
-    return content
+    return (
+      <div>
+        {content}
+        {this.getControls()}
+      </div>
+    )
+  }
+
+  proceed = () => {
+
   }
 }
 

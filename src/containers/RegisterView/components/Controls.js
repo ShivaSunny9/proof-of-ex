@@ -2,26 +2,30 @@ import React, { Component } from 'react'
 import PropTypes            from 'prop-types'
 import Button               from 'components/Button'
 
+import { controlsStyles } from './styles'
+
 class Controls extends Component {
   render() {
     const { nextLabel, nextDisabled, prevDisabled } = this.props
 
     return (
-      <div id="button-controls">
-        <Button
-          type="raised"
-          label={nextLabel}
-          primary
-          disabled={nextDisabled}
-          onClick={this.handleNext}
-        />
-        <Button
-          type="flat"
-          label="Back"
-          secondary
-          disabled={prevDisabled}
-          onClick={this.handlePrev}
-        />
+      <div className={controlsStyles}>
+        <div id="button-controls">
+          <Button
+            type="raised"
+            label={nextLabel}
+            primary
+            disabled={nextDisabled}
+            onClick={this.handleNext}
+          />
+          <Button
+            type="flat"
+            label="Back"
+            secondary
+            disabled={prevDisabled}
+            onClick={this.handlePrev}
+          />
+        </div>
       </div>
     )
   }
