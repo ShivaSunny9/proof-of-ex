@@ -24,7 +24,7 @@ class GenerateHashPanel extends Component {
     if (asset.assetHash === '') {
       getString(asset.stagedAsset, (assetUrl) => {
         setTimeout(() => {
-          actions.asset.checkIfAssetIsRegistered(assetUrl)
+          actions.asset.checkIfRegistered(assetUrl)
         }, 2000)
       })
     }
@@ -39,6 +39,10 @@ class GenerateHashPanel extends Component {
 
     if (asset.assetHash !== '') {
       this.setState({nextBtnDisabled: false})
+    }
+
+    if (asset.alreadyExists) {
+      this.setState({nextBtnDisabled: true})
     }
   }
 
@@ -61,7 +65,7 @@ class GenerateHashPanel extends Component {
     if (alreadyExists) {
       content = (
         <div className="notification">
-          <h2>Someone already registered this asset!</h2>
+          <h2>Sorry, someone already registered this photo!</h2>
           <span><Link to="/home">Upload a new photo</Link></span>
         </div>
       )

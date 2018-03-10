@@ -62,7 +62,7 @@ class RegisterAssetPanel extends Component {
 
   registerAsset = () => {
     const { actions } = this.props
-    actions.asset.createAssetHash()
+    actions.asset.register()
   }
 
 }

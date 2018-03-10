@@ -16,7 +16,7 @@ export function clear() {
   }
 }
 
-function checkIfRegistered(ProofOfExContract, assetHash, resolve, reject) {
+function checkIfAssetRegistered(ProofOfExContract, assetHash, resolve, reject) {
   ProofOfExContract.deployed().then((poe) => {
     return poe.checkIfRegistered(assetHash)
   })
@@ -29,9 +29,9 @@ function checkIfRegistered(ProofOfExContract, assetHash, resolve, reject) {
   })
 }
 
-function notarize(ProofOfExContract, assetHash, resolve, reject) {
+function registerAsset(ProofOfExContract, assetHash, resolve, reject) {
   ProofOfExContract.deployed().then((poe) => {
-    return poe.notarize(assetHash)
+    return poe.registerAsset(assetHash)
   })
   .then(result => {
     const transaction = (result !== null) ? result : null
@@ -90,7 +90,7 @@ function dispatchError(error, dispatch) {
   })())
 }
 
-export function checkIfAssetIsRegistered(assetUrl) {
+export function checkIfRegistered(assetUrl) {
   return (dispatch, getState) => {
     const { web3Provider } = getState().provider
     const ProofOfExContract = contract(ProofOfExistence)
@@ -100,7 +100,7 @@ export function checkIfAssetIsRegistered(assetUrl) {
     ProofOfExContract.defaults({from: web3Provider.eth.defaultAccount})
 
     return new Promise((resolve, reject) => {
-      checkIfRegistered(ProofOfExContract, assetHash, resolve, reject)
+      checkIfAssetRegistered(ProofOfExContract, assetHash, resolve, reject)
     })
     .then((assetExists) => {
       if (assetExists) {
@@ -115,7 +115,7 @@ export function checkIfAssetIsRegistered(assetUrl) {
   }
 }
 
-export function createAssetHash() {
+export function register() {
   return (dispatch, getState) => {
     const { web3Provider } = getState().provider
     const { assetHash } = getState().asset
@@ -125,7 +125,7 @@ export function createAssetHash() {
     ProofOfExContract.defaults({from: web3Provider.eth.defaultAccount})
 
     return new Promise((resolve, reject) => {
-      notarize(ProofOfExContract, assetHash, resolve, reject)
+      registerAsset(ProofOfExContract, assetHash, resolve, reject)
     })
     .then((transaction) => {
       if (transaction) {

@@ -53,7 +53,7 @@ class RegisterView extends Component {
         <div id="register-view">
           <Photo asset={asset} />
           <div id="registration-form-container">
-            <Stepper activeStep={panel}>
+            <Stepper activeStep={panel - 1}>
               <Step><StepLabel>Enter Credentials</StepLabel></Step>
               <Step><StepLabel>Generate Unique Hash</StepLabel></Step>
               <Step><StepLabel>Register</StepLabel></Step>

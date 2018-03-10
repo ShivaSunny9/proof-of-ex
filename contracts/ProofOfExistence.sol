@@ -7,7 +7,7 @@ contract ProofOfExistence {
     proofs[proof] = true;
   }
 
-  function notarize(string assetHash) {
+  function registerAsset(string assetHash) {
     storeProof(assetHash);
   }
 
