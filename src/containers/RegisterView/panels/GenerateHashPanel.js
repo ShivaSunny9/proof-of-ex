@@ -59,7 +59,7 @@ class GenerateHashPanel extends Component {
 
   render() {
     const { asset } = this.props
-    const { alreadyExists, assetHash, error } = asset
+    const { alreadyExists, assetHash } = asset
     let content
 
     if (alreadyExists) {
@@ -81,7 +81,7 @@ class GenerateHashPanel extends Component {
       content = (
         <div className="notification">
           <h2>Sorry, there's an error!</h2>
-          <span className="action">{error} - <Link to="/home"> Please try again</Link></span>
+          <span className="action"><Link to="/home"> Please try again</Link></span>
         </div>
       )
     } else if (asset.stagedAsset) {
