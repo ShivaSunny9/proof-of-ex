@@ -58,7 +58,7 @@ class DropTarget extends Component {
     if (isActive) {
       helperText = 'Release to drop'
     } else if (!isActive && files.length === 0) {
-      helperText = 'or drag file here'
+      helperText = 'or drag photo here'
     }
 
     return <span>{helperText}</span>
@@ -78,7 +78,7 @@ class DropTarget extends Component {
         <div id="upload-actions">
           <Icon icon="upload" className="upload-icon" />
           <Button
-            label="Choose photo to upload"
+            label="Upload Photo"
             type="raised"
             primary
             disabled={disabled}

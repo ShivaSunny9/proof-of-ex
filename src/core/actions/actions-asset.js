@@ -16,17 +16,17 @@ export function clear() {
   }
 }
 
-function checkIfExists(ProofOfExContract, assetHash, resolve, reject) {
+function checkIfRegistered(ProofOfExContract, assetHash, resolve, reject) {
   ProofOfExContract.deployed().then((poe) => {
-    return poe.checkIfExists(assetHash)
+    return poe.checkIfRegistered(assetHash)
   })
-    .then((exists) => {
-      const assetExists = exists ? true : false
-      resolve(assetExists)
-    })
-    .catch((error) => {
-      reject(error)
-    })
+  .then((exists) => {
+    const assetExists = exists ? true : false
+    resolve(assetExists)
+  })
+  .catch((error) => {
+    reject(error)
+  })
 }
 
 function notarize(ProofOfExContract, assetHash, resolve, reject) {
@@ -90,7 +90,7 @@ function dispatchError(error, dispatch) {
   })())
 }
 
-export function checkIfAssetExists(assetUrl) {
+export function checkIfAssetIsRegistered(assetUrl) {
   return (dispatch, getState) => {
     const { web3Provider } = getState().provider
     const ProofOfExContract = contract(ProofOfExistence)
@@ -100,7 +100,7 @@ export function checkIfAssetExists(assetUrl) {
     ProofOfExContract.defaults({from: web3Provider.eth.defaultAccount})
 
     return new Promise((resolve, reject) => {
-      checkIfExists(ProofOfExContract, assetHash, resolve, reject)
+      checkIfRegistered(ProofOfExContract, assetHash, resolve, reject)
     })
     .then((assetExists) => {
       if (assetExists) {

@@ -21,15 +21,15 @@ class GenerateHashPanel extends Component {
   componentDidMount() {
     const { actions, asset } = this.props
 
-    getString(asset.stagedAsset, (assetUrl) => {
-      setTimeout(() => {
-        actions.asset.checkIfAssetExists(assetUrl)
-      }, 2000)
-    })
-  }
+    if (asset.assetHash === '') {
+      getString(asset.stagedAsset, (assetUrl) => {
+        setTimeout(() => {
+          actions.asset.checkIfAssetIsRegistered(assetUrl)
+        }, 2000)
+      })
+    }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.asset.assetHash) {
+    if (asset.assetHash !== '') {
       this.setState({nextBtnDisabled: false})
     }
   }

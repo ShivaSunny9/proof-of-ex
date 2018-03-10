@@ -11,7 +11,7 @@ contract ProofOfExistence {
     storeProof(assetHash);
   }
 
-  function checkIfExists(string assetHash) constant returns (bool) {
+  function checkIfRegistered(string assetHash) constant returns (bool) {
     return proofs[assetHash];
   }
 

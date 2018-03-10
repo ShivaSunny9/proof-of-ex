@@ -76,7 +76,7 @@ class CredentialsPanel extends Component {
 CredentialsPanel.propTypes = {
   account: PropTypes.object,
   actions: PropTypes.object,
-  asset: Proptypes.object,
+  asset: PropTypes.object,
   history: PropTypes.object
 }
 
