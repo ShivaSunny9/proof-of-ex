@@ -34,6 +34,14 @@ class GenerateHashPanel extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { asset } = nextProps
+
+    if (asset.assetHash !== '') {
+      this.setState({nextBtnDisabled: false})
+    }
+  }
+
   getControls = () => {
     const { nextBtnDisabled } = this.state
     return (

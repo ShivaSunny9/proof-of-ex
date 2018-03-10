@@ -53,6 +53,7 @@ class RegisterAssetPanel extends Component {
         <Controls
           prevDisabled={false}
           nextDisabled={nextBtnDisabled}
+          nextLabel="Register"
           handleNext={this.registerAsset}
         />
       </div>
