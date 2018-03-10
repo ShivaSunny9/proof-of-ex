@@ -32,7 +32,7 @@ class CredentialsPanel extends Component {
               type="email"
               autoFocus
               placeholder="your_email@email.com"
-              checkIfValid={this.setEmailStatus}
+              checkIfValid={this.enableNext}
             />
           </div>
           <div className="form-section">
@@ -61,8 +61,10 @@ class CredentialsPanel extends Component {
     history.push('/register?panel=2')
   }
 
-  setEmailStatus=(input) => {
-    if (input.valid && input.type === 'email') {
+  enableNext=(input) => {
+    const { asset } = this.props
+
+    if (input.valid && asset.stagedAsset) {
       this.setState({
         email: input.value,
         nextBtnDisabled: false
@@ -74,12 +76,14 @@ class CredentialsPanel extends Component {
 CredentialsPanel.propTypes = {
   account: PropTypes.object,
   actions: PropTypes.object,
+  asset: Proptypes.object,
   history: PropTypes.object
 }
 
 function mapStateToProps(state) {
   return {
-    account: state.account
+    account: state.account,
+    asset: state.asset
   }
 }
 

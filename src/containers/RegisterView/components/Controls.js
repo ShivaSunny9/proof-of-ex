@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes            from 'prop-types'
+import { withRouter }       from 'react-router-dom'
 import Button               from 'components/Button'
 
 import { controlsStyles } from './styles'
@@ -36,15 +37,17 @@ class Controls extends Component {
   }
 
   handlePrev = () => {
-    const { handlePrev } = this.props
-    handlePrev()
+    const { history, location } = this.props
+    const currentPanel = parseInt(location.search.substr(1).split('=')[1], 10)
+    history.push(`/register?panel=${currentPanel - 1}`)
   }
 
 }
 
 Controls.propTypes = {
   handleNext: PropTypes.func,
-  handlePrev: PropTypes.func,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   nextLabel: PropTypes.string,
   nextDisabled: PropTypes.bool,
   prevDisabled: PropTypes.bool
@@ -56,6 +59,4 @@ Controls.defaultProps = {
   prevDisabled: true
 }
 
-export default Controls
-
-
+export default withRouter(Controls)
