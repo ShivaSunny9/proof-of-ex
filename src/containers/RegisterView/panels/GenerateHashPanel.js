@@ -59,7 +59,7 @@ class GenerateHashPanel extends Component {
 
   render() {
     const { asset } = this.props
-    const { alreadyExists, assetHash } = asset
+    const { alreadyExists, assetHash, error } = asset
     let content
 
     if (alreadyExists) {
