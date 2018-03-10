@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes            from 'prop-types'
 import { Paper }            from 'material-ui'
 import imagePlaceholderSvg  from 'assets/images/image-placeholder.svg'
 import ProgressIndicator    from 'components/ProgressIndicator'
