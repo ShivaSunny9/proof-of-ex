@@ -21,7 +21,7 @@ class RegisterAssetPanel extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.asset.transaction) {
       const { history } = this.props
-      history.push('/assets')
+      history.push('/register?panel=4')
     }
   }
 

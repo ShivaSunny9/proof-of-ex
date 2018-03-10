@@ -62,8 +62,16 @@
     pointer-events: none;
   }
 
+  .blink-me {
+    animation: blinker 2s linear infinite;
+  }
+
   #main {
     margin-top: 40px;
+
+    & > div > h2 {
+      margin-bottom: 40px;
+    }
   }
 
   @media (max-width: 1300px) {

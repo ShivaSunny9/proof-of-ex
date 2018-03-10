@@ -66,7 +66,7 @@ class GenerateHashPanel extends Component {
       content = (
         <div className="notification">
           <h2>Sorry, someone already registered this photo!</h2>
-          <span><Link to="/home">Upload a new photo</Link></span>
+          <span className="action"><Link to="/home">Upload a new photo</Link></span>
         </div>
       )
     } else if (assetHash) {
@@ -81,7 +81,7 @@ class GenerateHashPanel extends Component {
       content = (
         <div className="notification">
           <h2>Sorry, there's an error!</h2>
-          <span>{error} - <Link to="/home"> Please try again</Link></span>
+          <span className="action">{error} - <Link to="/home"> Please try again</Link></span>
         </div>
       )
     } else if (asset.stagedAsset) {
