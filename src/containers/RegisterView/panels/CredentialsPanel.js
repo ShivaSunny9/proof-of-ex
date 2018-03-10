@@ -44,7 +44,11 @@ class CredentialsPanel extends Component {
             />
           </div>
         </Form>
-        <Controls nextDisabled={nextBtnDisabled} handleNext={this.proceed} />
+        <Controls
+          prevDisabled
+          nextDisabled={nextBtnDisabled}
+          handleNext={this.proceed}
+        />
       </div>
     )
   }

@@ -1,9 +1,23 @@
-import React, { Component } from 'react'
-import PropTypes            from 'prop-types'
-import { connect }          from 'react-redux'
-import { withRouter }       from 'react-router-dom'
+import React, { Component }   from 'react'
+import PropTypes              from 'prop-types'
+import { connect }            from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withRouter }         from 'react-router-dom'
+import Controls               from '../components/Controls'
+
+import * as assetActionCreators from 'core/actions/actions-asset'
 
 class RegisterAssetPanel extends Component {
+  constructor(props) {
+    super(props)
+    const { email, id  } = props.account
+    const { assetHash } = props.asset
+
+    this.state = {
+      nextBtnDisabled: (email && id && assetHash ) ? false : true
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.asset.transaction) {
       const { history } = this.props
@@ -14,6 +28,7 @@ class RegisterAssetPanel extends Component {
   render() {
     const { id, email } = this.props.account
     const { assetHash } = this.props.asset
+    const { nextBtnDisabled } = this.state
 
     return (
       <div>
@@ -35,12 +50,25 @@ class RegisterAssetPanel extends Component {
             </li>
           </ul>
         </div>
-      </div>)
+        <Controls
+          prevDisabled={false}
+          nextDisabled={nextBtnDisabled}
+          handleNext={this.registerAsset}
+        />
+      </div>
+    )
   }
+
+  registerAsset = () => {
+    const { actions } = this.props
+    actions.asset.createAssetHash()
+  }
+
 }
 
 RegisterAssetPanel.propTypes = {
   account: PropTypes.object,
+  actions: PropTypes.object,
   asset: PropTypes.object,
   history: PropTypes.object.isRequired
 }
@@ -52,4 +80,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(RegisterAssetPanel))
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      asset: bindActionCreators(assetActionCreators, dispatch)
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterAssetPanel))

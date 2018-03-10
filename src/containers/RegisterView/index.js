@@ -6,6 +6,7 @@ import Photo                        from './components/Photo'
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import CredentialsPanel             from './panels/CredentialsPanel'
 import GenerateHashPanel            from './panels/GenerateHashPanel'
+import RegisterAssetPanel           from './panels/RegisterAssetPanel'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -37,6 +38,7 @@ class RegisterView extends Component {
     case 2:
       return <GenerateHashPanel />
     case 3:
+      return <RegisterAssetPanel />
     default:
       break
     }

@@ -4,6 +4,7 @@
     position: relative;
     display: inline-block;
     float: left;
+    height: 378px;
   }
 
   #registration-form-container {
@@ -14,10 +15,11 @@
     }
 
     #registration-form {
-      height: 250px;
+      display: flex;
+      flex-direction: column;
       padding: 20px;
       background-color: $beige;
-      width: 94.9%;
+      height: 70%;
       border-radius: $radius;
 
       h2 {
@@ -39,18 +41,17 @@
     margin-top: 40px;
   }
 
-  #already-exists-message,
-  #error-message {
+  .notification {
+    height: 100%;
     height: 100%;
 
     span {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
+      margin-top: 80px;
       font-size: 22px;
       font-weight: bold;
-      margin-top: -40px;
     }
   }
 

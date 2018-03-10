@@ -1,3 +1,3 @@
 export CredentialsPanel   from './CredentialsPanel'
 export GenerateHashPanel  from './GenerateHashPanel'
-export RegisterAssetPanel from './RegisterAsset'
+export RegisterAssetPanel from './RegisterAssetPanel'

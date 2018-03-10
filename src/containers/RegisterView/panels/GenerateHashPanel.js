@@ -2,6 +2,7 @@ import React, { Component }   from 'react'
 import PropTypes              from 'prop-types'
 import { connect }            from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { withRouter }         from 'react-router-dom'
 import ProgressIndicator      from 'components/ProgressIndicator'
 import { Link }               from 'react-router-dom'
 import { getString }          from 'core/utils/util-assets'
@@ -27,9 +28,21 @@ class GenerateHashPanel extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.asset.assetHash) {
+      this.setState({nextBtnDisabled: false})
+    }
+  }
+
   getControls = () => {
     const { nextBtnDisabled } = this.state
-    return (<Controls nextDisabled={nextBtnDisabled} handleNext={this.proceed} />)
+    return (
+      <Controls
+        prevDisabled={false}
+        nextDisabled={nextBtnDisabled}
+        handleNext={this.proceed}
+      />
+    )
   }
 
   render() {
@@ -39,7 +52,7 @@ class GenerateHashPanel extends Component {
 
     if (alreadyExists) {
       content = (
-        <div id="already-exists-message">
+        <div className="notification">
           <h2>Someone already registered this asset!</h2>
           <span><Link to="/home">Upload a new photo</Link></span>
         </div>
@@ -54,12 +67,12 @@ class GenerateHashPanel extends Component {
       )
     } else if (error) {
       content = (
-        <div id="error-message">
+        <div className="notification">
           <h2>Sorry, there's an error!</h2>
           <span>{error} - <Link to="/home"> Please try again</Link></span>
         </div>
       )
-    } else {
+    } else if (asset.stagedAsset) {
       content = (
         <div>
           <h2>Generating a unique hash of your asset...</h2>
@@ -67,6 +80,13 @@ class GenerateHashPanel extends Component {
             <ProgressIndicator type="linear" />
             <span className="blink-me">Please hold on...</span>
           </div>
+        </div>
+      )
+    } else {
+      content = (
+        <div className="notification">
+          <h2>Please upload a photo to register</h2>
+          <span><Link to="/home">Upload a photo</Link></span>
         </div>
       )
     }
@@ -80,14 +100,16 @@ class GenerateHashPanel extends Component {
   }
 
   proceed = () => {
-
+    const { history } = this.props
+    history.push('/register?panel=3')
   }
 }
 
 GenerateHashPanel.propTypes = {
   actions: PropTypes.object.isRequired,
   alreadyExists: PropTypes.bool,
-  asset: PropTypes.object
+  asset: PropTypes.object,
+  history: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
@@ -104,4 +126,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GenerateHashPanel)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GenerateHashPanel))
