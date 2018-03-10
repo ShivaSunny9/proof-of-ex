@@ -56,12 +56,14 @@ export class App extends Component {
             <div>
               <Header />
               <div className="container">
-                <Switch>
-                  <Route path="/home" component={HomeView} />
-                  <Route path="/assets" component={ListView} />
-                  <Route path="/register" component={RegisterView} />
-                  <Redirect from="/" to="/home" />
-                </Switch>
+                <div id="main">
+                  <Switch>
+                    <Route path="/home" component={HomeView} />
+                    <Route path="/assets" component={ListView} />
+                    <Route path="/register" component={RegisterView} />
+                    <Redirect from="/" to="/home" />
+                  </Switch>
+                </div>
               </div>
               <LeftNavBar />
               <Modal />
