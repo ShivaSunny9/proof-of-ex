@@ -83,7 +83,7 @@ class Input extends Component {
 }
 
 Input.propTypes = {
-  autoFocus: PropTypes.boolean,
+  autoFocus: PropTypes.bool,
   disabled: PropTypes.bool,
   onKeyPress: PropTypes.func,
   placeholder: PropTypes.string,
