@@ -9,7 +9,7 @@ class Form extends Component {
     super(props)
   }
 
-  render(){
+  render() {
     return (
       <div className={formStyles}>
         <form>
@@ -21,7 +21,7 @@ class Form extends Component {
 
 }
 
-Form.PropTypes = {
+Form.propTypes = {
   children: PropTypes.node.isRequired
 }
 

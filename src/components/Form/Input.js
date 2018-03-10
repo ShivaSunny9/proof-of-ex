@@ -15,28 +15,8 @@ class Input extends Component {
 
   componentDidMount() {
     const { value, autoFocus } = this.props
-    if(value){ this.setState({ value: value }) }
-    if(autoFocus) { this.input.focus() }
-  }
-
-  /****** Validity rules go here *******/
-  determineValidity(type, value) {
-    switch(type) {
-    case 'email':
-      return {
-        type,
-        valid: isEmail(value),
-        value: value
-      }
-    case 'text':
-      return {
-        type,
-        valid: value.length > 0,
-        value: value
-      }
-    default:
-      return false
-    }
+    if (value) { this.setState({ value: value }) }
+    if (autoFocus) { this.input.focus() }
   }
 
   onChange=(evt) => {
@@ -45,14 +25,24 @@ class Input extends Component {
 
     this.setState({ value: value })
 
-    if(checkIfValid) {
+    if (checkIfValid) {
       checkIfValid(this.determineValidity(type, value))
     }
   }
 
-  render(){
+  onKeyPress = (evt) =>{
+    const { onKeyPress } = this.props
+    if (onKeyPress) { onKeyPress(evt) }
+  }
+
+  render() {
     const { value } = this.state
-    const { type, placeholder, disabled, required } = this.props
+    const {
+      type,
+      placeholder,
+      disabled,
+      required
+    } = this.props
 
     return (
       <div className={inputStyles}>
@@ -70,13 +60,35 @@ class Input extends Component {
       </div>
     )
   }
+
+  /** **** Validity rules go here *******/
+  determineValidity(type, value) {
+    switch (type) {
+    case 'email':
+      return {
+        type,
+        valid: isEmail(value),
+        value: value
+      }
+    case 'text':
+      return {
+        type,
+        valid: value.length > 0,
+        value: value
+      }
+    default:
+      return false
+    }
+  }
 }
 
-Input.PropTypes = {
+Input.propTypes = {
   autoFocus: PropTypes.boolean,
   disabled: PropTypes.bool,
+  onKeyPress: PropTypes.func,
   placeholder: PropTypes.string,
   checkIfValid: PropTypes.func,
+  required: PropTypes.bool,
   type: PropTypes.string.isRequired,
   value: PropTypes.string
 }

@@ -9,7 +9,7 @@ class Label extends Component {
     super(props)
   }
 
-  render(){
+  render() {
     const { text } = this.props
 
     return (
@@ -21,8 +21,8 @@ class Label extends Component {
 
 }
 
-Label.PropTypes = {
-  text: PropTypes.string.isRequred
+Label.propTypes = {
+  text: PropTypes.string.isRequired
 }
 
 export default Label

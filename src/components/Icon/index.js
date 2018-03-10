@@ -1,20 +1,11 @@
-import React 					 from 'react';
-import PropTypes       from 'prop-types';
+import React           from 'react'
+import PropTypes       from 'prop-types'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import { faUpload } 	 from '@fortawesome/fontawesome-free-solid'
+import { faUpload }    from '@fortawesome/fontawesome-free-solid'
 
 /* component styles */
-import { styles } from './styles.scss';
+import { styles } from './styles.scss'
 
-const propTypes = {
-  className: PropTypes.string,
-  icon: PropTypes.string.isRequired
-}
-
-/* Create a key map of Font Awesome icons here.
- * Update this key map when you want to add
- * a new icon to the app.
- */
 const fontAwesomeIcons = {
   upload: faUpload
 }
@@ -23,14 +14,17 @@ const Icon = props => {
   const { icon, className } = props
 
   return (
-		<div className={`${styles} ${className}`}>
+    <div className={`${styles} ${className}`}>
       <div className="icon">
         <FontAwesomeIcon icon={fontAwesomeIcons[icon]} />
       </div>
-		</div>
-	)
+    </div>
+  )
 }
 
-Icon.propTypes = propTypes
+Icon.propTypes = {
+  className: PropTypes.string,
+  icon: PropTypes.string.isRequired
+}
 
 export default Icon

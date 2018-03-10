@@ -12,8 +12,16 @@ class CredentialsPanel extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      allowToProceed: false,
       email: '',
       nextBtnDisabled: true
+    }
+  }
+
+  onEnter = (evt) => {
+    if (evt.key === 'Enter') {
+      const { allowToProceed } = this.state
+      if (allowToProceed) { this.proceed() }
     }
   }
 
@@ -32,6 +40,7 @@ class CredentialsPanel extends Component {
               type="email"
               autoFocus
               placeholder="your_email@email.com"
+              onKeyPress={this.onEnter}
               checkIfValid={this.enableNext}
             />
           </div>
@@ -66,6 +75,7 @@ class CredentialsPanel extends Component {
 
     if (input.valid && asset.stagedAsset) {
       this.setState({
+        allowToProceed: true,
         email: input.value,
         nextBtnDisabled: false
       })

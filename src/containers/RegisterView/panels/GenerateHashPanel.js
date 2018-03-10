@@ -98,7 +98,7 @@ class GenerateHashPanel extends Component {
       content = (
         <div className="notification">
           <h2>Please upload a photo to register</h2>
-          <span><Link to="/home">Upload a photo</Link></span>
+          <span className="action"><Link to="/home">Upload a photo</Link></span>
         </div>
       )
     }
