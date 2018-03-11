@@ -2,7 +2,7 @@
  * Button - A common button
  */
 
-import React                    from 'react'
+import React, { Component }     from 'react'
 import PropTypes                from 'prop-types'
 import { FlatButton,
          RaisedButton,
@@ -12,42 +12,50 @@ import { FlatButton,
 /* component styles */
 import { styles } from './styles.scss'
 
-export default function Button(props) {
-  const buttonElem = createButton(props)
-  return (
-    <div className={styles}>
-      {buttonElem}
-    </div>
-  )
-}
+class Button extends Component {
+  render() {
+    const buttonElem = this.createButton(this.props)
 
-function createButton(props) {
-  const { type, className } = props
-  let buttonElem
-  const finalClassName = `btn ${className}`
-
-  switch(type) {
-  case 'raised':
-    buttonElem = <RaisedButton {...props} className={finalClassName} />
-    break
-  case 'flat':
-    buttonElem = <FlatButton {...props} className={finalClassName} />
-    break
-  case 'floating':
-    buttonElem = <FloatingActionButton {...props} className={finalClassName} />
-    break
-  case 'icon':
-    buttonElem = <IconButton {...props} className={finalClassName} />
-    break
+    return (
+      <div className={styles}>
+        {buttonElem}
+      </div>
+    )
   }
 
-  return buttonElem
+  createButton = (props) => {
+    const { type, className } = props
+    let buttonElem
+    const finalClassName = `btn ${className}`
+
+    switch (type) {
+    case 'raised':
+      buttonElem = <RaisedButton {...props} className={finalClassName} />
+      break
+    case 'flat':
+      buttonElem = <FlatButton {...props} className={finalClassName} />
+      break
+    case 'floating':
+      buttonElem = <FloatingActionButton {...props} className={finalClassName} />
+      break
+    case 'icon':
+      buttonElem = <IconButton {...props} className={finalClassName} />
+      break
+    default:
+      break
+    }
+
+    return buttonElem
+  }
 }
 
 Button.propTypes = {
+  className: PropTypes.string,
   type: PropTypes.string
 }
 
 Button.defaultProps = {
   type: 'raised'
 }
+
+export default Button

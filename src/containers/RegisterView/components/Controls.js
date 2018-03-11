@@ -16,6 +16,7 @@ class Controls extends Component {
             type="raised"
             label={nextLabel}
             primary
+            keyboardFocused
             disabled={nextDisabled}
             onClick={this.handleNext}
           />
