@@ -22,6 +22,7 @@ class RegisterView extends Component {
 
   componentWillUnmount() {
     const { actions } = this.props
+    actions.account.clear()
     actions.asset.clear()
   }
 

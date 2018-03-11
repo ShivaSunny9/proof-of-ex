@@ -6,3 +6,10 @@ export function setEmail(email) {
     email: email
   }
 }
+
+
+export function clear() {
+  return {
+    type: constants.CLEAR_ACCOUNT
+  }
+}

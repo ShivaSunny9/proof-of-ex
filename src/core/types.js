@@ -4,6 +4,7 @@ export default keyMirror({
   ADD_ASSET: null,
   ASSET_ERROR: null,
   CHECK_ASSET: null,
+  CLEAR_ACCOUNT: null,
   CLEAR_ASSETS: null,
   CLEAR_UI: null,
   CLOSE_LEFT_NAV: null,
