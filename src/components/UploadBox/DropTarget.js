@@ -81,7 +81,9 @@ class DropTarget extends Component {
             label="Upload Photo"
             type="raised"
             primary
+            keyboardFocused
             disabled={disabled}
+            onKeyPress={this.showUploadDialogBox}
             onTouchTap={this.showUploadDialogBox} />
           <input
             name="myFile"
