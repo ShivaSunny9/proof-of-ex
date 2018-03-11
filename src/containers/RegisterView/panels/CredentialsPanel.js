@@ -26,7 +26,7 @@ class CredentialsPanel extends Component {
   }
 
   render() {
-    const { id } = this.props.account
+    const { id, email } = this.props.account
     const { nextBtnDisabled } = this.state
 
     return (
@@ -38,6 +38,7 @@ class CredentialsPanel extends Component {
             <Label text="Your Email Address" />
             <Input
               type="email"
+              value={email}
               autoFocus
               placeholder="your_email@email.com"
               onKeyPress={this.onEnter}
