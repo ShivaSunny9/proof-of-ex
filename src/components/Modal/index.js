@@ -1,6 +1,11 @@
-import React, { Component }  from 'react'
-import PropTypes             from 'prop-types'
-import { Dialog }            from 'material-ui'
+import React, { Component }   from 'react'
+import PropTypes              from 'prop-types'
+import { connect }            from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Dialog }             from 'material-ui'
+
+/* actions */
+import * as uiActionCreators    from 'core/actions/actions-ui'
 
 /* component styles */
 import { styles } from './styles.scss'
@@ -13,50 +18,61 @@ class Modal extends Component {
     }
   }
 
-  componentWillReceiveProps= (nextProps) => {
-    const { open } = nextProps
-    this.setState({ open: open })
-  }
+  componentWillReceiveProps(nextProps) {
+    const modalInstance = nextProps.modalState
 
-  handleClose=() => {
-    this.setState({ open: false })
+    if (modalInstance && (modalInstance.modalKey === this.props.modalKey)) {
+      this.setState({
+        open: modalInstance.showModal
+      })
+    }
   }
 
   render() {
-    const { actions, title, content, className, customStyles } = this.props
-    const mergedStyles = styles + ' ' + className
+    const { title, children, className, cssModule } = this.props
+    const mergedStyles = styles + ' ' + cssModule
 
-    return(
+    return (
       <div>
         <Dialog
           title={title}
-          actions={actions}
-          className={mergedStyles}
-          contentStyle={customStyles}
+          className={className}
           modal={false}
           open={this.state.open}
-          children={<div className="modal-content">{content}</div>}
-          onRequestClose={this.handleClose}>
-        </Dialog>
+          children={<div className={mergedStyles}>{children}</div>}
+          onRequestClose={this.handleClose} />
       </div>
     )
+  }
+
+  handleClose=() => {
+    const { actions, modalKey } = this.props
+    this.setState({ open: false })
+    actions.ui.closeModal({modalKey})
   }
 
 }
 
 Modal.propTypes = {
-  open      : PropTypes.bool.isRequired,
-  actions   : PropTypes.array,
-  title     : PropTypes.string,
-  uiActions : PropTypes.object,
-  content   : PropTypes.element,
-  className : PropTypes.string
+  actions: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired,
+  className: PropTypes.string,
+  cssModule: PropTypes.string,
+  modalKey: PropTypes.string.isRequired,
+  modalState: PropTypes.object.isRequired,
+  title: PropTypes.string
 }
 
 Modal.defaultProps = {
-  open  : false,
-  title : 'Please confirm'
+  open: false
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      ui: bindActionCreators(uiActionCreators, dispatch)
+    }
+  }
+}
 
-export default Modal
+export default connect(null, mapDispatchToProps)(Modal)

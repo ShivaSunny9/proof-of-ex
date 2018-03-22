@@ -6,9 +6,10 @@ import { withRouter }         from 'react-router-dom'
 import { UploadBox }          from 'components/UploadBox'
 import Button                 from 'components/Button'
 import metaMaskImg            from 'assets/images/metamask.png'
+import Modal                  from 'components/modal'
 
 /* component styles */
-import { styles, modalStyles } from './styles.scss'
+import { styles, metaMaskModalStyles } from './styles.scss'
 
 /* actions */
 import * as uiActionCreators    from 'core/actions/actions-ui'
@@ -30,6 +31,7 @@ class HomeView extends Component {
   }
 
   render() {
+    const { ui } = this.props
     const { fileAdded } = this.state
 
     return (
@@ -49,6 +51,34 @@ class HomeView extends Component {
               </div>
             </div>
         </div>
+
+        <Modal
+          modalKey="install-metamask-modal"
+          modalState={ui.modalState}
+          title="Your need to install MetaMask!"
+          cssModule={metaMaskModalStyles}
+        >
+          <div>
+            <img className="metamask-logo" src={metaMaskImg} alt="MetaMask logo" />
+            <div className="message">
+              <p>
+                <a href="https://metamask.io/" target="_blank">MetaMask</a>
+                &nbsp;is a wallet and Chrome extension that allows you to make Ethereum transactions from
+                regular websites.
+              </p>
+              <p>In order to register your asset on the blockchain, you need to have it installed.</p>
+              <br />
+              <Button
+                label="Install MetaMask"
+                type="raised"
+                primary
+                onTouchTap={() => {
+                  window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en', '_blank')
+                }}
+              />
+            </div>
+          </div>
+        </Modal>
       </div>
     )
   }
@@ -67,35 +97,7 @@ class HomeView extends Component {
       actions.asset.addAsset(asset)
       history.push('/register?panel=1')
     } else {
-      const modalContent = (
-        <div>
-          <img className="metamask-logo" src={metaMaskImg} alt="MetaMask logo" />
-          <div className="message">
-            <p>
-              <a href="https://metamask.io/" target="_blank">MetaMask</a>
-              &nbsp;is a wallet and Chrome extension that allows you to make Ethereum transactions from
-              regular websites.
-            </p>
-            <p>In order to register your asset on the blockchain, you need to have it installed.</p>
-            <br />
-            <Button
-              label="Install MetaMask"
-              type="raised"
-              primary
-              onTouchTap={() => {
-                window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en', '_blank')
-              }}
-            />
-          </div>
-        </div>
-      )
-
-      actions.ui.showModal({
-        className: modalStyles,
-        customStyles: { width: '1000' },
-        title: 'You need to install MetaMask!',
-        content: modalContent
-      })
+      actions.ui.showModal({modalKey: 'install-metamask-modal'})
     }
   }
 }
@@ -103,12 +105,14 @@ class HomeView extends Component {
 HomeView.propTypes = {
   actions: PropTypes.object,
   history: PropTypes.object,
-  provider: PropTypes.object
+  provider: PropTypes.object,
+  ui: PropTypes.object
 }
 
 function mapStateToProps(state) {
   return {
-    provider: state.provider
+    provider: state.provider,
+    ui: state.ui
   }
 }
 

@@ -26,7 +26,6 @@ import LeftNavBar       from 'containers/LeftNavBar'
 import HomeView         from 'containers/HomeView'
 import ListView         from 'containers/ListView'
 import RegisterView     from 'containers/RegisterView'
-import Modal            from 'components/Modal'
 
 injectTapEventPlugin()
 
@@ -47,8 +46,6 @@ export class App extends Component {
   }
 
   render() {
-    const { ui } = this.props
-
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
@@ -66,16 +63,8 @@ export class App extends Component {
                 </div>
               </div>
               <LeftNavBar />
-              <Modal />
             </div>
           </HashRouter>
-          <Modal
-            open={ui.showModal}
-            actions={ui.modalActions}
-            content={ui.modalContent}
-            className={ui.modalClassName}
-            customStyles={ui.modalCustomStyles}
-            title={ui.modalTitle} />
         </div>
       </MuiThemeProvider>
     )
@@ -83,14 +72,7 @@ export class App extends Component {
 }
 
 App.propTypes = {
-  actions: PropTypes.object,
-  ui: PropTypes.object
-}
-
-function mapStateToProps(state) {
-  return {
-    ui: state.ui
-  }
+  actions: PropTypes.object
 }
 
 function mapDispatchToProps(dispatch) {
@@ -102,4 +84,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps)(App)
