@@ -14,5 +14,6 @@ export default keyMirror({
   OPEN_LEFT_NAV: null,
   SET_ACCOUNT: null,
   SET_ACCOUNT_EMAIL: null,
-  SET_PROVIDER: null
+  SET_PROVIDER: null,
+  GET_METAMASK_ID: null
 })

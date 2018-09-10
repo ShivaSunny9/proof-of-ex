@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { Dialog }             from 'material-ui'
 
 /* actions */
-import * as uiActionCreators    from 'core/actions/actions-ui'
+import * as uiActionCreators  from 'core/actions/actions-ui'
 
 /* component styles */
 import { styles } from './styles.scss'

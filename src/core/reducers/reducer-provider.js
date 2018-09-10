@@ -12,6 +12,12 @@ export function providerReducer(state = initialState, action) {
       web3Provider: action.provider
     })
 
+
+  case constants.GET_METAMASK_ID:
+    return Object.assign({}, state, {
+      web3Provider: action.provider
+    })
+
   default:
     return state
   }

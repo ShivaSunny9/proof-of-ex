@@ -62,6 +62,8 @@ class GenerateHashPanel extends Component {
     const { alreadyExists, assetHash, error } = asset
     let content
 
+    console.log('error is ', error)
+
     if (alreadyExists) {
       content = (
         <div className="notification">
@@ -81,6 +83,9 @@ class GenerateHashPanel extends Component {
       content = (
         <div className="notification">
           <h2>Sorry, there's an error!</h2>
+          <p>This Smart Contract is deployed to the <strong>Ropsten Network</strong>.
+            <br />
+            Please configure MeteMask to connect to the Ropsten Network to proceed!</p>
           <span className="action"><Link to="/home"> Please try again</Link></span>
         </div>
       )
