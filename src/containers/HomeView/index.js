@@ -37,6 +37,7 @@ class HomeView extends Component {
     return (
       <div className={styles}>
         <div id="home-view">
+          <h2>Proof Of Ex lets you register your unique photographic asset to the Blockchain!</h2>
           <UploadBox onDrop={this.onDrop} setUploadedFile={this.setUploadedFile} />
             <div>
               <div id="register-actions">
